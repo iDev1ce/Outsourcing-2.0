@@ -9,6 +9,8 @@ class App {
 
     constructor() {
         this.server = express()
+        this.middlewares()
+        this.routes()
     }
 
     public middlewares():void {

@@ -12,8 +12,10 @@ class ImpressoraRoute {
     }
 
     private getPrivateRoutes():void {
-        this.routes.get("/", Impressora.getAll);
-        this.routes.post("/", Impressora.insert)
+        this.routes.get("/" || "", Impressora.getAll);
+        this.routes.post("/" || "", Impressora.insert)
+        this.routes.put("/:id", Impressora.update)
+        this.routes.delete("/:id", Impressora.delete)
     }
 
 

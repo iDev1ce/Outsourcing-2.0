@@ -1,2 +1,5 @@
-/node_modules
-/ormconfig.json
+node_modules/
+ormconfig.json/
+temp/
+
+tmp/*

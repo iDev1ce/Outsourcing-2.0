@@ -1,6 +1,6 @@
-import Impressora from "../../models/Impressora";
+import Impressora from "../../../models/Impressora";
 
-import ImpressoraRepository from "../../repositories/ImpressoraRepository"
+import ImpressoraRepository from "../../../repositories/estoque/ImpressoraRepository"
 import { getCustomRepository } from "typeorm";
 
 interface Request {

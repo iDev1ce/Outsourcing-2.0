@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import Impressora from "../app/resources/ImpressoraResource";
+import Impressora from "../../app/resources/estoque/ImpressoraResource";
 
 class ImpressoraRoute {
     public routes:Router
@@ -12,7 +12,8 @@ class ImpressoraRoute {
     }
 
     private getPrivateRoutes():void {
-        this.routes.get("/" || "", Impressora.getAll);
+        this.routes.get("/" || "", Impressora.getAll)
+        this.routes.get("/:id", Impressora.getById)
         this.routes.post("/" || "", Impressora.insert)
         this.routes.put("/:id", Impressora.update)
         this.routes.delete("/:id", Impressora.delete)

@@ -1,5 +1,5 @@
 import { Repository, EntityRepository } from "typeorm"
-import Impressora from "../models/Impressora";
+import Impressora from "../../models/Impressora";
 
 @EntityRepository(Impressora)
 class ImpressoraRepository extends Repository<Impressora> {

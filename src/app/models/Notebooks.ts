@@ -13,7 +13,19 @@ class Notebooks {
     modelo:string
 
     @Column()
-    tipo:string
+    memoriaRam:string
+
+    @Column()
+    placaVideo:string
+
+    @Column()
+    tipoPlacaVideo:string
+
+    @Column()
+    processador:string
+
+    @Column()
+    tamanhoDaTela:string
 }
 
 export default Notebooks

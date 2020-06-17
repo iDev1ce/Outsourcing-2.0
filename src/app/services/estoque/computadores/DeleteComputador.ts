@@ -1,6 +1,6 @@
-import Impressora from "../../models/Impressora";
+import Computador from "../../../models/Computador";
 
-import ImpressoraRepository from "../../repositories/ImpressoraRepository"
+import ComputadorRepository from "../../../repositories/estoque/ComputadorRepository"
 import { getCustomRepository } from "typeorm";
 
 interface Request {
@@ -10,9 +10,9 @@ interface Request {
 class DeleteImpressora {
 
     public async execute({ id }:Request):Promise<true | false> {
-        const impressoraRepository = getCustomRepository(ImpressoraRepository)
+        const computadorRepository = getCustomRepository(ComputadorRepository)
 
-        const status = await impressoraRepository.delete({ id })
+        const status = await computadorRepository.delete({ id })
 
         if (status.affected == 0)
             return false 

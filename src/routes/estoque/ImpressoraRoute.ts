@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import Impressora from "../../app/resources/estoque/ImpressoraResource";
+import middle from "../../middlewares/usuarioAuth"
 
 class ImpressoraRoute {
     public routes:Router
@@ -12,6 +13,7 @@ class ImpressoraRoute {
     }
 
     private getPrivateRoutes():void {
+        this.routes.use(middle)
         this.routes.get("/" || "", Impressora.getAll)
         this.routes.get("/:id", Impressora.getById)
         this.routes.post("/" || "", Impressora.insert)

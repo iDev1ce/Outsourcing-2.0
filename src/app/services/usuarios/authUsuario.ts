@@ -39,6 +39,9 @@ class AuthUsuario {
 
         const usuario = existingUsuario
 
+        delete usuario.senha
+        delete usuario.email
+
         return {
             usuario,
             token

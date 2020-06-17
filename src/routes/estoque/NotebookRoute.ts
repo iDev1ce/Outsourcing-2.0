@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import Notebook from "../../app/resources/estoque/NotebookResource"
+import middle from "../../middlewares/usuarioAuth"
 
 class NotebookRoute {
     public routes:Router
@@ -12,6 +13,7 @@ class NotebookRoute {
     }
 
     private getPrivateRoutes():void {
+        this.routes.use(middle)
         this.routes.get("/" || "", Notebook.getAll)
         this.routes.get("/:id", Notebook.getById)
         this.routes.post("/" || "", Notebook.insert)

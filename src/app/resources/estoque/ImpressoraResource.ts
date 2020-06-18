@@ -76,7 +76,7 @@ class ImpressoraResource {
             if (!deleteStatus)
                 throw new AppError("Impressora não encontrada", 404)
             
-            return res.status(404).send({ message: "Impressora não encontrada" })
+            return res.status(200).send({ message: "Impressora deletado com sucesso!" })
         } catch (err) {
             return res.status(err.statusCode).send({ error: err.message })
         }

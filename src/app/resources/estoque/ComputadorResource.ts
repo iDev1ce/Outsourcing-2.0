@@ -111,7 +111,10 @@ class ComputadorResource {
         const { id } = req.params
 
         try {
-            await deleteComputador.execute({ id })
+            const deleteStatus = await deleteComputador.execute({ id })
+
+            if (!deleteStatus)
+                throw new AppError("Computador não encontrado", 404)
                 
             return res.status(200).send({ message: "Computador deletado com sucesso!" })
         } catch (err) {

@@ -3,7 +3,7 @@ import { Router } from "express"
 import ImpressoraRoute from "./estoque/ImpressoraRoute";
 import NotebookRoute from "./estoque/NotebookRoute"
 import ComputadorRoute from "./estoque/ComputadorRoute"
-import FuncionarioRoute from "./funcionariosRoutes";
+import FuncionarioRoute from "./FuncionarioRoutes";
 import UsersRoute from "./UsuarioRoute";
 
 class Routes {

@@ -1,7 +1,8 @@
 import { Router } from "express";
 
 import Computador from "../../app/resources/estoque/ComputadorResource";
-import middle from "../../middlewares/usuarioAuth"
+import middleUser from "../../middlewares/usuarioAuth"
+import middleFunc from "../../middlewares/funcionarioAuth"
 
 class ComputadorResource {
     public routes:Router
@@ -13,7 +14,7 @@ class ComputadorResource {
     }
 
     private getPrivateRoutes():void {
-        this.routes.use(middle)
+        this.routes.use(middleFunc) || this.routes.use(middleUser)
         this.routes.get("/" || "", Computador.getAll)
         this.routes.get("/:id", Computador.getById)
         this.routes.post("/" || "", Computador.insert)

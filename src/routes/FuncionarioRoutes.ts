@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import funcionarioResource from "../app/resources/funcionarioResource";
 
-class FuncionariosRoutes {
+class FuncionarioRoutes {
     public routes:Router
 
     constructor() {
@@ -12,9 +12,9 @@ class FuncionariosRoutes {
     }
 
     private getPrivateRoutes():void {
-        this.routes.post("/sing-in", funcionarioResource.singIn)
+        this.routes.post("/sign-in", funcionarioResource.singIn)
         this.routes.post("/auth", funcionarioResource.login)
     }
 }
 
-export default new FuncionariosRoutes().routes
+export default new FuncionarioRoutes().routes

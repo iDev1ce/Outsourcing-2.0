@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
 
-import Computador from "../../../models/Computador";
+import Computador from "../../../models/estoque/Computador";
 import ComputadorRepository from "../../../repositories/estoque/ComputadorRepository"
 import AppError from "../../../../errors/AppError"
 

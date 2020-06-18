@@ -1,4 +1,4 @@
-import Notebooks from "../../../models/Notebooks";
+import Notebooks from "../../../models/estoque/Notebooks";
 
 import NotebooksRepository from "../../../repositories/estoque/NotebookRepository"
 import { getCustomRepository } from "typeorm";

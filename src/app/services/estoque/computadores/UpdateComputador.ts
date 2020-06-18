@@ -1,4 +1,4 @@
-import Computador from "../../../models/Computador";
+import Computador from "../../../models/estoque/Computador";
 
 import ComputadorRepository from "../../../repositories/estoque/ComputadorRepository"
 import { getCustomRepository } from "typeorm";

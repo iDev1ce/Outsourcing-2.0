@@ -6,59 +6,80 @@ import ImpressoraRepository from "../../repositories/estoque/ImpressoraRepositor
 import createImpressora from "../../services/estoque/impressoras/CreateImpressora"
 import updateImpressora from "../../services/estoque/impressoras/UpdateImpressora"
 import deleteImpressora from "../../services/estoque/impressoras/DeleteImpressora"
+import AppError from "../../../errors/AppError"
 
 class ImpressoraResource {
 
     public async getAll(req:Request, res:Response) {
-        const impressoraRepository = getCustomRepository(ImpressoraRepository)
+        try {
+            const impressoraRepository = getCustomRepository(ImpressoraRepository)
 
-        const impressoras = await impressoraRepository.find()
+            const impressoras = await impressoraRepository.find()
 
-        return res.status(200).send(impressoras)
+            return res.status(200).send(impressoras)
+        } catch (err) {
+            return res.status(err.statusCode).send({ error: err.message })
+        }
     }
 
     public async getById(req:Request, res:Response) {
-        const impressoraRepository = getCustomRepository(ImpressoraRepository)
-
-        const { id } = req.params
-
-        const impressora = await impressoraRepository.findOne({ id })
-
-        if (impressora == null) 
-            return res.status(404).send({ message: "Impressora não encontrada!" })
-
-        return res.status(200).send(impressora)
+        try {
+            const impressoraRepository = getCustomRepository(ImpressoraRepository)
+    
+            const { id } = req.params
+    
+            const impressora = await impressoraRepository.findOne({ id })
+    
+            if (!impressora) 
+                throw new AppError("Impressora não encontrada", 404)
+    
+            return res.status(200).send(impressora)
+        } catch (err) {
+            return res.status(err.statusCode).send({ error: err.message })
+        }
     }
 
     public async insert(req:Request, res:Response) {
-        const { marca, modelo, tipo } = req.body
+        try {
+            const { marca, modelo, tipo } = req.body
 
-        const impressora = await createImpressora.execute({ marca, modelo, tipo })
+            const impressora = await createImpressora.execute({ marca, modelo, tipo })
 
-        return res.status(201).send(impressora)
+            return res.status(201).send(impressora)
+        } catch (err) {
+            return res.status(err.statusCode).send({ error: err.message })
+        }
     }
 
     public async update(req:Request, res:Response) {
-        const { id } = req.params
-        const { marca, modelo, tipo } = req.body
+        try {
+            const { id } = req.params
+            const { marca, modelo, tipo } = req.body
 
-        const impressora = await updateImpressora.execute({ id, marca, modelo, tipo })
+            const impressora = await updateImpressora.execute({ id, marca, modelo, tipo })
 
-        if (impressora == null)
-            return res.status(404).send({ message: "Impressora não encontrada!" })
+            if (!impressora)
+                throw new AppError("Impressora não encontrada", 404)
 
-        return res.status(200).send({ status: "Updated", impressora })
+            return res.status(200).send({ status: "Updated", impressora })
+        } catch (err) {
+            return res.status(err.statusCode).send({ error: err.message })
+        }
     }
 
     public async delete(req:Request, res:Response) {
-        const { id } = req.params
-
-        const deleteStatus = await deleteImpressora.execute({ id })
-
-        if (deleteStatus == true)
-            return res.status(200).send({ message: "Impressora deletada com sucesso!" })
-        
-        return res.status(404).send({ message: "Impressora não encontrada" })
+        try {
+            const { id } = req.params
+    
+            const deleteStatus = await deleteImpressora.execute({ id })
+    
+            if (!deleteStatus)
+                throw new AppError("Impressora não encontrada", 404)
+            
+            return res.status(404).send({ message: "Impressora não encontrada" })
+        } catch (err) {
+            return res.status(err.statusCode).send({ error: err.message })
+        }
     }
 }
 

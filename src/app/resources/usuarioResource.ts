@@ -5,11 +5,15 @@ import authUsuario from "../services/usuarios/authUsuario"
 
 class UsuarioRepository {
     public async singIn(req: Request, res: Response) {
-        const { nome, cpf, email, senha } = req.body
+        try {
+            const { nome, cpf, email, senha } = req.body
 
-        const usuario = await createUsuarios.execute({ nome, cpf, email, senha })
+            const usuario = await createUsuarios.execute({ nome, cpf, email, senha })
 
-        return res.status(201).send(usuario)
+            return res.status(201).send(usuario)
+        } catch (err) {
+            return res.status(err.statusCode).send({ error: err.message })
+        }
     }
 
     public async login(req: Request, res: Response) {
@@ -20,7 +24,7 @@ class UsuarioRepository {
 
             return res.status(200).send(usuario)
         } catch(err) {
-            return res.status(404).send({ erro: err })
+            return res.status(err.statusCode).send({ erro: err.message })
         }
     }
 }

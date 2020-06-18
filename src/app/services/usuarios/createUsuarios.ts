@@ -2,6 +2,7 @@ import { getCustomRepository } from "typeorm";
 
 import Usuario from "../../models/Usuario";
 import UsuarioRepository from "../../repositories/UsuarioRepository";
+import AppError from "../../../errors/AppError";
 
 interface Request {
     nome: string
@@ -12,13 +13,17 @@ interface Request {
 
 class CreateUsuarios {
     public async execute({ nome, cpf, email, senha }: Request): Promise<Usuario | null> {
-        const usuarioRepository = getCustomRepository(UsuarioRepository)
+        try {
+            const usuarioRepository = getCustomRepository(UsuarioRepository)
 
-        const usuario = usuarioRepository.create({ nome, cpf, email, senha })
+            const usuario = usuarioRepository.create({ nome, cpf, email, senha })
 
-        await usuarioRepository.save(usuario)
+            await usuarioRepository.save(usuario)
 
-        return usuario
+            return usuario
+        } catch (err) {
+            throw new AppError("Erro ao registrar usuário", 400)
+        }
     }
 }
 

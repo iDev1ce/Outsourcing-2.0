@@ -2,6 +2,7 @@ import Impressora from "../../../models/Impressora";
 
 import ImpressoraRepository from "../../../repositories/estoque/ImpressoraRepository"
 import { getCustomRepository } from "typeorm";
+import AppError from "../../../../errors/AppError";
 
 interface Request {
     id: string
@@ -15,7 +16,7 @@ class DeleteImpressora {
         const status = await impressoraRepository.delete({ id })
 
         if (status.affected == 0)
-            return false 
+            throw new AppError("Impressora não encontrada", 404)
 
         return true
     }

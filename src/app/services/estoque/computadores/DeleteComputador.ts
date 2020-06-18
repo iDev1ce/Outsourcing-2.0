@@ -1,7 +1,8 @@
-import Computador from "../../../models/Computador";
-
-import ComputadorRepository from "../../../repositories/estoque/ComputadorRepository"
 import { getCustomRepository } from "typeorm";
+
+import Computador from "../../../models/Computador";
+import ComputadorRepository from "../../../repositories/estoque/ComputadorRepository"
+import AppError from "../../../../errors/AppError"
 
 interface Request {
     id: string
@@ -9,13 +10,13 @@ interface Request {
 
 class DeleteImpressora {
 
-    public async execute({ id }:Request):Promise<true | false> {
+    public async execute({ id }:Request):Promise<true | null> {
         const computadorRepository = getCustomRepository(ComputadorRepository)
 
         const status = await computadorRepository.delete({ id })
 
         if (status.affected == 0)
-            return false 
+            throw new AppError("Computador não encontrado")
 
         return true
     }

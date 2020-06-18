@@ -1,7 +1,8 @@
-import Computador from "../../../models/Computador";
-
-import ComputadorRepository from "../../../repositories/estoque/ComputadorRepository"
 import { getCustomRepository } from "typeorm";
+
+import Computador from "../../../models/Computador";
+import ComputadorRepository from "../../../repositories/estoque/ComputadorRepository"
+import AppError from "../../../../errors/AppError";
 
 interface Request {
     fonte:string
@@ -17,13 +18,30 @@ interface Request {
 
 class CreateComputador {
 
-    public async execute({ fonte, memoriaRam, mouse, placaMae, monitor, placaRede, placaVideo, processador, teclado }:Request):Promise<Computador | null> {
-        const computadorRepository = getCustomRepository(ComputadorRepository)
+    public async execute(
+        { fonte, memoriaRam, mouse, placaMae, monitor, placaRede, placaVideo, processador, teclado }:Request
+    ):Promise<Computador | null> {
+        try {
+            const computadorRepository = getCustomRepository(ComputadorRepository)
 
-        const computador = computadorRepository.create({ fonte, memoriaRam, mouse, monitor, placaMae, placaRede, placaVideo, processador, teclado })
-        await computadorRepository.save(computador)
+            const computador = computadorRepository.create({ 
+                fonte, 
+                memoriaRam, 
+                mouse, 
+                monitor, 
+                placaMae, 
+                placaRede, 
+                placaVideo, 
+                processador, 
+                teclado 
+            })
+            
+            await computadorRepository.save(computador)
 
-        return computador
+            return computador
+        } catch (err) {
+            throw new AppError("Erro ao salvar computador")
+        }
     }
 }
 

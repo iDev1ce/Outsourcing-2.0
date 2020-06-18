@@ -2,6 +2,7 @@ import Impressora from "../../../models/Impressora";
 
 import ImpressoraRepository from "../../../repositories/estoque/ImpressoraRepository"
 import { getCustomRepository } from "typeorm";
+import AppError from "../../../../errors/AppError";
 
 interface Request {
     marca:string
@@ -12,12 +13,16 @@ interface Request {
 class CreateImpressora {
 
     public async execute({ marca, modelo, tipo }:Request):Promise<Impressora | null> {
-        const impressoraRepository = getCustomRepository(ImpressoraRepository)
-
-        const impressora = impressoraRepository.create({ marca, modelo, tipo})
-        await impressoraRepository.save(impressora)
-
-        return impressora
+        try {
+            const impressoraRepository = getCustomRepository(ImpressoraRepository)
+    
+            const impressora = impressoraRepository.create({ marca, modelo, tipo})
+            await impressoraRepository.save(impressora)
+    
+            return impressora
+        } catch (err) {
+            throw new AppError("Erro ao inserir uma empressora", 400)
+        }
     }
 }
 

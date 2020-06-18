@@ -2,6 +2,7 @@ import Computador from "../../../models/Computador";
 
 import ComputadorRepository from "../../../repositories/estoque/ComputadorRepository"
 import { getCustomRepository } from "typeorm";
+import AppError from "../../../../errors/AppError";
 
 interface Request {
     id: string
@@ -24,7 +25,7 @@ class UpdateComputador {
         const existingImpressora = await computadorRepository.findOne(id)
 
         if (!existingImpressora) {
-            return null
+            throw new AppError("Computador não encontrado", 404)
         }
 
         const computador = computadorRepository.create({ id, fonte, memoriaRam, mouse, placaMae, monitor, placaRede, placaVideo, processador, teclado })

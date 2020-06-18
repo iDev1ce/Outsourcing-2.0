@@ -2,6 +2,7 @@ import Notebook from "../../../models/Notebooks";
 
 import NotebookRepository from "../../../repositories/estoque/NotebookRepository"
 import { getCustomRepository } from "typeorm";
+import AppError from "../../../../errors/AppError";
 
 interface Request {
     id: string
@@ -15,7 +16,7 @@ class DeleteNotebook {
         const status = await notebookRepository.delete({ id })
 
         if (status.affected == 0)
-            return false 
+            throw new AppError("Notebook não encontrado", 404)
 
         return true
     }

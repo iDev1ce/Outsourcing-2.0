@@ -20,7 +20,7 @@ class CreateComputador {
 
     public async execute(
         { fonte, memoriaRam, mouse, placaMae, monitor, placaRede, placaVideo, processador, teclado }:Request
-    ):Promise<Computador | null> {
+    ):Promise<Computador | false> {
         try {
             const computadorRepository = getCustomRepository(ComputadorRepository)
 
@@ -40,7 +40,7 @@ class CreateComputador {
 
             return computador
         } catch (err) {
-            throw new AppError("Erro ao salvar computador")
+            return false
         }
     }
 }

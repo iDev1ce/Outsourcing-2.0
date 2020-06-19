@@ -12,7 +12,7 @@ interface Request {
 
 class CreateImpressora {
 
-    public async execute({ marca, modelo, tipo }:Request):Promise<Impressora | null> {
+    public async execute({ marca, modelo, tipo }:Request):Promise<Impressora | false> {
         try {
             const impressoraRepository = getCustomRepository(ImpressoraRepository)
     
@@ -21,7 +21,7 @@ class CreateImpressora {
     
             return impressora
         } catch (err) {
-            throw new AppError("Erro ao inserir uma empressora", 400)
+            return false
         }
     }
 }

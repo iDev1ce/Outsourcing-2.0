@@ -8,18 +8,18 @@ interface Request {
     id: string
 }
 
-class DeleteImpressora {
+class DeleteComputador {
 
-    public async execute({ id }:Request):Promise<true | null> {
+    public async execute({ id }:Request):Promise<true | false> {
         const computadorRepository = getCustomRepository(ComputadorRepository)
 
         const status = await computadorRepository.delete({ id })
 
         if (status.affected == 0)
-            throw new AppError("Computador não encontrado")
+            return false
 
         return true
     }
 }
 
-export default new DeleteImpressora()
+export default new DeleteComputador()

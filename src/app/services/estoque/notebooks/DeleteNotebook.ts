@@ -16,7 +16,7 @@ class DeleteNotebook {
         const status = await notebookRepository.delete({ id })
 
         if (status.affected == 0)
-            throw new AppError("Notebook não encontrado", 404)
+            return false
 
         return true
     }

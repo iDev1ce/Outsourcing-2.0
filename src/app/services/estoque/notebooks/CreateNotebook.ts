@@ -16,7 +16,7 @@ interface Request {
 
 class CreateNotebook {
 
-    public async execute({ marca, modelo, memoriaRam, placaVideo, tipoPlacaVideo, processador, tamanhoDaTela }:Request):Promise<Notebooks | null> {
+    public async execute({ marca, modelo, memoriaRam, placaVideo, tipoPlacaVideo, processador, tamanhoDaTela }:Request):Promise<Notebooks | false> {
         try {
             const notebooksRepository = getCustomRepository(NotebooksRepository)
     
@@ -25,7 +25,7 @@ class CreateNotebook {
     
             return notebook
         } catch (err) {
-            throw new AppError("Erro ao salvar notebook")
+            return false
         }
     }
 }

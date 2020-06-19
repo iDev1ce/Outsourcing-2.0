@@ -17,7 +17,7 @@ class NotebookResource {
         const notebooks = await notebooksRepository.find();
 
         if (!notebooks)
-            throw new AppError("Notebooks não foram encontrados", 404)
+            return res.status(404).send({ message: "Não há notebooks" })
 
         return res.status(200).send(notebooks)
     }
@@ -29,8 +29,8 @@ class NotebookResource {
 
         const notebook = await notebooksRepository.findOne({ id })
 
-        if (notebook == null) 
-            throw new AppError("Notebook não encontrado", 404)
+        if (!notebook) 
+            return res.status(404).send({ message: "Notebook não encontrado" })
 
         return res.status(200).send(notebook)
     }
@@ -50,7 +50,7 @@ class NotebookResource {
         const notebook = await updateNotebook.execute({ id, marca, modelo, memoriaRam, placaVideo, processador, tipoPlacaVideo, tamanhoDaTela })
 
         if (!notebook)
-            throw new AppError("Notebook não encontrado", 404)
+            return res.status(404).send({ message: "Notebook não encontrado" })
 
         return res.status(200).send({ status: "Updated", notebook })
     }
@@ -62,7 +62,7 @@ class NotebookResource {
             const deleteStatus = await deleteNotebook.execute({ id })
     
             if (!deleteStatus)
-                throw new AppError("Notebook não encontrado", 404)
+                return res.status(404).send({ message: "Notebook não encontrado" })
     
             return res.status(200).send({ message: "Notebook deletado com sucesso!" })
         } catch (err) {

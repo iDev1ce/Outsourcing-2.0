@@ -13,14 +13,13 @@ interface Request {
 
 class UpdateImpressora {
 
-    public async execute({ id, marca, modelo, tipo }:Request):Promise<Impressora | null> {
+    public async execute({ id, marca, modelo, tipo }:Request):Promise<Impressora | false> {
         const impressoraRepository = getCustomRepository(ImpressoraRepository)
 
         const existingImpressora = await impressoraRepository.findOne(id)
 
-        if (!existingImpressora) {
-            throw new AppError("Impressora não encontrada", 404)
-        }
+        if (!existingImpressora)
+            return false
 
         const impressora = impressoraRepository.create({ id, marca, modelo, tipo})
         await impressoraRepository.save(impressora)

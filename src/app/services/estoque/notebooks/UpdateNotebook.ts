@@ -17,14 +17,13 @@ interface Request {
 
 class UpdateNotebook {
 
-    public async execute({ id, marca, modelo, memoriaRam, placaVideo, processador, tamanhoDaTela }:Request):Promise<Notebook | null> {
+    public async execute({ id, marca, modelo, memoriaRam, placaVideo, processador, tamanhoDaTela }:Request):Promise<Notebook | false> {
         const notebookRepository = getCustomRepository(NotebookRepository)
 
         const existingNotebook = await notebookRepository.findOne(id)
 
-        if (!existingNotebook) {
-            throw new AppError("Notebook não encontrado")
-        }
+        if (!existingNotebook) 
+            return false
 
         const notebook = notebookRepository.create({ id, marca, modelo, memoriaRam, placaVideo, processador, tamanhoDaTela })
         await notebookRepository.save(notebook)

@@ -19,14 +19,13 @@ interface Request {
 
 class UpdateComputador {
 
-    public async execute({ id, fonte, memoriaRam, mouse, monitor, placaMae, placaRede, placaVideo, processador, teclado }:Request):Promise<Computador | null> {
+    public async execute({ id, fonte, memoriaRam, mouse, monitor, placaMae, placaRede, placaVideo, processador, teclado }:Request):Promise<Computador | false> {
         const computadorRepository = getCustomRepository(ComputadorRepository)
 
-        const existingImpressora = await computadorRepository.findOne(id)
+        const existingComputador = await computadorRepository.findOne(id)
 
-        if (!existingImpressora) {
-            throw new AppError("Computador não encontrado", 404)
-        }
+        if (!existingComputador)
+            return false
 
         const computador = computadorRepository.create({ id, fonte, memoriaRam, mouse, placaMae, monitor, placaRede, placaVideo, processador, teclado })
         await computadorRepository.save(computador)

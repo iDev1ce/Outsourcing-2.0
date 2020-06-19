@@ -16,7 +16,7 @@ class DeleteImpressora {
         const status = await impressoraRepository.delete({ id })
 
         if (status.affected == 0)
-            throw new AppError("Impressora não encontrada", 404)
+            return false
 
         return true
     }

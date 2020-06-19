@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import funcionarioResource from "../app/resources/funcionarioResource";
 
-class FuncionariosRoutes {
+class FuncionarioRoutes {
     public routes:Router
 
     constructor() {
@@ -17,4 +17,4 @@ class FuncionariosRoutes {
     }
 }
 
-export default new FuncionariosRoutes().routes
+export default new FuncionarioRoutes().routes

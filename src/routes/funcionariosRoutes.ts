@@ -12,7 +12,7 @@ class FuncionariosRoutes {
     }
 
     private getPrivateRoutes():void {
-        this.routes.post("/sing-in", funcionarioResource.singIn)
+        this.routes.post("/sign-in", funcionarioResource.singIn)
         this.routes.post("/auth", funcionarioResource.login)
     }
 }

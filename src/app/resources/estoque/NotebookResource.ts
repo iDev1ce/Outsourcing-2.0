@@ -12,15 +12,14 @@ import AppError from "../../../errors/AppError"
 class NotebookResource {
 
     public async getAll(req:Request, res:Response) {
-        try {
-            const notebooksRepository = getCustomRepository(NotebooksRepository)
-    
-            const notebooks = await notebooksRepository.find();
-    
-            return res.status(200).send(notebooks)
-        } catch (err) {
-            return res.status(err.statusCode).send({ error: err.message })
-        }
+        const notebooksRepository = getCustomRepository(NotebooksRepository)
+
+        const notebooks = await notebooksRepository.find();
+
+        if (!notebooks)
+            throw new AppError("Notebooks não foram encontrados", 404)
+
+        return res.status(200).send(notebooks)
     }
 
     public async getById(req:Request, res:Response) {
@@ -37,15 +36,11 @@ class NotebookResource {
     }
 
     public async insert(req:Request, res:Response) {
-        try {
-            const { marca, modelo, memoriaRam, placaVideo, processador, tipoPlacaVideo, tamanhoDaTela } = req.body
-    
-            const notebook = await createNotebook.execute({ marca, memoriaRam, modelo, placaVideo, processador, tamanhoDaTela, tipoPlacaVideo })
-    
-            return res.status(201).send(notebook)
-        } catch (err) {
-            throw new AppError("Notebook não registrado")
-        }
+        const { marca, modelo, memoriaRam, placaVideo, processador, tipoPlacaVideo, tamanhoDaTela } = req.body
+
+        const notebook = await createNotebook.execute({ marca, memoriaRam, modelo, placaVideo, processador, tamanhoDaTela, tipoPlacaVideo })
+
+        return res.status(201).send(notebook)
     }
 
     public async update(req:Request, res:Response) {

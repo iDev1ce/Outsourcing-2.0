@@ -2,31 +2,26 @@ import { Request, Response } from "express";
 
 import createFuncionario from "../services/funcionarios/createFuncionario"
 import authFuncionario from "../services/funcionarios/authFuncionario"
+import AppError from "../../errors/AppError";
 
 class FuncionariosResource {
     public async singIn(req: Request, res: Response) {
-        try {
-            const { cpf, nome, email, senha } = req.body
+        const { cpf, nome, email, senha } = req.body
 
-            const funcionario = await createFuncionario.execute({ cpf, nome, email, senha })
+        const funcionario = await createFuncionario.execute({ cpf, nome, email, senha })
 
-            return res.status(201).send(funcionario)
-        } catch (err) {
-            return res.status(err.statusCode).send({ error: err.message })
-        }
+        return res.status(201).send(funcionario)
     }
 
     public async login(req: Request, res: Response) {
-        try {
-            const { email, senha } = req.body
-            
-            const funcionario = await authFuncionario.execute({ email, senha })
-    
-            return res.status(200).send(funcionario)
-        } catch (err) {
-            return res.status(err.statusCode).send({ error: err.message })
-        }
+        const { email, senha } = req.body
         
+        const funcionario = await authFuncionario.execute({ email, senha })
+
+        if(!funcionario)
+            throw new AppError("Erro ao logar")
+
+        return res.status(200).send(funcionario)
     }
 }
 

@@ -13,17 +13,14 @@ interface Request {
 
 class CreateUsuarios {
     public async execute({ nome, cpf, email, senha }: Request): Promise<Usuario | null> {
-        try {
-            const usuarioRepository = getCustomRepository(UsuarioRepository)
+        const usuarioRepository = getCustomRepository(UsuarioRepository)
 
-            const usuario = usuarioRepository.create({ nome, cpf, email, senha })
+        const usuario = usuarioRepository.create({ nome, cpf, email, senha })
 
-            await usuarioRepository.save(usuario)
+        if (!await usuarioRepository.save(usuario))
+            throw new AppError("Erro ao salvar o usuário")
 
-            return usuario
-        } catch (err) {
-            throw new AppError("Erro ao registrar usuário", 400)
-        }
+        return usuario
     }
 }
 

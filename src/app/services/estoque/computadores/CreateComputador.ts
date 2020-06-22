@@ -21,27 +21,23 @@ class CreateComputador {
     public async execute(
         { fonte, memoriaRam, mouse, placaMae, monitor, placaRede, placaVideo, processador, teclado }:Request
     ):Promise<Computador | null> {
-        try {
-            const computadorRepository = getCustomRepository(ComputadorRepository)
+        const computadorRepository = getCustomRepository(ComputadorRepository)
 
-            const computador = computadorRepository.create({ 
-                fonte, 
-                memoriaRam, 
-                mouse, 
-                monitor, 
-                placaMae, 
-                placaRede, 
-                placaVideo, 
-                processador, 
-                teclado 
-            })
-            
-            await computadorRepository.save(computador)
+        const computador = computadorRepository.create({ 
+            fonte, 
+            memoriaRam,
+            mouse, 
+            monitor, 
+            placaMae, 
+            placaRede, 
+            placaVideo, 
+            processador, 
+            teclado 
+        })
+        
+        await computadorRepository.save(computador)
 
-            return computador
-        } catch (err) {
-            throw new AppError("Erro ao salvar computador")
-        }
+        return computador
     }
 }
 

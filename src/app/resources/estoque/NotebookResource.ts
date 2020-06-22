@@ -56,19 +56,14 @@ class NotebookResource {
     }
 
     public async delete(req:Request, res:Response) {
-        try {
-            const { id } = req.params
-    
-            const deleteStatus = await deleteNotebook.execute({ id })
-    
-            if (!deleteStatus)
-                throw new AppError("Notebook não encontrado", 404)
-    
-            return res.status(200).send({ message: "Notebook deletado com sucesso!" })
-        } catch (err) {
-            return res.status(err.statusCode).send({ error: err.message })
+        const { id } = req.params
 
-        }
+        const deleteStatus = await deleteNotebook.execute({ id })
+
+        if (!deleteStatus)
+            throw new AppError("Notebook não encontrado", 404)
+
+        return res.status(200).send({ message: "Notebook deletado com sucesso!" })
     }
 
 }

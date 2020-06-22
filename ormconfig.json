@@ -5,7 +5,8 @@
     "password": "bcd127",
     "database": "solcode",
     "entities": [
-        "./src/app/models/*.ts"
+        "./src/app/models/*.ts",
+        "./src/app/models/estoque/*.ts"
     ],
     "migrations": [
         "./src/database/migrations/*.ts"

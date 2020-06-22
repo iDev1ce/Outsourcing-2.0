@@ -14,27 +14,24 @@ interface Request {
 
 class CreateFuncionario {
     public async execute({ cpf, nome, email, senha }: Request): Promise<Funcionario | null> {
-        try {
-            const funcionarioRepository = getCustomRepository(FuncionarioRepository)
-    
-            const senhaHash = await hash(senha, 10)
-    
-            const funcionario = funcionarioRepository.create({
-                cpf,
-                nome,
-                email, 
-                senha: senhaHash 
-            })
-    
-            await funcionarioRepository.save(funcionario)
-    
-            delete funcionario.senha
-            delete funcionario.email
-    
-            return funcionario
-        } catch (err) {
-            throw new AppError("Erro ao registrar funcionário")
-        }
+        const funcionarioRepository = getCustomRepository(FuncionarioRepository)
+
+        const senhaHash = await hash(senha, 10)
+
+        const funcionario = funcionarioRepository.create({
+            cpf,
+            nome,
+            email, 
+            senha: senhaHash 
+        })
+
+        if (!await funcionarioRepository.save(funcionario))
+            throw new AppError("Erro ao salvar funcionário")
+
+        delete funcionario.senha
+        delete funcionario.email
+
+        return funcionario
     }
 }
 

@@ -16,17 +16,17 @@ interface Request {
 
 class CreateNotebook {
 
-    public async execute({ marca, modelo, memoriaRam, placaVideo, tipoPlacaVideo, processador, tamanhoDaTela }:Request):Promise<Notebooks | null> {
-        try {
-            const notebooksRepository = getCustomRepository(NotebooksRepository)
-    
-            const notebook = notebooksRepository.create({ marca, modelo, memoriaRam, placaVideo, tipoPlacaVideo, processador, tamanhoDaTela })
-            await notebooksRepository.save(notebook)
-    
-            return notebook
-        } catch (err) {
+    public async execute(
+        { marca, modelo, memoriaRam, placaVideo, tipoPlacaVideo, processador, tamanhoDaTela }:Request
+    ):Promise<Notebooks | null> {
+        const notebooksRepository = getCustomRepository(NotebooksRepository)
+
+        const notebook = notebooksRepository.create({ marca, modelo, memoriaRam, placaVideo, tipoPlacaVideo, processador, tamanhoDaTela })
+        
+        if (!await notebooksRepository.save(notebook))
             throw new AppError("Erro ao salvar notebook")
-        }
+
+        return notebook
     }
 }
 

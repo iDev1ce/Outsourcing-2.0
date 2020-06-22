@@ -13,16 +13,14 @@ interface Request {
 class CreateImpressora {
 
     public async execute({ marca, modelo, tipo }:Request):Promise<Impressora | null> {
-        try {
-            const impressoraRepository = getCustomRepository(ImpressoraRepository)
-    
-            const impressora = impressoraRepository.create({ marca, modelo, tipo})
-            await impressoraRepository.save(impressora)
-    
-            return impressora
-        } catch (err) {
-            throw new AppError("Erro ao inserir uma empressora", 400)
-        }
+        const impressoraRepository = getCustomRepository(ImpressoraRepository)
+
+        const impressora = impressoraRepository.create({ marca, modelo, tipo})
+        
+        if (!await impressoraRepository.save(impressora))
+            throw new AppError("Erro ao salvar impressora")
+
+        return impressora
     }
 }
 

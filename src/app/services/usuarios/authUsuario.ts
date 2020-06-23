@@ -24,8 +24,10 @@ class AuthUsuario {
             where: { email }
         })
 
-        if(!existingUsuario)
+        if(!existingUsuario) 
             return null
+
+        console.log(existingUsuario.senha)
 
         if(!await compare(senha, existingUsuario.senha))
             return null
@@ -37,10 +39,10 @@ class AuthUsuario {
             expiresIn: expiresIn
         })
 
-        const usuario = existingUsuario
+        delete existingUsuario.senha
+        delete existingUsuario.email
 
-        delete usuario.senha
-        delete usuario.email
+        const usuario = existingUsuario
 
         return {
             usuario,

@@ -20,8 +20,8 @@ class UsuarioRepository {
 
         const usuario = await authUsuario.execute({ email, senha })
 
-        if(!usuario)
-            return res.status(400).send({ message: "Erro ao logar" })
+        if(usuario == null)
+            return res.status(400).send({ message: "Erro email/senha inválido" })
 
         return res.status(200).send(usuario)
     }

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, Timestamp } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity("usuarios")
 class Usuario {
@@ -17,9 +17,6 @@ class Usuario {
 
     @Column()
     senha: string
-
-    @Column("datetime")
-    date: Timestamp
 
 }
 

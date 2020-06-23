@@ -2,7 +2,6 @@ import Notebooks from "../../../models/estoque/Notebooks";
 
 import NotebooksRepository from "../../../repositories/estoque/NotebookRepository"
 import { getCustomRepository } from "typeorm";
-import AppError from "../../../../shared/errors/AppError";
 
 interface Request {
     marca:string

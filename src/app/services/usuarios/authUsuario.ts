@@ -5,7 +5,6 @@ import { sign } from "jsonwebtoken";
 import Usuario from "../../models/Usuario";
 import UsuarioRepository from "../../repositories/UsuarioRepository";
 import authConfigUsuario from "../../../config/authUsuario";
-import AppError from "../../../shared/errors/AppError";
 
 interface Request {
     email: string

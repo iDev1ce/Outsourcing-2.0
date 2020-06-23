@@ -1,8 +1,5 @@
-import Impressora from "../../../models/estoque/Impressora";
-
 import ImpressoraRepository from "../../../repositories/estoque/ImpressoraRepository"
 import { getCustomRepository } from "typeorm";
-import AppError from "../../../../shared/errors/AppError";
 
 interface Request {
     id: string

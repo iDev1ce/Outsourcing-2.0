@@ -7,7 +7,6 @@ import createNotebook from "../../services/estoque/notebooks/CreateNotebook"
 import updateNotebook from "../../services/estoque/notebooks/UpdateNotebook"
 import deleteNotebook from "../../services/estoque/notebooks/DeleteNotebook"
 import NotebookRepository from "../../repositories/estoque/NotebookRepository"
-import AppError from "../../../shared/errors/AppError"
 
 class NotebookResource {
 

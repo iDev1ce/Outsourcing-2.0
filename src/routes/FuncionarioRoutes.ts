@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import funcionarioResource from "../../../../app/resources/funcionarioResource";
+import funcionarioResource from "../app/resources/funcionarioResource";
 // import funcionarioResource from "@resources/"
 
 class FuncionarioRoutes {

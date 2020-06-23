@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import Impressora from "../../../../../app/resources/estoque/ImpressoraResource"
+import Impressora from "../../app/resources/estoque/ImpressoraResource"
 import middleUser from "../../middlewares/usuarioAuth"
 import middleFunc from "../../middlewares/funcionarioAuth"
 

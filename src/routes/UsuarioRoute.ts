@@ -1,6 +1,6 @@
 import { Router } from "express"
 
-import usuarioResource from "../../../../app/resources/usuarioResource";
+import usuarioResource from "../app/resources/usuarioResource";
 
 class UsersRoute {
     public routes:Router

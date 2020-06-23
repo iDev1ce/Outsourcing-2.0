@@ -2,7 +2,6 @@ import Notebook from "../../../models/estoque/Notebooks";
 
 import NotebookRepository from "../../../repositories/estoque/NotebookRepository"
 import { getCustomRepository } from "typeorm";
-import AppError from "../../../../shared/errors/AppError";
 
 interface Request {
     id:string

@@ -3,7 +3,6 @@ import { hash } from "bcrypt"
 
 import FuncionarioRepository from "../../repositories/FuncionarioRepository"
 import Funcionario from "../../models/Funcionarios"
-import AppError from "../../../shared/errors/AppError"
 
 interface Request {
     cpf: string

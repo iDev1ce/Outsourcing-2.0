@@ -3,7 +3,7 @@ import { hash } from "bcrypt"
 
 import FuncionarioRepository from "../../repositories/FuncionarioRepository"
 import Funcionario from "../../models/Funcionarios"
-import AppError from "../../../errors/AppError"
+import AppError from "../../../shared/errors/AppError"
 
 interface Request {
     cpf: string
@@ -26,7 +26,7 @@ class CreateFuncionario {
         })
 
         if (!await funcionarioRepository.save(funcionario))
-            throw new AppError("Erro ao salvar funcionário")
+            return null
 
         delete funcionario.senha
         delete funcionario.email

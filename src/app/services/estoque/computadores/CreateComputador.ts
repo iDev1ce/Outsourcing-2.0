@@ -2,7 +2,6 @@ import { getCustomRepository } from "typeorm";
 
 import Computador from "../../../models/estoque/Computador";
 import ComputadorRepository from "../../../repositories/estoque/ComputadorRepository"
-import AppError from "../../../../errors/AppError";
 
 interface Request {
     fonte:string
@@ -35,7 +34,8 @@ class CreateComputador {
             teclado 
         })
         
-        await computadorRepository.save(computador)
+        if (!await computadorRepository.save(computador))
+            return null
 
         return computador
     }

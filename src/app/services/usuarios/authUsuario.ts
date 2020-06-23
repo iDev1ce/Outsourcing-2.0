@@ -5,6 +5,7 @@ import { sign } from "jsonwebtoken";
 import Usuario from "../../models/Usuario";
 import UsuarioRepository from "../../repositories/UsuarioRepository";
 import authConfigUsuario from "../../../config/authUsuario";
+import AppError from "../../../shared/errors/AppError";
 
 interface Request {
     email: string
@@ -25,10 +26,10 @@ class AuthUsuario {
         })
 
         if(!existingUsuario)
-            throw new Error("Email/senha inválidos")
+            return null
 
         if(!await compare(senha, existingUsuario.senha))
-            new Error("Email/senha inválidos")
+            return null
 
         const { secret, expiresIn } = authConfigUsuario
 

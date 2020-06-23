@@ -2,7 +2,7 @@ import Notebooks from "../../../models/estoque/Notebooks";
 
 import NotebooksRepository from "../../../repositories/estoque/NotebookRepository"
 import { getCustomRepository } from "typeorm";
-import AppError from "../../../../errors/AppError";
+import AppError from "../../../../shared/errors/AppError";
 
 interface Request {
     marca:string
@@ -24,7 +24,7 @@ class CreateNotebook {
         const notebook = notebooksRepository.create({ marca, modelo, memoriaRam, placaVideo, tipoPlacaVideo, processador, tamanhoDaTela })
         
         if (!await notebooksRepository.save(notebook))
-            throw new AppError("Erro ao salvar notebook")
+            return null
 
         return notebook
     }

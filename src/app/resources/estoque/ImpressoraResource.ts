@@ -6,7 +6,6 @@ import ImpressoraRepository from "../../repositories/estoque/ImpressoraRepositor
 import createImpressora from "../../services/estoque/impressoras/CreateImpressora"
 import updateImpressora from "../../services/estoque/impressoras/UpdateImpressora"
 import deleteImpressora from "../../services/estoque/impressoras/DeleteImpressora"
-import AppError from "../../../errors/AppError"
 
 class ImpressoraResource {
 
@@ -15,8 +14,8 @@ class ImpressoraResource {
 
         const impressoras = await impressoraRepository.find()
 
-        if (!impressoras)
-            throw new AppError("Erro ao buscar impressoras", 404)
+        if(!impressoras)
+            return res.status(404).send({ message: "Não há impressoras" })
 
         return res.status(200).send(impressoras)
     }
@@ -28,8 +27,8 @@ class ImpressoraResource {
 
         const impressora = await impressoraRepository.findOne({ id })
 
-        if (!impressora) 
-            throw new AppError("Impressora não encontrada", 404)
+        if(!impressora)
+            return res.status(404).send({ message: "Não há impressora" })
 
         return res.status(200).send(impressora)
     }
@@ -38,6 +37,9 @@ class ImpressoraResource {
         const { marca, modelo, tipo } = req.body
 
         const impressora = await createImpressora.execute({ marca, modelo, tipo })
+
+        if(!impressora)
+            return res.status(400).send({ message: "Erro ao salvar impressora" })
 
         return res.status(201).send(impressora)
     }
@@ -48,8 +50,8 @@ class ImpressoraResource {
 
         const impressora = await updateImpressora.execute({ id, marca, modelo, tipo })
 
-        if (!impressora)
-            throw new AppError("Impressora não encontrada", 404)
+        if(!impressora)
+            return res.status(404).send({ message: "Não há impressora" })
 
         return res.status(200).send({ status: "Updated", impressora })
     }
@@ -59,10 +61,10 @@ class ImpressoraResource {
 
         const deleteStatus = await deleteImpressora.execute({ id })
 
-        if (!deleteStatus)
-            throw new AppError("Impressora não encontrada", 404)
+        if(deleteStatus == null)
+            return res.status(404).send({ message: "Não há impressora" })
         
-        return res.status(404).send({ message: "Impressora não encontrada" })
+        return res.status(200).send({ message: "Impressora deletada com sucesso!" })
     }
 }
 

@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { getCustomRepository, ReplSet } from "typeorm"
+import { getCustomRepository } from "typeorm"
 
 import NotebooksRepository from "../../repositories/estoque/NotebookRepository"
 
@@ -7,7 +7,7 @@ import createNotebook from "../../services/estoque/notebooks/CreateNotebook"
 import updateNotebook from "../../services/estoque/notebooks/UpdateNotebook"
 import deleteNotebook from "../../services/estoque/notebooks/DeleteNotebook"
 import NotebookRepository from "../../repositories/estoque/NotebookRepository"
-import AppError from "../../../errors/AppError"
+import AppError from "../../../shared/errors/AppError"
 
 class NotebookResource {
 
@@ -17,7 +17,7 @@ class NotebookResource {
         const notebooks = await notebooksRepository.find();
 
         if (!notebooks)
-            throw new AppError("Notebooks não foram encontrados", 404)
+            return res.status(404).send({ message: "Não há notebooks" })
 
         return res.status(200).send(notebooks)
     }
@@ -29,8 +29,8 @@ class NotebookResource {
 
         const notebook = await notebooksRepository.findOne({ id })
 
-        if (notebook == null) 
-            throw new AppError("Notebook não encontrado", 404)
+        if (!notebook)
+            return res.status(404).send({ message: "Não há notebook" })
 
         return res.status(200).send(notebook)
     }
@@ -38,7 +38,18 @@ class NotebookResource {
     public async insert(req:Request, res:Response) {
         const { marca, modelo, memoriaRam, placaVideo, processador, tipoPlacaVideo, tamanhoDaTela } = req.body
 
-        const notebook = await createNotebook.execute({ marca, memoriaRam, modelo, placaVideo, processador, tamanhoDaTela, tipoPlacaVideo })
+        const notebook = await createNotebook.execute({ 
+            marca, 
+            memoriaRam, 
+            modelo, 
+            placaVideo, 
+            processador, 
+            tamanhoDaTela, 
+            tipoPlacaVideo 
+        })
+
+        if (!notebook)
+            return res.status(400).send({ message: "Erro ao salvar notebook" })
 
         return res.status(201).send(notebook)
     }
@@ -47,10 +58,19 @@ class NotebookResource {
         const { id } = req.params
         const { marca, modelo, memoriaRam, placaVideo, processador, tipoPlacaVideo, tamanhoDaTela } = req.body
 
-        const notebook = await updateNotebook.execute({ id, marca, modelo, memoriaRam, placaVideo, processador, tipoPlacaVideo, tamanhoDaTela })
+        const notebook = await updateNotebook.execute({ 
+            id, 
+            marca, 
+            modelo, 
+            memoriaRam, 
+            placaVideo, 
+            processador, 
+            tipoPlacaVideo, 
+            tamanhoDaTela 
+        })
 
         if (!notebook)
-            throw new AppError("Notebook não encontrado", 404)
+            return res.status(404).send({ message: "Não há notebook" })
 
         return res.status(200).send({ status: "Updated", notebook })
     }
@@ -61,7 +81,7 @@ class NotebookResource {
         const deleteStatus = await deleteNotebook.execute({ id })
 
         if (!deleteStatus)
-            throw new AppError("Notebook não encontrado", 404)
+            return res.status(404).send({ message: "Não há notebooks" })
 
         return res.status(200).send({ message: "Notebook deletado com sucesso!" })
     }

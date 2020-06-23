@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import Computador from "../../app/resources/estoque/ComputadorResource"
+import Computador from "../../../../../app/resources/estoque/ComputadorResource"
 import middleUser from "../../middlewares/usuarioAuth"
 import middleFunc from "../../middlewares/funcionarioAuth"
 

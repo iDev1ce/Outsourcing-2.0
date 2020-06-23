@@ -2,7 +2,7 @@ import Notebook from "../../../models/estoque/Notebooks";
 
 import NotebookRepository from "../../../repositories/estoque/NotebookRepository"
 import { getCustomRepository } from "typeorm";
-import AppError from "../../../../errors/AppError";
+import AppError from "../../../../shared/errors/AppError";
 
 interface Request {
     id:string
@@ -22,9 +22,8 @@ class UpdateNotebook {
 
         const existingNotebook = await notebookRepository.findOne(id)
 
-        if (!existingNotebook) {
-            throw new AppError("Notebook não encontrado")
-        }
+        if (!existingNotebook) 
+            return null
 
         const notebook = notebookRepository.create({ id, marca, modelo, memoriaRam, placaVideo, processador, tamanhoDaTela })
         await notebookRepository.save(notebook)

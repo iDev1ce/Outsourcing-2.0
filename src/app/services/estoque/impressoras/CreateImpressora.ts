@@ -2,7 +2,7 @@ import Impressora from "../../../models/estoque/Impressora";
 
 import ImpressoraRepository from "../../../repositories/estoque/ImpressoraRepository"
 import { getCustomRepository } from "typeorm";
-import AppError from "../../../../errors/AppError";
+import AppError from "../../../../shared/errors/AppError";
 
 interface Request {
     marca:string
@@ -18,7 +18,7 @@ class CreateImpressora {
         const impressora = impressoraRepository.create({ marca, modelo, tipo})
         
         if (!await impressoraRepository.save(impressora))
-            throw new AppError("Erro ao salvar impressora")
+            return null
 
         return impressora
     }

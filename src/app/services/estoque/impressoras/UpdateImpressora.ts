@@ -2,7 +2,7 @@ import Impressora from "../../../models/estoque/Impressora";
 
 import ImpressoraRepository from "../../../repositories/estoque/ImpressoraRepository"
 import { getCustomRepository } from "typeorm";
-import AppError from "../../../../errors/AppError";
+import AppError from "../../../../shared/errors/AppError";
 
 interface Request {
     id:string
@@ -18,9 +18,8 @@ class UpdateImpressora {
 
         const existingImpressora = await impressoraRepository.findOne(id)
 
-        if (!existingImpressora) {
-            throw new AppError("Impressora não encontrada", 404)
-        }
+        if (!existingImpressora)
+            return null
 
         const impressora = impressoraRepository.create({ id, marca, modelo, tipo})
         await impressoraRepository.save(impressora)

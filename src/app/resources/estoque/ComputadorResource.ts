@@ -2,7 +2,6 @@ import { Request, Response } from "express"
 import { getCustomRepository } from "typeorm"
 
 import ComputadorRepository from "../../repositories/estoque/ComputadorRepository"
-import AppError from "../../../errors/AppError"
 
 import createComputador from "../../services/estoque/computadores/CreateComputador"
 import updateComputador from "../../services/estoque/computadores/UpdateComputador"
@@ -17,7 +16,7 @@ class ComputadorResource {
         const computadores = await computadorRepository.find();
 
         if(!computadores)
-            throw new AppError("Computador não encontrado", 404)
+            return res.send(404).send({ message: "Não há computadores" })
 
         return res.status(200).send(computadores)
     }
@@ -30,7 +29,7 @@ class ComputadorResource {
         const computador = await computadorRepository.findOne({ id })
 
         if(!computador)
-            throw new AppError("Computador não encontrado", 404)
+            return res.send(404).send({ message: "Não há computador" })
 
         return res.status(200).send(computador)
     }
@@ -58,6 +57,9 @@ class ComputadorResource {
             teclado
         })
 
+        if(!computador)
+            return res.send(404).send({ message: "Erro ao salvar computador" })
+
         return res.status(201).send(computador)
     }
 
@@ -76,18 +78,21 @@ class ComputadorResource {
             teclado
             } = req.body
 
-            const computador = await updateComputador.execute({ 
-                id,
-                fonte,
-                memoriaRam,
-                monitor,
-                mouse,
-                placaMae,
-                placaRede,
-                placaVideo,
-                processador,
-                teclado
-            })
+        const computador = await updateComputador.execute({ 
+            id,
+            fonte,
+            memoriaRam,
+            monitor,
+            mouse,
+            placaMae,
+            placaRede,
+            placaVideo,
+            processador,
+            teclado
+        })
+
+        if(!computador)
+            return res.send(404).send({ message: "Não há computador" })
 
         return res.status(200).send({ status: "Updated", computador })
     }
@@ -95,8 +100,10 @@ class ComputadorResource {
     public async delete(req:Request, res:Response) {
         const { id } = req.params
 
-        if (await deleteComputador.execute({ id }))
-            throw new AppError("Erro ao apagar o computador")
+        const deleteStatus = await deleteComputador.execute({ id })
+
+        if(deleteStatus == false)
+            return res.status(404).send({ message: "Não há computadores" })
             
         return res.status(200).send({ message: "Computador deletado com sucesso!" })
     }

@@ -5,7 +5,6 @@ import { sign } from "jsonwebtoken"
 import Funcionario from "../../models/Funcionarios";
 import FuncionarioRepository from "../../repositories/FuncionarioRepository";
 import authConfig from "../../../config/auth"
-import AppError from "../../../errors/AppError"
 
 interface Request {
     email: string
@@ -26,10 +25,10 @@ class AuthFuncionario {
         })
 
         if(!existingFuncionario)
-            throw new AppError("Email/senha inválido", 401)
+            return null
 
         if(!await compare(senha, existingFuncionario.senha))
-            throw new AppError("Email/senha inválido", 401)
+            return null
 
         const { secret, expiresIn } = authConfig
 

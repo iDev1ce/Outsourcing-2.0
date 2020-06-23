@@ -3,9 +3,10 @@ import "express-async-errors"
 import cors from "cors";
 
 import routes from "./routes";
-import AppError from "./errors/AppError"
+import AppError from "../../errors/AppError"
+// import AppError from "@shared/errors/AppError"
 
-import "./database"
+import "../database"
 
 class App {
     public server:Application;

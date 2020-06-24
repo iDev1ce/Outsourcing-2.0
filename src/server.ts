@@ -3,6 +3,7 @@ import "express-async-errors"
 import cors from "cors";
 
 import routes from "./routes";
+import uploadConfig from "./config/upload"
 
 import "./database"
 
@@ -17,6 +18,7 @@ class App {
 
     public middlewares():void {
         this.server.use(express.json())
+        this.server.use("/files", express.static(uploadConfig.directory))
         this.server.use(cors())
     }
 

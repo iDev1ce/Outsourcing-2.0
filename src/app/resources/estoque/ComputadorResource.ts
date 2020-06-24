@@ -6,6 +6,7 @@ import ComputadorRepository from "../../repositories/estoque/ComputadorRepositor
 import createComputador from "../../services/estoque/computadores/CreateComputador"
 import updateComputador from "../../services/estoque/computadores/UpdateComputador"
 import deleteComputador from "../../services/estoque/computadores/DeleteComputador"
+import uploadFotoComputador from "../../services/estoque/computadores/uploadFotoComputador"
 
 class ComputadorResource {
 
@@ -95,6 +96,17 @@ class ComputadorResource {
             return res.send(404).send({ message: "Não há computador" })
 
         return res.status(200).send({ status: "Updated", computador })
+    }
+
+    public async upload(req: Request, res: Response) {
+        const { id } = req.params
+
+        const computador = await uploadFotoComputador.execute({
+            computador_id: id,
+            fotoFilename: req.file.filename
+        })
+
+        return res.status(200).send(computador)
     }
 
     public async delete(req:Request, res:Response) {

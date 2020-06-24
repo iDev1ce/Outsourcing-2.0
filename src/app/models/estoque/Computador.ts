@@ -32,6 +32,9 @@ class Computador {
 
     @Column({ type: "varchar", length: 100 })
     placaVideo:string
+
+    @Column({ type: "varchar", length: 255 })
+    foto: string
 }
 
 export default Computador

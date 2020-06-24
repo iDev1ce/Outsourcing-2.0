@@ -1,9 +1,9 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
 export class createComputador1592419349975 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        queryRunner.createTable(
+        await queryRunner.createTable(
             new Table({
                 name: 'computadores',
                 columns: [
@@ -60,9 +60,20 @@ export class createComputador1592419349975 implements MigrationInterface {
                         type: "varchar",
                         isNullable: false,
                     },
+                    {
+                        name: "foto_id",
+                        type: "varchar",
+                        isNullable: true
+                    }
                 ]
             })
         )
+
+        await queryRunner.createForeignKey("computadores", new TableForeignKey({
+            columnNames: ["foto_id"],
+            referencedColumnNames: ["id"],
+            referencedTableName: "fotos"
+        }))
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

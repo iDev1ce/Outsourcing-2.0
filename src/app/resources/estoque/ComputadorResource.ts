@@ -101,12 +101,12 @@ class ComputadorResource {
     public async upload(req: Request, res: Response) {
         const { id } = req.params
 
-        const computador = await uploadFotoComputador.execute({
+        const foto = await uploadFotoComputador.execute({
             computador_id: id,
             fotoFilename: req.file.filename
         })
 
-        return res.status(200).send(computador)
+        return res.status(200).send(foto)
     }
 
     public async delete(req:Request, res:Response) {

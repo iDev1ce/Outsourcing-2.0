@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from "typeorm";
 
 @Entity("computadores")
 class Computador {
@@ -34,6 +34,10 @@ class Computador {
     placaVideo:string
 
     @Column({ type: "varchar", length: 255 })
+    foto_id: string
+
+    @OneToMany(type => Computador, computador => computador.foto)
+    @JoinColumn({ name: "foto_id" })
     foto: string
 }
 

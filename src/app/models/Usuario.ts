@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import Contrato from "./Contrato";
 
 @Entity("usuarios")
 class Usuario {
@@ -17,6 +18,9 @@ class Usuario {
 
     @Column()
     senha: string
+
+    @OneToMany(type => Contrato, contrato => contrato.id)
+    contrato_id: Contrato
 
 }
 

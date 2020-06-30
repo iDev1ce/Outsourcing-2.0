@@ -5,7 +5,7 @@ export class createTableFotos1592998982232 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "fotos",
+                name: "fotos_computadores",
                 columns: [
                     {
                         name: "id",
@@ -23,7 +23,7 @@ export class createTableFotos1592998982232 implements MigrationInterface {
                     {
                         name: "computador_id",
                         type: "varchar",
-                        isNullable: false
+                        isNullable: true
                     }
                 ]
             })

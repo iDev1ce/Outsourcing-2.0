@@ -61,18 +61,19 @@ export class createComputador1592419349975 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
-                        name: "foto_id",
+                        name: "contrato_id",
                         type: "varchar",
-                        isNullable: true
+                        isNullable: true,
+                        isUnique: true
                     }
                 ]
             })
         )
 
         await queryRunner.createForeignKey("computadores", new TableForeignKey({
-            columnNames: ["foto_id"],
+            columnNames: ["contrato_id"],
             referencedColumnNames: ["id"],
-            referencedTableName: "fotos"
+            referencedTableName: "contratos"
         }))
     }
 

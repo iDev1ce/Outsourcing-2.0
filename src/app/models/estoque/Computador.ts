@@ -1,4 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOne } from "typeorm";
+
+import Contrato from "../Contrato";
+import Chamados from "../Chamados";
+import FotoComputador from "../FotoComputador";
 
 @Entity("computadores")
 class Computador {
@@ -32,13 +36,22 @@ class Computador {
 
     @Column({ type: "varchar", length: 100 })
     placaVideo:string
+    
+    @Column({ type: "varchar", length: 100 })
+    contrato_id: string
+    
+    @OneToMany(type => FotoComputador, foto => foto.id)
+    @JoinColumn({ name: "id" })
+    foto: FotoComputador[]
 
-    @Column({ type: "varchar", length: 255 })
-    foto_id: string
+    @ManyToOne(type => Contrato, contrato => contrato.id)
+    @JoinColumn({ name: "contrato_id" })
+    contrato: Computador
 
-    @OneToMany(type => Computador, computador => computador.foto)
-    @JoinColumn({ name: "foto_id" })
-    foto: string
+    @OneToMany(type => Chamados, chamados => chamados.id)
+    @JoinColumn({ name: "id" })
+    chamados: Chamados[]
+
 }
 
 export default Computador

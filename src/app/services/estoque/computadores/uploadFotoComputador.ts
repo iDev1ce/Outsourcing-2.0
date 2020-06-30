@@ -1,9 +1,7 @@
 import { getCustomRepository } from "typeorm"
 
 import FotoRepository from "../../../repositories/FotoRepository"
-// import Fotos from "../../../../app/models/Fotos"
-import Computador from "../../../../app/models/estoque/Computador"
-import ComputadorRepository from "../../../../app/repositories/estoque/ComputadorRepository"
+import FotoComputador from "../../../models/FotoComputador"
 
 /**
  * apagar foto lógica
@@ -17,7 +15,7 @@ import ComputadorRepository from "../../../../app/repositories/estoque/Computado
  * if (fotoComputerFileExist) {
  *     await fs.promise.unlink(fotoComputerFilePath)
  * }
- */
+*/
 
 interface Request {
     computador_id: string
@@ -25,22 +23,13 @@ interface Request {
 }
 
 class UploadFotoComputador {
-    public async execute({ computador_id, fotoFilename }: Request): Promise<Computador | null> {
+    public async execute({ computador_id, fotoFilename }: Request): Promise<FotoComputador | null> {
         const fotoRepository = getCustomRepository(FotoRepository)
-        const computadorRepository = getCustomRepository(ComputadorRepository)
 
-        const foto = fotoRepository.create({ foto: fotoFilename })
-        const id_foto = await fotoRepository.save(foto)
+        const foto = fotoRepository.create({ foto: fotoFilename, computador_id })
+        await fotoRepository.save(foto)
 
-        const computador = await computadorRepository.findOne(computador_id)
-
-        if(!computador)
-            return null
-
-        computador.foto_id = id_foto.id
-        await computadorRepository.save(computador)
-
-        return computador
+        return foto
     }
 }
 

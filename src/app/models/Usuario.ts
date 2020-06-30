@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from "typeorm";
 import Contrato from "./Contrato";
 
 @Entity("usuarios")
@@ -20,7 +20,8 @@ class Usuario {
     senha: string
 
     @OneToMany(type => Contrato, contrato => contrato.id)
-    contrato_id: Contrato
+    @JoinColumn({ name: "id" })
+    contrato: Contrato[]
 
 }
 

@@ -1,8 +1,8 @@
 import { EntityRepository, Repository } from "typeorm";
 
-import Fotos from "../../app/models/Fotos";
+import FotoComputador from "../models/FotoComputador";
 
-@EntityRepository(Fotos)
-class FotoRepository extends Repository<Fotos> {}
+@EntityRepository(FotoComputador)
+class FotoRepository extends Repository<FotoComputador> {}
 
 export default FotoRepository

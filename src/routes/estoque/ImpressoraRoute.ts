@@ -14,12 +14,16 @@ class ImpressoraRoute {
     }
 
     private getPrivateRoutes():void {
-        this.routes.use(middleFunc) || this.routes.use(middleUser)
-        this.routes.get("/" || "",middleFunc , Impressora.getAll)
+        // this.routes.use(middleFunc) || this.routes.use(middleUser)
+
+        this.routes.use(middleUser)
+        this.routes.get("/" || "", Impressora.getAll)
         this.routes.get("/:id", Impressora.getById)
         this.routes.post("/" || "", Impressora.insert)
         this.routes.put("/:id", Impressora.update)
         this.routes.delete("/:id", Impressora.delete)
+        this.routes.post('/contratos', Impressora.contrato)
+        this.routes.post("/chamados/:id", Impressora.chamado)
     }
 }
 

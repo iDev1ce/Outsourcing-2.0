@@ -6,6 +6,8 @@ import ImpressoraRepository from "../../repositories/estoque/ImpressoraRepositor
 import createImpressora from "../../services/estoque/impressoras/CreateImpressora"
 import updateImpressora from "../../services/estoque/impressoras/UpdateImpressora"
 import deleteImpressora from "../../services/estoque/impressoras/DeleteImpressora"
+// import createChamado from "../../services/estoque/impressoras/CreateChamado"
+import createContrato from "../../services/estoque/impressoras/CreateContrato"
 
 class ImpressoraResource {
 
@@ -36,7 +38,12 @@ class ImpressoraResource {
     public async insert(req:Request, res:Response) {
         const { marca, modelo, tipo } = req.body
 
-        const impressora = await createImpressora.execute({ marca, modelo, tipo })
+        const impressora = await createImpressora.execute({ 
+            marca,
+            modelo, 
+            tipo,
+            id_funcionario: req.user.id
+        })
 
         if(!impressora)
             return res.status(400).send({ message: "Erro ao salvar impressora" })
@@ -65,6 +72,34 @@ class ImpressoraResource {
             return res.status(404).send({ message: "Não há impressora" })
         
         return res.status(200).send({ message: "Impressora deletada com sucesso!" })
+    }
+
+    public async contrato(req: Request, res: Response) {
+        const { id_impressora } = req.body
+
+        const contrato = await createContrato.execute({ 
+            id_impressora,
+            id_cliente: req.user.id
+        })
+
+        if(!contrato)
+            return res.status(400).send({ message: "Erro ao criar um contrato!" })
+        
+        return res.status(201).send(contrato)
+    }
+
+    public async chamado(req:Request, res: Response) {
+        const { id_impressora } = req.body
+
+        const chamado = await createContrato.execute({ 
+            id_impressora,
+            id_cliente: req.user.id 
+        })
+
+        if(!chamado)
+            return res.status(400).send({ message: "Erro ao fazer um chamado!" })
+        
+        return res.status(201).send(chamado)
     }
 }
 

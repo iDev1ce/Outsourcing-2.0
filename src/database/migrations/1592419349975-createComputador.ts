@@ -70,11 +70,11 @@ export class createComputador1592419349975 implements MigrationInterface {
             })
         )
 
-        await queryRunner.createForeignKey("computadores", new TableForeignKey({
-            columnNames: ["contrato_id"],
-            referencedColumnNames: ["id"],
-            referencedTableName: "contratos"
-        }))
+        // await queryRunner.createForeignKey("computadores", new TableForeignKey({
+        //     columnNames: ["contrato_id"],
+        //     referencedColumnNames: ["id"],
+        //     referencedTableName: "contratos"
+        // }))
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

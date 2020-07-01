@@ -22,12 +22,9 @@ class Funcionario {
 
     @Column()
     senha: string
-
-    @Column()
-    id_contrato: string
     
     @OneToMany(type => Contrato, contrato => contrato.id)
-    @JoinColumn({ name: "id_contrato" })
+    @JoinColumn({ name: "id" })
     contrato: Contrato[]
 
     @OneToMany(type => Impressora, impressora => impressora.id)

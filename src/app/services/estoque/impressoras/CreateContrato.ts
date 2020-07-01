@@ -27,10 +27,13 @@ class CreateContrato {
             id_cliente,
             id_funcionario: impressora.id_funcionario
         })
-
-        console.log(contrato)
-
+        
         await contratoRepository.save(contrato)
+        
+        impressora.id_contrato = contrato.id
+        
+        const impressoraSave = impressoraRepository.create(impressora)
+        await impressoraRepository.save(impressoraSave)
 
         return contrato
     }

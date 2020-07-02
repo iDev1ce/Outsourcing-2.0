@@ -3,6 +3,8 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOn
 import Contrato from "../Contrato";
 import Chamados from "../Chamados";
 import FotoComputador from "../FotoComputador";
+import Funcionario from "../Funcionarios";
+import funcionarioResource from "../../resources/funcionarioResource";
 
 @Entity("computadores")
 class Computador {
@@ -39,6 +41,13 @@ class Computador {
     
     @Column({ type: "varchar", length: 100 })
     contrato_id: string
+
+    @Column({ type: "varchar", length: 100 })
+    id_funcionario:string
+
+    @ManyToOne(type => Funcionario, funcionario => funcionario.id)
+    @JoinColumn({ name: "id_funcionario" })
+    funcionario: Funcionario
     
     @OneToMany(type => FotoComputador, foto => foto.id)
     @JoinColumn({ name: "id" })

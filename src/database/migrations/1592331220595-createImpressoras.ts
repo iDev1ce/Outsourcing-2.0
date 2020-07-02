@@ -39,8 +39,7 @@ export class createImpressoras1592331220595 implements MigrationInterface {
                     {
                         name: "id_funcionario",
                         type: "varchar",
-                        isNullable: true,
-                        isUnique: true
+                        isNullable: false
                     }
                 ]
             })

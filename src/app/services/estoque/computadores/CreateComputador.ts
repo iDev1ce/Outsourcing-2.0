@@ -13,12 +13,13 @@ interface Request {
     placaMae:string
     placaRede:string
     placaVideo:string
+    id_funcionario:string
 }
 
 class CreateComputador {
 
     public async execute(
-        { fonte, memoriaRam, mouse, placaMae, monitor, placaRede, placaVideo, processador, teclado }:Request
+        { fonte, memoriaRam, mouse, placaMae, monitor, placaRede, placaVideo, processador, teclado, id_funcionario }:Request
     ):Promise<Computador | null> {
         const computadorRepository = getCustomRepository(ComputadorRepository)
 
@@ -31,7 +32,8 @@ class CreateComputador {
             placaRede, 
             placaVideo, 
             processador, 
-            teclado 
+            teclado,
+            id_funcionario
         })
         
         if (!await computadorRepository.save(computador))

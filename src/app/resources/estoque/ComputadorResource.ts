@@ -7,6 +7,7 @@ import createComputador from "@app/services/estoque/computadores/CreateComputado
 import updateComputador from "@app/services/estoque/computadores/UpdateComputador"
 import deleteComputador from "@app/services/estoque/computadores/DeleteComputador"
 import uploadFotoComputador from "@app/services/estoque/computadores/uploadFotoComputador"
+import createContrato from "@app/services/estoque/computadores/CreateContrato"
 
 class ComputadorResource {
 
@@ -57,7 +58,8 @@ class ComputadorResource {
             placaRede,
             placaVideo,
             processador,
-            teclado
+            teclado,
+            id_funcionario: req.user.id
         })
 
         if(!computador)
@@ -120,6 +122,20 @@ class ComputadorResource {
             return res.status(404).send({ message: "Não há computadores" })
             
         return res.status(200).send({ message: "Computador deletado com sucesso!" })
+    }
+
+    public async contrato(req:Request, res:Response) {
+        const { id_computador } = req.body
+
+        const contrato = await createContrato.execute({
+            id_computador,
+            id_cliente: req.user.id
+        })
+
+        if (!contrato)
+            return res.status(400).send({ message: "Erro ao criar o contrato" })
+
+        return res.status(201).send(contrato)
     }
 }
 

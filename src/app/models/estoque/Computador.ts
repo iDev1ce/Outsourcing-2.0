@@ -1,8 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOne } from "typeorm";
 
-import Contrato from "../Contrato";
-import Chamados from "../Chamados";
-import FotoComputador from "../FotoComputador";
+import Contrato from "@app/models/Contrato";
+import Chamados from "@app/models/Chamados";
+import FotoComputador from "@app/models/FotoComputador";
+import Funcionario from "@app/models/Funcionarios";
+import funcionarioResource from "@app/resources/funcionarioResource";
 
 @Entity("computadores")
 class Computador {
@@ -41,7 +43,11 @@ class Computador {
     contrato_id: string
 
     @Column({ type: "varchar", length: 100 })
-    chamados_id: string
+    id_funcionario:string
+
+    @ManyToOne(type => Funcionario, funcionario => funcionario.id)
+    @JoinColumn({ name: "id_funcionario" })
+    funcionario: Funcionario
     
     @OneToMany(type => FotoComputador, foto => foto.id)
     @JoinColumn({ name: "id" })

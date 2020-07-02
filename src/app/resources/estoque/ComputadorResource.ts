@@ -36,15 +36,17 @@ class ComputadorResource {
     }
 
     public async insert(req:Request, res:Response) {
-        const { fonte,
-                memoriaRam,
-                mouse,
-                monitor,
-                placaMae,
-                placaRede,
-                placaVideo,
-                processador,
-                teclado } = req.body
+        const { 
+            fonte,
+            memoriaRam,
+            mouse,
+            monitor,
+            placaMae,
+            placaRede,
+            placaVideo,
+            processador,
+            teclado 
+        } = req.body
 
         const computador = await createComputador.execute({
             fonte,
@@ -77,7 +79,7 @@ class ComputadorResource {
             placaVideo,
             processador,
             teclado
-            } = req.body
+        } = req.body
 
         const computador = await updateComputador.execute({ 
             id,

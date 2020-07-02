@@ -36,6 +36,9 @@ class Notebooks {
     @Column({ name: "id_contrato", length: 100 })
     id_contrato: string
 
+    @Column({ type: "varchar", length: 100 })
+    id_chamados: string
+
     @ManyToOne(type => Funcionario, funcionario => funcionario.id)
     @JoinColumn({ name: "id_funcionario" })
     funcionario: Funcionario
@@ -45,7 +48,7 @@ class Notebooks {
     contrato: Contrato
 
     @OneToMany(type => Chamados, chamados => chamados.id_notebook)
-    @JoinColumn({ name: "id" })
+    @JoinColumn({ name: "id_chamados" })
     chamados: Chamados[]
 
 }

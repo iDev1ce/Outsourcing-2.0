@@ -39,6 +39,9 @@ class Computador {
     
     @Column({ type: "varchar", length: 100 })
     contrato_id: string
+
+    @Column({ type: "varchar", length: 100 })
+    chamados_id: string
     
     @OneToMany(type => FotoComputador, foto => foto.id)
     @JoinColumn({ name: "id" })
@@ -49,7 +52,7 @@ class Computador {
     contrato: Computador
 
     @OneToMany(type => Chamados, chamados => chamados.id)
-    @JoinColumn({ name: "id" })
+    @JoinColumn({ name: "chamados_id" })
     chamados: Chamados[]
 
 }

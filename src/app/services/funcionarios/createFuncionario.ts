@@ -1,8 +1,8 @@
 import { getCustomRepository } from "typeorm"
 import { hash } from "bcrypt"
 
-import FuncionarioRepository from "../../repositories/FuncionarioRepository"
-import Funcionario from "../../models/Funcionarios"
+import FuncionarioRepository from "@app/repositories/FuncionarioRepository"
+import Funcionario from "@app/models/Funcionarios"
 
 interface Request {
     cpf: string

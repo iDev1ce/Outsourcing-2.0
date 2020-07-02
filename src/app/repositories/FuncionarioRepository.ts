@@ -1,5 +1,6 @@
 import { EntityRepository, Repository } from "typeorm"
-import Funcionario from "../models/Funcionarios";
+
+import Funcionario from "@app/models/Funcionarios"
 
 @EntityRepository(Funcionario)
 class FuncionarioRepository extends Repository<Funcionario> {}

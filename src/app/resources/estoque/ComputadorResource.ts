@@ -1,12 +1,12 @@
 import { Request, Response } from "express"
 import { getCustomRepository } from "typeorm"
 
-import ComputadorRepository from "../../repositories/estoque/ComputadorRepository"
+import ComputadorRepository from "@app/repositories/estoque/ComputadorRepository"
 
-import createComputador from "../../services/estoque/computadores/CreateComputador"
-import updateComputador from "../../services/estoque/computadores/UpdateComputador"
-import deleteComputador from "../../services/estoque/computadores/DeleteComputador"
-import uploadFotoComputador from "../../services/estoque/computadores/uploadFotoComputador"
+import createComputador from "@app/services/estoque/computadores/CreateComputador"
+import updateComputador from "@app/services/estoque/computadores/UpdateComputador"
+import deleteComputador from "@app/services/estoque/computadores/DeleteComputador"
+import uploadFotoComputador from "@app/services/estoque/computadores/uploadFotoComputador"
 
 class ComputadorResource {
 

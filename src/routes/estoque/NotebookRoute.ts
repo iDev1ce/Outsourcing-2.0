@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import Notebook from "../../app/resources/estoque/NotebookResource"
-import middleUser from "../../middlewares/usuarioAuth"
-import middleFunc from "../../middlewares/funcionarioAuth"
+import Notebook from "@app/resources/estoque/NotebookResource"
+import middleUser from "@middlewares/usuarioAuth"
+import middleFunc from "@middlewares/funcionarioAuth"
 
 class NotebookRoute {
     public routes:Router

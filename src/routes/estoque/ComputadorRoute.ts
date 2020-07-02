@@ -1,10 +1,10 @@
 import { Router } from "express";
 import multer from "multer"
 
-import Computador from "../../app/resources/estoque/ComputadorResource"
-import middleUser from "../../middlewares/usuarioAuth"
-import middleFunc from "../../middlewares/funcionarioAuth"
-import uploadConfig from "../../config/upload"
+import Computador from "@app/resources/estoque/ComputadorResource"
+import middleUser from "@middlewares/usuarioAuth"
+import middleFunc from "@middlewares/funcionarioAuth"
+import uploadConfig from "@config/upload"
 
 const upload = multer(uploadConfig)
 

@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import Impressora from "../../app/resources/estoque/ImpressoraResource"
-import middleUser from "../../middlewares/usuarioAuth"
-import middleFunc from "../../middlewares/funcionarioAuth"
+import Impressora from "@app/resources/estoque/ImpressoraResource"
+import middleUser from "@middlewares/usuarioAuth"
+import middleFunc from "@middlewares/funcionarioAuth"
 
 class ImpressoraRoute {
     public routes:Router

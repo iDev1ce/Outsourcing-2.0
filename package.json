@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "ts-node ./src/index.ts",
-    "dev": "ts-node-dev ./src/index.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --ignore-watch node_modules ./src/index.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "devDependencies": {
@@ -28,6 +28,7 @@
     "@types/multer": "^1.4.3",
     "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.49",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.5"
   }
 }

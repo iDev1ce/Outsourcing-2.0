@@ -1,8 +1,8 @@
 import { getCustomRepository } from "typeorm";
 import { hash } from "bcrypt"
 
-import Usuario from "../../models/Usuario";
-import UsuarioRepository from "../../repositories/UsuarioRepository";
+import Usuario from "@app/models/Usuario";
+import UsuarioRepository from "@app/repositories/UsuarioRepository";
 
 interface Request {
     nome: string

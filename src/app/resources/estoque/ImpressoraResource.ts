@@ -1,13 +1,13 @@
 import { Request, Response } from "express"
 import { getCustomRepository } from "typeorm"
 
-import ImpressoraRepository from "../../repositories/estoque/ImpressoraRepository"
+import ImpressoraRepository from "@app/repositories/estoque/ImpressoraRepository"
 
-import createImpressora from "../../services/estoque/impressoras/CreateImpressora"
-import updateImpressora from "../../services/estoque/impressoras/UpdateImpressora"
-import deleteImpressora from "../../services/estoque/impressoras/DeleteImpressora"
-// import createChamado from "../../services/estoque/impressoras/CreateChamado"
-import createContrato from "../../services/estoque/impressoras/CreateContrato"
+import createImpressora from "@app/services/estoque/impressoras/CreateImpressora"
+import updateImpressora from "@app/services/estoque/impressoras/UpdateImpressora"
+import deleteImpressora from "@app/services/estoque/impressoras/DeleteImpressora"
+// import createChamado from "@app/services/estoque/impressoras/CreateChamado"
+import createContrato from "@app/services/estoque/impressoras/CreateContrato"
 
 class ImpressoraResource {
 

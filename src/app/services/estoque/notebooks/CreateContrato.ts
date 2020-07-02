@@ -1,8 +1,8 @@
 import { getCustomRepository } from "typeorm"
 
-import Contrato from "../../../models/Contrato";
-import ContratoRepository from "../../../repositories/ContratoRepository"
-import NotebookRepository from "../../../repositories/estoque/NotebookRepository";
+import Contrato from "@app/models/Contrato";
+import ContratoRepository from "@app/repositories/ContratoRepository"
+import NotebookRepository from "@app/repositories/estoque/NotebookRepository";
 
 interface Request {
     id_notebook: string

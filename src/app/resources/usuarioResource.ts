@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 
-import createUsuarios from "../services/usuarios/createUsuarios"
-import authUsuario from "../services/usuarios/authUsuario"
+import createUsuarios from "@app/services/usuarios/createUsuarios"
+import authUsuario from "@app/services/usuarios/authUsuario"
 
 class UsuarioRepository {
     public async singIn(req: Request, res: Response) {

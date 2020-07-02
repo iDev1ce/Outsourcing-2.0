@@ -33,29 +33,28 @@ export class createImpressoras1592331220595 implements MigrationInterface {
                     {
                         name: "id_contrato",
                         type: "varchar",
-                        isNullable: true,
-                        isUnique: true
+                        isNullable: true
                     },
                     {
                         name: "id_funcionario",
                         type: "varchar",
-                        isNullable: false
+                        isNullable: true
                     }
                 ]
             })
         )
 
-        await queryRunner.createForeignKey("impressoras", new TableForeignKey({
-            columnNames: ["id_contrato"],
-            referencedColumnNames: ["id"],
-            referencedTableName: "contratos"
-        }))
+        // await queryRunner.createForeignKey("impressoras", new TableForeignKey({
+        //     columnNames: ["id_contrato"],
+        //     referencedColumnNames: ["id"],
+        //     referencedTableName: "contratos"
+        // }))
 
-        await queryRunner.createForeignKey("impressoras", new TableForeignKey({
-            columnNames: ["id_funcionario"],
-            referencedColumnNames: ["id"],
-            referencedTableName: "funcionarios"
-        }))
+        // await queryRunner.createForeignKey("impressoras", new TableForeignKey({
+        //     columnNames: ["id_funcionario"],
+        //     referencedColumnNames: ["id"],
+        //     referencedTableName: "funcionarios"
+        // }))
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

@@ -2,9 +2,9 @@ import { getCustomRepository } from "typeorm"
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
-import Usuario from "../../models/Usuario";
-import UsuarioRepository from "../../repositories/UsuarioRepository";
-import authConfigUsuario from "../../../config/authUsuario";
+import Usuario from "@app/models/Usuario";
+import UsuarioRepository from "@app/repositories/UsuarioRepository";
+import authConfigUsuario from "@config/authUsuario";
 
 interface Request {
     email: string

@@ -1,6 +1,6 @@
-import { EntityRepository, Repository } from "typeorm";
+import { EntityRepository, Repository } from "typeorm"
 
-import Contrato from "../models/Contrato";
+import Contrato from "@app/models/Contrato"
 
 @EntityRepository(Contrato)
 class ContratoRepository extends Repository<Contrato> {}

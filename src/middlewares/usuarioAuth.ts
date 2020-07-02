@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import { verify } from "jsonwebtoken"
 
-import authUsuario from "../config/authUsuario"
+import authUsuario from "@config/authUsuario"
 
 interface TokenPayload {
     int: number

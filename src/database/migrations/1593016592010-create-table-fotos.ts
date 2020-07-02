@@ -29,13 +29,13 @@ export class createTableFotos1592998982232 implements MigrationInterface {
             })
         )
 
-        await queryRunner.createForeignKey(
-            "fotos", new TableForeignKey({
-                columnNames: ["computador_id"],
-                referencedColumnNames: ["id"],
-                referencedTableName: "computadores"
-            })
-        )
+        // await queryRunner.createForeignKey(
+        //     "fotos", new TableForeignKey({
+        //         columnNames: ["computador_id"],
+        //         referencedColumnNames: ["id"],
+        //         referencedTableName: "computadores"
+        //     })
+        // )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

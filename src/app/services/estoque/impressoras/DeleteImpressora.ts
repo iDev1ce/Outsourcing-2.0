@@ -1,5 +1,6 @@
-import ImpressoraRepository from "../../../repositories/estoque/ImpressoraRepository"
-import { getCustomRepository } from "typeorm";
+import { getCustomRepository } from "typeorm"
+
+import ImpressoraRepository from "@app/repositories/estoque/ImpressoraRepository"
 
 interface Request {
     id: string

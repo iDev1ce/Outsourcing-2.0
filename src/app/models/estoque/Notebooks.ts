@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import Contrato from "../Contrato";
 import Chamados from "../Chamados";
+import Funcionario from "../Funcionarios";
 
 @Entity("notebooks")
 class Notebooks {
@@ -8,29 +9,36 @@ class Notebooks {
     @PrimaryGeneratedColumn("uuid")
     id:string
 
-    @Column({ name: "varchar", length: 100 })
+    @Column({ name: "marca", length: 100 })
     marca:string
 
-    @Column({ name: "varchar", length: 100 })
+    @Column({ name: "modelo", length: 100 })
     modelo:string
 
-    @Column({ name: "varchar", length: 100 })
+    @Column({ name: "memoriaRam", length: 100 })
     memoriaRam:string
 
-    @Column({ name: "varchar", length: 100 })
+    @Column({ name: "placaVideo", length: 100 })
     placaVideo:string
 
-    @Column({ name: "varchar", length: 100 })
+    @Column({ name: "tipoPlacaVideo", length: 100 })
     tipoPlacaVideo:string
 
-    @Column({ name: "varchar", length: 100 })
+    @Column({ name: "processador", length: 100 })
     processador:string
 
-    @Column({ name: "varchar", length: 100 })
+    @Column({ name: "tamanhoDaTela", length: 100 })
     tamanhoDaTela:string
 
-    @Column({ name: "varchar", length: 100 })
-    contrato_id: string
+    @Column({ name: "id_funcionario" })
+    id_funcionario: string
+
+    @Column({ name: "id_contrato", length: 100 })
+    id_contrato: string
+
+    @ManyToOne(type => Funcionario, funcionario => funcionario.id)
+    @JoinColumn({ name: "id_funcionario" })
+    funcionario: Funcionario
 
     @ManyToOne(type => Contrato, contrato => contrato.id)
     @JoinColumn({ name: "id_contrato" })

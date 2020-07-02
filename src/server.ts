@@ -2,7 +2,7 @@ import express, { Application } from "express";
 import cors from "cors";
 
 import routes from "./routes";
-import uploadConfig from "./config/upload"
+import uploadConfig from "@config/upload"
 
 import "./database"
 

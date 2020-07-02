@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
 export class createNotebooks1592415048509 implements MigrationInterface {
 
@@ -49,10 +49,32 @@ export class createNotebooks1592415048509 implements MigrationInterface {
                         name: "tamanhoDaTela",
                         type: "varchar",
                         isNullable: false,
+                    },
+                    {
+                        name: "id_funcionario",
+                        type: "varchar",
+                        isNullable: false
+                    },
+                    {
+                        name: "id_contrato",
+                        type: "varchar",
+                        isNullable: true
                     }
                 ]
             })
         )
+
+        // await queryRunner.createForeignKey("notebooks",new TableForeignKey({
+        //     columnNames: ["id_contrato"],
+        //     referencedColumnNames: ["id"],
+        //     referencedTableName: "contratos"
+        // }))
+
+        // await queryRunner.createForeignKey("notebooks",new TableForeignKey({
+        //     columnNames: ["id_funcionario"],
+        //     referencedColumnNames: ["id"],
+        //     referencedTableName: "funcionarios"
+        // }))
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-import createFuncionario from "../services/funcionarios/createFuncionario"
-import authFuncionario from "../services/funcionarios/authFuncionario"
+import createFuncionario from "@app/services/funcionarios/createFuncionario"
+import authFuncionario from "@app/services/funcionarios/authFuncionario"
 
 class FuncionariosResource {
     public async singIn(req: Request, res: Response) {

@@ -1,12 +1,13 @@
 import { Request, Response } from "express"
 import { getCustomRepository } from "typeorm"
 
-import NotebooksRepository from "../../repositories/estoque/NotebookRepository"
+import NotebooksRepository from "@app/repositories/estoque/NotebookRepository"
 
-import createNotebook from "../../services/estoque/notebooks/CreateNotebook"
-import updateNotebook from "../../services/estoque/notebooks/UpdateNotebook"
-import deleteNotebook from "../../services/estoque/notebooks/DeleteNotebook"
-import NotebookRepository from "../../repositories/estoque/NotebookRepository"
+import createNotebook from "@app/services/estoque/notebooks/CreateNotebook"
+import updateNotebook from "@app/services/estoque/notebooks/UpdateNotebook"
+import deleteNotebook from "@app/services/estoque/notebooks/DeleteNotebook"
+import NotebookRepository from "@app/repositories/estoque/NotebookRepository"
+import createContrato from "@app/services/estoque/notebooks/CreateContrato"
 
 class NotebookResource {
 
@@ -44,7 +45,8 @@ class NotebookResource {
             placaVideo, 
             processador, 
             tamanhoDaTela, 
-            tipoPlacaVideo 
+            tipoPlacaVideo,
+            id_funcionario: req.user.id
         })
 
         if (!notebook)
@@ -83,6 +85,20 @@ class NotebookResource {
             return res.status(404).send({ message: "Não há notebooks" })
 
         return res.status(200).send({ message: "Notebook deletado com sucesso!" })
+    }
+
+    public async contrato(req: Request, res: Response) {
+        const { id_notebook } = req.body
+
+        const contrato = await createContrato.execute({
+            id_notebook,
+            id_cliente: req.user.id
+        })
+
+        if(!contrato)
+            return res.status(400).send({ message: "Erro ao criar um contrato!" })
+
+        return res.status(201).send(contrato)
     }
 
 }

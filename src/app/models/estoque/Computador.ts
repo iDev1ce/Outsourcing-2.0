@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOne, JoinTable } from "typeorm";
 
 import Contrato from "@app/models/Contrato";
 import Chamados from "@app/models/Chamados";
@@ -54,6 +54,7 @@ class Computador {
     foto: FotoComputador[]
 
     @ManyToOne(type => Contrato, contrato => contrato.id)
+   
     @JoinColumn({ name: "contrato_id" })
     contrato: Computador
 

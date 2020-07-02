@@ -8,6 +8,7 @@ import updateComputador from "@app/services/estoque/computadores/UpdateComputado
 import deleteComputador from "@app/services/estoque/computadores/DeleteComputador"
 import uploadFotoComputador from "@app/services/estoque/computadores/uploadFotoComputador"
 import createContrato from "@app/services/estoque/computadores/CreateContrato"
+import createChamado from "@app/services/estoque/computadores/CreateChamado"
 
 class ComputadorResource {
 
@@ -136,6 +137,17 @@ class ComputadorResource {
             return res.status(400).send({ message: "Erro ao criar o contrato" })
 
         return res.status(201).send(contrato)
+    }
+
+    public async chamado(req: Request, res: Response) {
+        const { id } = req.params
+
+        const chamado = await createChamado.execute({ id_maquina: id })
+
+        if(!chamado)
+            return res.status(400).send({ message: "Erro ao fazer um chamado!" })
+        
+        return res.status(201).send(chamado)
     }
 }
 

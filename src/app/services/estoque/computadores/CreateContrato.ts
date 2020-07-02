@@ -21,14 +21,17 @@ class CreateContrato {
         if (!computador)
             return null
         
-        const id_funcionario = computador.id_funcionario
-
         const contrato = contratoRepository.create({
             id_cliente,
-            id_funcionario
+            id_funcionario: computador.id_funcionario
         })
-
+        
         await contratoRepository.save(contrato)
+        
+        computador.contrato_id = contrato.id
+
+        const computadorSave = computadorRepository.create(computador)
+        await computadorRepository.save(computadorSave)
 
         return contrato
     }

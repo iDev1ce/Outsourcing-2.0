@@ -68,7 +68,7 @@ export class createComputador1592419349975 implements MigrationInterface {
                     {
                         name: "id_funcionario",
                         type: "varchar",
-                        isNullable: false
+                        isNullable: true
                     }
                 ]
             })

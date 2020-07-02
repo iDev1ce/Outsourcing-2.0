@@ -18,8 +18,8 @@ class ComputadorResource {
     }
 
     private getPrivateRoutes():void {
-        this.routes.use(middleUser)
-        // this.routes.use(middleFunc)
+        // this.routes.use(middleUser)
+        this.routes.use(middleFunc)
         this.routes.get("/" || "", Computador.getAll)
         this.routes.get("/:id", Computador.getById)
         this.routes.post("/" || "", Computador.insert)
@@ -27,6 +27,7 @@ class ComputadorResource {
         this.routes.patch("/foto/:id", upload.single("foto"), Computador.upload)
         this.routes.delete("/:id", Computador.delete)
         this.routes.post("/contrato", Computador.contrato)
+        this.routes.get("/chamados/:id", Computador.chamado)
     }
 }
 

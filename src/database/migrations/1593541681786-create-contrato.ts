@@ -42,6 +42,7 @@ export class createContrato1593541681786 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable("contratos")
     }
 
 }

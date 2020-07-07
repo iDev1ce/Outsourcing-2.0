@@ -11,16 +11,16 @@ class Chamados {
     @PrimaryGeneratedColumn("uuid")
     id: string
 
-    @Column({ name: "varchar", length: 100 })
+    @Column({ name: "id_contrato", length: 100 })
     id_contrato: string
 
-    @Column({ name: "varchar", length: 100 })
+    @Column({ name: "id_computador", length: 100 })
     id_computador: string
 
-    @Column({ name: "varchar", length: 100 })
+    @Column({ name: "id_notebook", length: 100 })
     id_notebook: string
 
-    @Column({ name: "varchar", length: 100 })
+    @Column({ name: "id_impressora", length: 100 })
     id_impressora: string
 
     @ManyToOne(type => Contrato, contrato => contrato.id)
@@ -38,10 +38,6 @@ class Chamados {
     @ManyToOne(type => Impressora, impressora => impressora.id)
     @JoinColumn({ name: "id_impressora" })
     impressora: Impressora
-
-    @OneToMany(type => Chamados, chamados => chamados.id)
-    @JoinColumn({ name: "id" })
-    chamados: Chamados
 
 }
 

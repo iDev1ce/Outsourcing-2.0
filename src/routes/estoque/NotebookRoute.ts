@@ -15,7 +15,8 @@ class NotebookRoute {
 
     private getPrivateRoutes():void {
         // this.routes.use(middleFunc) || this.routes.use(middleUser)
-        this.routes.use(middleUser)
+        
+        this.routes.use(middleFunc)
         this.routes.get("/" || "", Notebook.getAll)
         this.routes.get("/:id", Notebook.getById)
         this.routes.post("/" || "", Notebook.insert)

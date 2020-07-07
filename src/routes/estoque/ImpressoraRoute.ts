@@ -16,7 +16,8 @@ class ImpressoraRoute {
     private getPrivateRoutes():void {
         // this.routes.use(middleFunc) || this.routes.use(middleUser)
 
-        this.routes.use(middleUser)
+        this.routes.use(middleFunc)
+
         this.routes.get("/" || "", Impressora.getAll)
         this.routes.get("/:id", Impressora.getById)
         this.routes.post("/" || "", Impressora.insert)

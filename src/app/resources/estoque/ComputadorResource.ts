@@ -10,6 +10,7 @@ import deleteComputador from "@app/services/estoque/computadores/DeleteComputado
 import uploadFotoComputador from "@app/services/estoque/computadores/uploadFotoComputador"
 import createContrato from "@app/services/estoque/computadores/CreateContrato"
 import createChamado from "@app/services/estoque/computadores/CreateChamado"
+import ContratoRepository from "@app/repositories/ContratoRepository"
 
 class ComputadorResource {
 
@@ -153,7 +154,7 @@ class ComputadorResource {
 
     public async getAllChamados(req: Request, res: Response) {
         const { id_maquina } = req.params
-        // const computadorRepository = getCustomRepository(ComputadorRepository)
+
         const chamadoRepository = getCustomRepository(ChamadoRepository)
 
         const chamados = await chamadoRepository.find({

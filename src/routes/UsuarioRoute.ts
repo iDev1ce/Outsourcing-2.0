@@ -1,6 +1,7 @@
 import { Router } from "express"
 
-import usuarioResource from "@app/resources/usuarioResource";
+import usuarioResource from "@app/resources/usuarioResource"
+import middleUser from "@middlewares/usuarioAuth"
 
 class UsersRoute {
     public routes:Router
@@ -14,6 +15,7 @@ class UsersRoute {
     public getPublicRoutes():void {
         this.routes.post("/sign-in", usuarioResource.singIn)
         this.routes.post("/login", usuarioResource.login)
+        this.routes.get("/chamados", middleUser, usuarioResource.getAllChamados)
     }
 }
 

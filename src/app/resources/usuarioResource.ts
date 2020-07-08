@@ -1,9 +1,12 @@
 import { Request, Response } from "express"
+import { getCustomRepository } from "typeorm"
 
 import createUsuarios from "@app/services/usuarios/createUsuarios"
 import authUsuario from "@app/services/usuarios/authUsuario"
+import ContratoRepository from "@app/repositories/ContratoRepository"
+import ChamadoRepository from "@app/repositories/ChamadoRepository"
 
-class UsuarioRepository {
+class UsuarioResource {
     public async singIn(req: Request, res: Response) {
         const { nome, cpf, email, senha } = req.body
 
@@ -25,6 +28,21 @@ class UsuarioRepository {
 
         return res.status(200).send(usuario)
     }
+
+    public async getAllChamados(req:Request, res:Response) {
+        const contratoRepository = getCustomRepository(ContratoRepository)
+        const chamadoRespository = getCustomRepository(ChamadoRepository)
+
+        const contrato = await contratoRepository.find({
+            relations: ["cliente", "chamados"],
+            where: { id_cliente: req.user.id }
+        })
+
+        if(!contrato)
+            return res.status(404).send("Não há chamados")
+
+        return res.status(200).send(contrato)
+    }
 }
 
-export default new UsuarioRepository()
+export default new UsuarioResource()

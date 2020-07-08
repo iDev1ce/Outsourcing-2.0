@@ -36,9 +36,6 @@ class Notebooks {
     @Column({ name: "id_contrato", length: 100 })
     id_contrato: string
 
-    @Column({ type: "varchar", length: 100 })
-    id_chamados: string
-
     @ManyToOne(type => Funcionario, funcionario => funcionario.id)
     @JoinColumn({ name: "id_funcionario" })
     funcionario: Funcionario

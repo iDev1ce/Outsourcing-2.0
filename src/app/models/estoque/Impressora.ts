@@ -24,9 +24,6 @@ class Impressora {
 
     @Column({ name: "id_funcionario", length: 100 })
     id_funcionario: string
-    
-    @Column({ type: "varchar", length: 100 })
-    id_chamados: string
 
     @ManyToOne(type => Contrato, contrato => contrato.id)
     @JoinColumn({ name: "id_contrato" })

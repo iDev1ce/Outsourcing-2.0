@@ -3,7 +3,6 @@ import multer from "multer"
 
 import Computador from "@app/resources/estoque/ComputadorResource"
 import middleUser from "@middlewares/usuarioAuth"
-import middleFunc from "@middlewares/funcionarioAuth"
 import uploadConfig from "@config/upload"
 
 const upload = multer(uploadConfig)
@@ -14,14 +13,11 @@ class ComputadorResource {
     constructor() {
         this.routes = Router();
 
-        this.getPrivateRoutes();
+        this.getPrivateRoutes()
     }
-
+    
     private getPrivateRoutes():void {
         this.routes.use(middleUser)
-        
-        // this.routes.use(middleFunc)
-
         this.routes.get("/" || "", Computador.getAll)
         this.routes.get("/:id", Computador.getById)
         this.routes.post("/" || "", Computador.insert)

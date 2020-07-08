@@ -1,7 +1,6 @@
 import { Router } from "express";
 
 import Notebook from "@app/resources/estoque/NotebookResource"
-import middleUser from "@middlewares/usuarioAuth"
 import middleFunc from "@middlewares/funcionarioAuth"
 
 class NotebookRoute {
@@ -14,8 +13,6 @@ class NotebookRoute {
     }
 
     private getPrivateRoutes():void {
-        // this.routes.use(middleFunc) || this.routes.use(middleUser)
-        
         this.routes.use(middleFunc)
         this.routes.get("/" || "", Notebook.getAll)
         this.routes.get("/:id", Notebook.getById)

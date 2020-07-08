@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm"
 
-import FotoRepository from "../../../repositories/FotoRepository"
-import FotoComputador from "../../../models/FotoComputador"
+import FotoRepository from "@app/repositories/FotoRepository"
+import FotoComputador from "@app/models/FotoComputador"
 
 /**
  * apagar foto lógica
@@ -28,6 +28,14 @@ class UploadFotoComputador {
 
         const foto = fotoRepository.create({ foto: fotoFilename, computador_id })
         await fotoRepository.save(foto)
+
+        const computador = await fotoRepository.findOne({
+            relations: ['computador'],
+            where: { computador_id }
+        })
+
+        if(!computador)
+            return null
 
         return foto
     }

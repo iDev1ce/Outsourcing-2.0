@@ -59,7 +59,7 @@ class Computador {
     contrato: Computador
 
     @OneToMany(type => Chamados, chamados => chamados.id)
-    @JoinColumn({ name: "chamados_id" })
+    @JoinColumn({ name: "id" })
     chamados: Chamados[]
 
 }

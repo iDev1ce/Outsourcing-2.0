@@ -16,13 +16,13 @@ export class createContrato1593541681786 implements MigrationInterface {
                 {
                     name: "id_funcionario",
                     type: "varchar",
-                    isNullable: true,
+                    isNullable: false,
                     isUnique: true
                 },
                 {
                     name: "id_cliente",
                     type: "varchar",
-                    isNullable: true,
+                    isNullable: false,
                     isUnique: true
                 }
             ]

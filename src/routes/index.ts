@@ -1,12 +1,12 @@
 import { Router } from "express"
 
-import ImpressoraFuncionarioRoute from "./estoque/ImpressoraFuncionarioRoute"
-import NotebookFuncionarioRoute from "./estoque/NotebookFuncionarioRoute"
-import ComputadorFuncionarioRoute from "./estoque/ComputadorFuncionarioRoute"
+import ImpressoraFuncionarioRoute from "./estoque/Funcionarios/ImpressoraFuncionarioRoute"
+import NotebookFuncionarioRoute from "./estoque/Funcionarios/NotebookFuncionarioRoute"
+import ComputadorFuncionarioRoute from "./estoque/Funcionarios/ComputadorFuncionarioRoute"
 
-import ImpressoraUsuarioRoute from "./estoque/ImpressoraUsuarioRoute"
-import NotebookUsuarioRoute from "./estoque/NotebookUsuarioRoute"
-import ComputadorUsuarioRoute from "./estoque/ComputadorUsuarioRoute"
+import ImpressoraUsuarioRoute from "./estoque/Usuario/ImpressoraUsuarioRoute"
+import NotebookUsuarioRoute from "./estoque/Usuario/NotebookUsuarioRoute"
+import ComputadorUsuarioRoute from "./estoque/Usuario/ComputadorUsuarioRoute"
 
 import FuncionarioRoute from "./FuncionarioRoutes"
 import UsersRoute from "./UsuarioRoute"

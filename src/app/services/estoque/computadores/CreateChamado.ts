@@ -6,25 +6,25 @@ import ComputadorRepository from "@app/repositories/estoque/ComputadorRepository
 
 interface Request {
     id_maquina: string
+    id_cliente: string
 }
 
 class CreateChamado {
-    public async execute({ id_maquina }: Request): Promise<Chamados | null> {
+    public async execute({ id_maquina, id_cliente }: Request): Promise<Chamados | null> {
         const chamadoRepository = getCustomRepository(ChamadoRepository)
         const computadorRepository = getCustomRepository(ComputadorRepository)
         
         const computador = await computadorRepository.findOne({ where: { id: id_maquina } })
-        
-        console.log(id_maquina);
 
         if(!computador)
             return null
         
         const chamados = chamadoRepository.create({
             id_computador: id_maquina,
-            id_contrato: computador.contrato_id
+            id_contrato: computador.contrato_id,
+            id_cliente
         })
-        
+         
         /**
          * SELECT COM INNER JOIN
          * 
@@ -46,8 +46,6 @@ class CreateChamado {
          
         if(!contrato)
             return null
-         
-        console.log(contrato)
 
         await chamadoRepository.save(chamados)
 

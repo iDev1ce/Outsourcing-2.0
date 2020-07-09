@@ -30,18 +30,16 @@ class UsuarioResource {
     }
 
     public async getAllChamados(req:Request, res:Response) {
-        const contratoRepository = getCustomRepository(ContratoRepository)
-        const chamadoRespository = getCustomRepository(ChamadoRepository)
+        const chamadoRepository = getCustomRepository(ChamadoRepository)
 
-        const contrato = await contratoRepository.find({
-            relations: ["cliente", "chamados"],
+        const chamados = await chamadoRepository.find({
             where: { id_cliente: req.user.id }
         })
 
-        if(!contrato)
+        if(!chamados)
             return res.status(404).send("Não há chamados")
 
-        return res.status(200).send(contrato)
+        return res.status(200).send(chamados)
     }
 }
 

@@ -54,7 +54,6 @@ class Computador {
     foto: FotoComputador[]
 
     @ManyToOne(type => Contrato, contrato => contrato.id)
-   
     @JoinColumn({ name: "contrato_id" })
     contrato: Computador
 

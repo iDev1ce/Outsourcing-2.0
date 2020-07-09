@@ -98,6 +98,15 @@ export class createForeignKey1594147549118 implements MigrationInterface {
                 referencedTableName: "computadores"
             })
         )
+
+        await queryRunner.createForeignKey(
+            "chamados",
+            new TableForeignKey({
+                columnNames: ["id_cliente"],
+                referencedColumnNames: ["id"],
+                referencedTableName: "usuarios"
+            })
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

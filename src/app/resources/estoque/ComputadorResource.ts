@@ -144,7 +144,7 @@ class ComputadorResource {
     public async chamado(req: Request, res: Response) {
         const { id_maquina } = req.body
 
-        const chamado = await createChamado.execute({ id_maquina: id_maquina })
+        const chamado = await createChamado.execute({ id_maquina: id_maquina, id_cliente: req.user.id })
 
         if(!chamado)
             return res.status(400).send({ message: "Erro ao fazer um chamado!" })
@@ -156,10 +156,10 @@ class ComputadorResource {
         const { id_maquina } = req.params
 
         const chamadoRepository = getCustomRepository(ChamadoRepository)
-
-        const chamados = await chamadoRepository.find({
+        
+        const chamados = await chamadoRepository.findOne({
             relations: ["computador"],
-            where: { id_computador: id_maquina }
+            where: { id_cliente: id_maquina }
         })
         
         if(!chamados)

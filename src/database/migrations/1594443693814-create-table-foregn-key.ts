@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, TableForeignKey} from "typeorm";
 
-export class createForeignKey1594147549118 implements MigrationInterface {
+export class createTableForegnKey1594443693814 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         // Impressoras
@@ -105,6 +105,24 @@ export class createForeignKey1594147549118 implements MigrationInterface {
                 columnNames: ["id_cliente"],
                 referencedColumnNames: ["id"],
                 referencedTableName: "usuarios"
+            })
+        )
+
+        // Fotos Impressoras
+        await queryRunner.createForeignKey(
+            "fotos_impressora", new TableForeignKey({
+                columnNames: ["impressora_id"],
+                referencedColumnNames: ["id"],
+                referencedTableName: "impressoras"
+            })
+        )
+
+        // Fotos Notebooks
+        await queryRunner.createForeignKey(
+            "fotos_notebook", new TableForeignKey({
+                columnNames: ["notebook_id"],
+                referencedColumnNames: ["id"],
+                referencedTableName: "notebooks"
             })
         )
     }

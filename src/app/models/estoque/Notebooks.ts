@@ -1,7 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
+
 import Contrato from "../Contrato";
 import Chamados from "../Chamados";
 import Funcionario from "../Funcionarios";
+import FotoNotebook from "../FotoNotebook";
 
 @Entity("notebooks")
 class Notebooks {
@@ -47,6 +49,10 @@ class Notebooks {
     @OneToMany(type => Chamados, chamados => chamados.id_notebook)
     @JoinColumn({ name: "id_chamados" })
     chamados: Chamados[]
+
+    @OneToMany(type => FotoNotebook, foto => foto.id)
+    @JoinColumn({ name: "id" })
+    foto: FotoNotebook[]
 
 }
 

@@ -3,6 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMan
 import Contrato from "../Contrato";;
 import Chamados from "../Chamados";
 import Funcionario from "../Funcionarios";
+import FotoImpressora from "../FotoImpressora";
 
 @Entity("impressoras")
 class Impressora {
@@ -36,6 +37,10 @@ class Impressora {
     @ManyToOne(type => Funcionario, funcionario => funcionario.id)
     @JoinColumn({ name: "id_funcionario" })
     funcionario: Funcionario
+
+    @OneToMany(type => FotoImpressora, foto => foto.id)
+    @JoinColumn({ name: "id" })
+    foto: FotoImpressora[]
     
 }
 

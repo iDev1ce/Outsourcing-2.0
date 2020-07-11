@@ -8,6 +8,7 @@ import updateImpressora from "@app/services/estoque/impressoras/UpdateImpressora
 import deleteImpressora from "@app/services/estoque/impressoras/DeleteImpressora"
 // import createChamado from "@app/services/estoque/impressoras/CreateChamado"
 import createContrato from "@app/services/estoque/impressoras/CreateContrato"
+import uploadFotoImpressora from "@app/services/estoque/impressoras/uploadFotoImpressora"
 
 class ImpressoraResource {
 
@@ -72,6 +73,17 @@ class ImpressoraResource {
             return res.status(404).send({ message: "Não há impressora" })
         
         return res.status(200).send({ message: "Impressora deletada com sucesso!" })
+    }
+
+    public async upload(req: Request, res: Response) {
+        const { id } = req.params
+
+        const foto = await uploadFotoImpressora.execute({
+            impressora_id: id,
+            fotoFilename: req.file.filename
+        })
+
+        return res.status(200).send(foto)
     }
 
     public async contrato(req: Request, res: Response) {

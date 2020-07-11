@@ -1,7 +1,11 @@
 import { Router } from "express";
+import multer from "multer";
 
 import Impressora from "@app/resources/estoque/ImpressoraResource"
 import middleFunc from "@middlewares/funcionarioAuth"
+import uploadConfig from "@config/upload";
+
+const upload = multer(uploadConfig)
 
 class ImpressoraRoute {
     public routes:Router
@@ -18,6 +22,7 @@ class ImpressoraRoute {
         this.routes.get("/:id", Impressora.getById)
         this.routes.post("/" || "", Impressora.insert)
         this.routes.put("/:id", Impressora.update)
+        this.routes.patch('/upload/:id', upload.single("foto"), Impressora.upload)
         this.routes.delete("/:id", Impressora.delete)
         this.routes.post('/contratos', Impressora.contrato)
         this.routes.post("/chamados/:id", Impressora.chamado)

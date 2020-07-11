@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+
 import Computador from "./estoque/Computador";
 
 @Entity("fotos_computadores")

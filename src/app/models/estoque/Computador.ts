@@ -1,10 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOne, JoinTable } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOne } from "typeorm";
 
 import Contrato from "@app/models/Contrato";
 import Chamados from "@app/models/Chamados";
 import FotoComputador from "@app/models/FotoComputador";
 import Funcionario from "@app/models/Funcionarios";
-import funcionarioResource from "@app/resources/funcionarioResource";
 
 @Entity("computadores")
 class Computador {

@@ -1,7 +1,11 @@
 import { Router } from "express";
+import multer from "multer";
 
 import Notebook from "@app/resources/estoque/NotebookResource"
 import middleFunc from "@middlewares/funcionarioAuth"
+import uploadConfig from "@config/upload"
+
+const upload = multer(uploadConfig);
 
 class NotebookRoute {
     public routes:Router
@@ -19,6 +23,7 @@ class NotebookRoute {
         this.routes.post("/" || "", Notebook.insert)
         this.routes.put("/:id", Notebook.update)
         this.routes.delete("/:id", Notebook.delete)
+        this.routes.patch("/upload/:id", upload.single("foto"), Notebook.upload)
         this.routes.post("/contrato", Notebook.contrato)
     }
 

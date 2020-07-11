@@ -8,6 +8,7 @@ import updateNotebook from "@app/services/estoque/notebooks/UpdateNotebook"
 import deleteNotebook from "@app/services/estoque/notebooks/DeleteNotebook"
 import NotebookRepository from "@app/repositories/estoque/NotebookRepository"
 import createContrato from "@app/services/estoque/notebooks/CreateContrato"
+import uploadFotoNotebook from "@app/services/estoque/notebooks/uploadFotoNotebook"
 
 class NotebookResource {
 
@@ -85,6 +86,17 @@ class NotebookResource {
             return res.status(404).send({ message: "Não há notebooks" })
 
         return res.status(200).send({ message: "Notebook deletado com sucesso!" })
+    }
+
+    public async upload(req: Request, res: Response) {
+        const { id } = req.params
+
+        const foto = await uploadFotoNotebook.execute({
+            notebook_id: id,
+            fotoFilename: req.file.filename
+        })
+
+        return res.status(200).send(foto)
     }
 
     public async contrato(req: Request, res: Response) {

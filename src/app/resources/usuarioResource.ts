@@ -33,6 +33,8 @@ class UsuarioResource {
         const chamadoRepository = getCustomRepository(ChamadoRepository)
 
         const chamados = await chamadoRepository.find({
+            select: ["id_cliente", "id_contrato"],
+            relations: ["computador", "impressora", "notebook"],
             where: { id_cliente: req.user.id }
         })
 

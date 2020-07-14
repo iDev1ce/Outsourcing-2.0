@@ -159,11 +159,11 @@ class ComputadorResource {
         
         const chamados = await chamadoRepository.findOne({
             relations: ["computador"],
-            where: { id_cliente: id_maquina }
+            where: { id_computador: id_maquina }
         })
         
         if(!chamados)
-            return res.status(404).send("Chamados não encontrados")
+            return res.status(404).send({ message: "Chamados não encontrados" })
         
         return res.status(200).send(chamados)
     }

@@ -1,7 +1,6 @@
 import { Router } from "express";
 
-import funcionarioResource from "@app/resources/funcionarioResource";
-// import funcionarioResource from "@resources/"
+import funcionarioResource from "@app/resources/funcionarioResource"
 
 class FuncionarioRoutes {
     public routes:Router
@@ -15,6 +14,7 @@ class FuncionarioRoutes {
     private getPrivateRoutes():void {
         this.routes.post("/sign-in", funcionarioResource.singIn)
         this.routes.post("/auth", funcionarioResource.login)
+        this.routes.get("/contratos", funcionarioResource.getAllContratos)
     }
 }
 

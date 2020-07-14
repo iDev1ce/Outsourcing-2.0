@@ -3,7 +3,6 @@ import { getCustomRepository } from "typeorm";
 import Contrato from "@app/models/Contrato";
 import ContratoRepository from "@app/repositories/ContratoRepository"
 import ImpressoraRepository from "@app/repositories/estoque/ImpressoraRepository"
-import Impressora from "@app/models/estoque/Impressora";
 
 interface Request {
     id_impressora: string

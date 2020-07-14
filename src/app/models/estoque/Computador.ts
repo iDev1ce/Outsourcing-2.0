@@ -54,7 +54,7 @@ class Computador {
 
     @ManyToOne(type => Contrato, contrato => contrato.id)
     @JoinColumn({ name: "contrato_id" })
-    contrato: Computador
+    contrato: Contrato
 
     @OneToMany(type => Chamados, chamados => chamados.id)
     @JoinColumn({ name: "id" })

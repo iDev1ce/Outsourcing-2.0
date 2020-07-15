@@ -35,7 +35,17 @@ export class createTableChamados1594144141326 implements MigrationInterface {
                         isNullable: true
                     },
                     {
+                        name: "descricao",
+                        type: "varchar",
+                        isNullable: false
+                    },
+                    {
                         name: "id_cliente",
+                        type: "varchar",
+                        isNullable: false
+                    },
+                    {
+                        name: "id_funcionario",
                         type: "varchar",
                         isNullable: false
                     }

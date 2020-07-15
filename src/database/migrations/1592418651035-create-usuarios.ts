@@ -35,6 +35,11 @@ export class createUsuarios1592418651035 implements MigrationInterface {
                         name: "senha",
                         type: "varchar",
                         isNullable: false
+                    },
+                    {
+                        name: "id_empresa",
+                        type: "varchar",
+                        isNullable: true
                     }
                 ]
             })

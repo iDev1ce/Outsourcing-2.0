@@ -7,10 +7,11 @@ import ComputadorRepository from "@app/repositories/estoque/ComputadorRepository
 interface Request {
     id_maquina: string
     id_cliente: string
+    descricao: string
 }
 
 class CreateChamado {
-    public async execute({ id_maquina, id_cliente }: Request): Promise<Chamados | null> {
+    public async execute({ id_maquina, id_cliente, descricao }: Request): Promise<Chamados | null> {
         const chamadoRepository = getCustomRepository(ChamadoRepository)
         const computadorRepository = getCustomRepository(ComputadorRepository)
         
@@ -19,10 +20,12 @@ class CreateChamado {
         if(!computador)
             return null
         
-        const chamados = chamadoRepository.create({
+        const contrato = chamadoRepository.create({
             id_computador: id_maquina,
             id_contrato: computador.contrato_id,
-            id_cliente
+            id_cliente,
+            id_funcionario: computador.id_funcionario,
+            descricao
         })
          
         /**
@@ -39,17 +42,22 @@ class CreateChamado {
          * console.log(contrato)
         */
 
-        const contrato = await chamadoRepository.find({
-            relations: ['contrato'],
-            where: { id_computador: id_maquina }
-        })
-         
+        // const contrato = await chamadoRepository.find({
+        //     relations: [
+        //         'contrato',
+        //         'computador'
+        //     ],
+        //     where: { id_computador: id_maquina }
+        // })
+
+        console.log(contrato)
+
         if(!contrato)
             return null
 
-        await chamadoRepository.save(chamados)
+        await chamadoRepository.save(contrato)
 
-        return chamados
+        return contrato
     }
 }
 

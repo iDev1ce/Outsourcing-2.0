@@ -10,12 +10,10 @@ import deleteComputador from "@app/services/estoque/computadores/DeleteComputado
 import uploadFotoComputador from "@app/services/estoque/computadores/uploadFotoComputador"
 import createContrato from "@app/services/estoque/computadores/CreateContrato"
 import createChamado from "@app/services/estoque/computadores/CreateChamado"
-import ContratoRepository from "@app/repositories/ContratoRepository"
 
 class ComputadorResource {
 
     public async getAll(req:Request, res:Response) {
-
         const computadorRepository = getCustomRepository(ComputadorRepository)
     
         const computadores = await computadorRepository.find();
@@ -138,13 +136,25 @@ class ComputadorResource {
         if (!contrato)
             return res.status(400).send({ message: "Erro ao criar o contrato" })
 
+        delete contrato.usuario[0].senha
+        delete contrato.usuario[0].cpf
+        delete contrato.usuario[0].nome
+        delete contrato.usuario[0].cpf
+        delete contrato.usuario[0].email
+        delete contrato.usuario[0].id
+        delete contrato.usuario[0].id_empresa
+
         return res.status(201).send(contrato)
     }
 
     public async chamado(req: Request, res: Response) {
-        const { id_maquina } = req.body
+        const { id_computador, descricao } = req.body
 
-        const chamado = await createChamado.execute({ id_maquina: id_maquina, id_cliente: req.user.id })
+        const chamado = await createChamado.execute({ 
+            id_maquina: id_computador,
+            id_cliente: req.user.id,
+            descricao 
+        })
 
         if(!chamado)
             return res.status(400).send({ message: "Erro ao fazer um chamado!" })

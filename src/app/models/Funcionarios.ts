@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOne } from "typeorm"
 
 import Contrato from "./Contrato"
 import Impressora from "./estoque/Impressora"
 import Notebooks from "./estoque/Notebooks"
 import Computador from "./estoque/Computador"
+import Empresa from "./EmpresaCliente"
 
 @Entity("funcionarios")
 class Funcionario {
@@ -22,7 +23,7 @@ class Funcionario {
 
     @Column()
     senha: string
-    
+
     @OneToMany(type => Contrato, contrato => contrato.id)
     @JoinColumn({ name: "id" })
     contrato: Contrato[]

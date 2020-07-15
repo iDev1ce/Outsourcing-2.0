@@ -10,6 +10,13 @@ import ComputadorUsuarioRoute from "./estoque/Usuario/ComputadorUsuarioRoute"
 
 import FuncionarioRoute from "./FuncionarioRoutes"
 import UsersRoute from "./UsuarioRoute"
+import EmpresaRoutes from "./EmpresaClienteRoutes"
+
+import FuncionarioResource from "@app/resources/funcionarioResource"
+import UsuarioResource from "@app/resources/usuarioResource"
+
+import middle from "@middlewares/funcionarioAuth"
+import middleUser from "@middlewares/usuarioAuth"
 
 class Routes {
     public routes:Router
@@ -19,6 +26,9 @@ class Routes {
 
         this.getFuncionarioPrivateRoutes()
         this.getUsuarioPrivateRoutes()
+        this.getPrivateChamadosRoute()
+        this.getPrivateContratosRotues()
+        this.getPrivateEmpresaClienteRoutes()
     }
 
     private getFuncionarioPrivateRoutes():void {
@@ -33,6 +43,19 @@ class Routes {
         this.routes.use("/usuarios", UsersRoute)
         this.routes.use("/notebooks", NotebookUsuarioRoute)
         this.routes.use("/computadores", ComputadorUsuarioRoute)
+    }
+
+    private getPrivateChamadosRoute(): void {
+        this.routes.use('/api/chamados', middle, FuncionarioResource.getAllChamados)
+    }
+
+    private getPrivateContratosRotues(): void {
+        this.routes.get("/chamados", middleUser, UsuarioResource.getAllChamados)
+        this.routes.get("/contratos", middleUser, UsuarioResource.getAllContratos)
+    }
+
+    private getPrivateEmpresaClienteRoutes(): void {
+        this.routes.use("/empresas", middleUser, EmpresaRoutes)
     }
 }
 

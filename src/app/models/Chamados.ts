@@ -5,6 +5,7 @@ import Computador from "./estoque/Computador";
 import Notebooks from "./estoque/Notebooks";
 import Impressora from "./estoque/Impressora";
 import Usuario from "./Usuario";
+import Funcionario from "./Funcionarios";
 
 @Entity("chamados")
 class Chamados {
@@ -27,6 +28,12 @@ class Chamados {
     @Column({ name: "id_cliente", length: 100 })
     id_cliente: string
 
+    @Column({ name: "id_funcionario", length: 100 })
+    id_funcionario: string
+
+    @Column({ type: "text", name: "descricao" })
+    descricao: string
+
     @ManyToOne(type => Contrato, contrato => contrato.id)
     @JoinColumn({ name: "id_contrato" })
     contrato: Contrato
@@ -46,6 +53,10 @@ class Chamados {
     @ManyToOne(type => Usuario, usuario => usuario.id)
     @JoinColumn({ name: "id_cliente" })
     cliente: Usuario
+
+    @ManyToOne(type => Funcionario, funcionario => funcionario.id)
+    @JoinColumn({ name: "id_funcionario" })
+    funcionario: Funcionario
 
 }
 

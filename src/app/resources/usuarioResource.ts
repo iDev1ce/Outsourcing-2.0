@@ -103,19 +103,6 @@ class UsuarioResource {
         return res.status(201).send(empresaCliente)
     }
 
-    public async getAllContratos(req: Request, res: Response) {
-        const contratoRepository = getCustomRepository(ContratoRepository)
-
-        const contratos = await contratoRepository.find({
-            where: { id_cliente: req.user.id }
-        })
-
-        if(!contratos)
-            return res.status(404).send({ message: "Ainda não tem um contrato!" })
-
-        return res.status(200).send(contratos)
-    }
-
     public async getAllContratos(req:Request, res:Response) {
         const contratoRepository = getCustomRepository(ContratoRepository)
 

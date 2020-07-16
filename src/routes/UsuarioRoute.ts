@@ -16,6 +16,7 @@ class UsersRoute {
         this.routes.post("/sign-in", usuarioResource.singIn)
         this.routes.post("/login", usuarioResource.login)
         this.routes.get("/chamados", middleUser, usuarioResource.getAllChamados)
+        this.routes.get("/contrato", middleUser, usuarioResource.getAllContratos)
     }
 }
 

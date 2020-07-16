@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import ContratoResource from '@app/resources/contratoResource'
+import Contrato from "@app/models/Contrato";
 
 class ContratoRoutes {
     public routes:Router
@@ -13,6 +14,8 @@ class ContratoRoutes {
 
     private getPrivateRoutes():void {
         this.routes.post("/criar", ContratoResource.insert)
+        this.routes.get("/", ContratoResource.getAll)
+        this.routes.get("/:id", ContratoResource.getById)
     }
 }
 

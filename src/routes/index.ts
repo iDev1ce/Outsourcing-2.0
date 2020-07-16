@@ -7,6 +7,7 @@ import ComputadorFuncionarioRoute from "./estoque/Funcionarios/ComputadorFuncion
 import ImpressoraUsuarioRoute from "./estoque/Usuario/ImpressoraUsuarioRoute"
 import NotebookUsuarioRoute from "./estoque/Usuario/NotebookUsuarioRoute"
 import ComputadorUsuarioRoute from "./estoque/Usuario/ComputadorUsuarioRoute"
+import contratoRoutes from "./ContratoRoutes"
 
 import FuncionarioRoute from "./FuncionarioRoutes"
 import UsersRoute from "./UsuarioRoute"
@@ -31,13 +32,19 @@ class Routes {
         this.getPrivateEmpresaClienteRoutes()
     }
 
+    // Funcionarios
     private getFuncionarioPrivateRoutes():void {
         this.routes.use("/api/impressoras", ImpressoraFuncionarioRoute)
         this.routes.use("/api/funcionarios", FuncionarioRoute)
         this.routes.use("/api/notebooks", NotebookFuncionarioRoute)
         this.routes.use("/api/computadores", ComputadorFuncionarioRoute)
     }
-
+    
+    private getPrivateChamadosRoute(): void {
+        this.routes.use('/api/chamados', middle, FuncionarioResource.getAllChamados)
+    }
+    
+    // Usuarios
     private getUsuarioPrivateRoutes():void {
         this.routes.use("/impressoras", ImpressoraUsuarioRoute)
         this.routes.use("/usuarios", UsersRoute)
@@ -45,13 +52,10 @@ class Routes {
         this.routes.use("/computadores", ComputadorUsuarioRoute)
     }
 
-    private getPrivateChamadosRoute(): void {
-        this.routes.use('/api/chamados', middle, FuncionarioResource.getAllChamados)
-    }
-
     private getPrivateContratosRotues(): void {
         this.routes.get("/chamados", middleUser, UsuarioResource.getAllChamados)
         this.routes.get("/contratos", middleUser, UsuarioResource.getAllContratos)
+        this.routes.post("/contratos", middleUser, contratoRoutes)
     }
 
     private getPrivateEmpresaClienteRoutes(): void {

@@ -12,7 +12,6 @@ import createContrato from "@app/services/estoque/computadores/CreateContrato"
 import createChamado from "@app/services/estoque/computadores/CreateChamado"
 
 class ComputadorResource {
-
     public async getAll(req:Request, res:Response) {
         const computadorRepository = getCustomRepository(ComputadorRepository)
     

@@ -1,7 +1,6 @@
 import { Router } from "express";
 
-import ContratoResource from '@app/resources/contratoResource'
-import Contrato from "@app/models/Contrato";
+import ContratoResource from "@app/resources/contratoResource"
 
 class ContratoRoutes {
     public routes:Router

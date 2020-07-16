@@ -54,7 +54,6 @@ class Routes {
 
     private getPrivateContratosRotues(): void {
         this.routes.get("/chamados", middleUser, UsuarioResource.getAllChamados)
-        this.routes.use("/contratos", middleUser, UsuarioResource.getAllContratos)
         this.routes.use("/contratos", middleUser, contratoRoutes)
     }
 

@@ -5,6 +5,8 @@ import createUsuarios from "@app/services/usuarios/createUsuarios"
 import authUsuario from "@app/services/usuarios/authUsuario"
 import ContratoRepository from "@app/repositories/ContratoRepository"
 import ChamadoRepository from "@app/repositories/ChamadoRepository"
+import createEmpresaCliente from "@app/services/usuarios/createEmpresaCliente"
+import UsuarioRepository from "@app/repositories/UsuarioRepository"
 
 class UsuarioResource {
     public async singIn(req: Request, res: Response) {
@@ -37,15 +39,81 @@ class UsuarioResource {
 
     public async getAllChamados(req:Request, res:Response) {
         const chamadoRepository = getCustomRepository(ChamadoRepository)
+        const usuarioRepository = getCustomRepository(UsuarioRepository)
 
         const chamados = await chamadoRepository.find({
+            select: ["id_cliente", "id_contrato", "descricao"],
+            relations: ["computador", "impressora", "notebook"],
             where: { id_cliente: req.user.id }
         })
+
+
+        const usuario = await usuarioRepository.findOne({
+            relations: ["empresa"],
+            where: { id: chamados[0].id_cliente }
+        })
+
+        if(!usuario)
+            return null
+
+        delete usuario.cpf
+        delete usuario.senha
+
 
         if(!chamados)
             return res.status(404).send("Não há chamados")
 
-        return res.status(200).send(chamados)
+        return res.status(200).send({ chamados, usuario })
+    }
+
+    public async registerEmpresaCliente(req: Request, res: Response) {
+        const {
+            nome,
+            estado,
+            cidade,
+            bairro,
+            rua,
+            cep,
+            numero,
+            email,
+            telefone,
+            cnpj
+        } = req.body
+
+        const empresaCliente = await createEmpresaCliente.execute({
+            nome,
+            estado,
+            cidade,
+            bairro,
+            rua,
+            cep,
+            numero,
+            email,
+            telefone,
+            cnpj,
+            id_usuario: req.user.id
+        })
+
+        if(empresaCliente === "cnpj")
+            return res.status(400).send({ message: 'Empresa já cadastrada' })
+
+        if(!empresaCliente)
+            return res.status(400).send({ message: 'Ops algo deu errado!' })
+
+        return res.status(201).send(empresaCliente)
+    }
+
+    public async getAllContratos(req: Request, res: Response) {
+        const contratoRepository = getCustomRepository(ContratoRepository)
+
+        const contratos = await contratoRepository.find({
+            where: { id_cliente: req.user.id }
+        })
+
+        if(!contratos)
+            return res.status(404).send({ message: "Ainda não tem um contrato!" })
+
+        return res.status(200).send(contratos)
     }
 
     public async getAllContratos(req:Request, res:Response) {

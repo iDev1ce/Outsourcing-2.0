@@ -6,9 +6,9 @@ import ImpressoraRepository from "@app/repositories/estoque/ImpressoraRepository
 import createImpressora from "@app/services/estoque/impressoras/CreateImpressora"
 import updateImpressora from "@app/services/estoque/impressoras/UpdateImpressora"
 import deleteImpressora from "@app/services/estoque/impressoras/DeleteImpressora"
-// import createChamado from "@app/services/estoque/impressoras/CreateChamado"
 import createContrato from "@app/services/estoque/impressoras/CreateContrato"
 import uploadFotoImpressora from "@app/services/estoque/impressoras/uploadFotoImpressora"
+import createChamado from "@app/services/estoque/impressoras/CreateChamado"
 
 class ImpressoraResource {
 
@@ -101,11 +101,12 @@ class ImpressoraResource {
     }
 
     public async chamado(req:Request, res: Response) {
-        const { id_impressora } = req.body
+        const { id_impressora, descricao } = req.body
 
-        const chamado = await createContrato.execute({ 
+        const chamado = await createChamado.execute({ 
             id_impressora,
-            id_cliente: req.user.id 
+            id_cliente: req.user.id,
+            descricao 
         })
 
         if(!chamado)

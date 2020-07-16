@@ -16,6 +16,7 @@ class FuncionarioRoutes {
         this.routes.post("/sign-in", funcionarioResource.singIn)
         this.routes.post("/auth", funcionarioResource.login)
         this.routes.get("/contratos", middle, funcionarioResource.getAllContratos)
+        this.routes.get("/chamados", middle, funcionarioResource.getAllChamados)
     }
 }
 

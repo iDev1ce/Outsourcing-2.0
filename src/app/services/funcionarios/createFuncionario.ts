@@ -32,10 +32,10 @@ class CreateFuncionario {
             return "email"
             
         const funcionario = funcionarioRepository.create({
-            cpf,
             nome,
-            email, 
-            senha: senhaHash 
+            email,
+            senha: senhaHash,
+            cpf
         })
 
 

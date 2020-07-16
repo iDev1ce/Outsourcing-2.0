@@ -9,6 +9,7 @@ import deleteNotebook from "@app/services/estoque/notebooks/DeleteNotebook"
 import NotebookRepository from "@app/repositories/estoque/NotebookRepository"
 import createContrato from "@app/services/estoque/notebooks/CreateContrato"
 import uploadFotoNotebook from "@app/services/estoque/notebooks/uploadFotoNotebook"
+import createChamado from "@app/services/estoque/notebooks/createChamados"
 
 class NotebookResource {
 
@@ -111,6 +112,21 @@ class NotebookResource {
             return res.status(400).send({ message: "Erro ao criar um contrato!" })
 
         return res.status(201).send(contrato)
+    }
+
+    public async chamados(req: Request, res: Response) {
+        const { id_notebook, descricao } = req.body
+
+        const chamado = await createChamado.execute({ 
+            id_notebook,
+            id_cliente: req.user.id,
+            descricao 
+        })
+
+        if(!chamado)
+            return res.status(400).send({ message: "Erro ao fazer um chamado!" })
+        
+        return res.status(201).send(chamado)
     }
 
 }

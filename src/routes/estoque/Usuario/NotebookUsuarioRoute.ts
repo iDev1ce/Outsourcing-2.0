@@ -20,6 +20,7 @@ class NotebookRoute {
         this.routes.put("/:id", Notebook.update)
         this.routes.delete("/:id", Notebook.delete)
         this.routes.post("/contrato", Notebook.contrato)
+        this.routes.post("/chamados", Notebook.chamados)
     }
 
 

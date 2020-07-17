@@ -13,25 +13,56 @@ interface Request {
 
 interface Response {
     contrato: Contrato
-    valor: any
+    teste: string
 }
 
 class CreateContrato {
-    public async execute({ id_maquinas, id_cliente }: Request): Promise<Response | null> {
+
+    private teste = 'fodase.'
+
+    private async retornaValor(valor: any, contrato: Contrato) {
+        const contratoRepository = getCustomRepository(ContratoRepository)
+
+        const contr = contratoRepository.create({
+            id: contrato.id,
+            valor: valor
+        })
+
+        this.teste = valor
+
+        await contratoRepository.save(contr)
+
+        return valor
+    }
+
+    private async retornaCliente(id_contrato: string) {
+        const contratoRepository = getCustomRepository(ContratoRepository)
+    
+        const contrato = await contratoRepository.findOne({
+            where: {
+                id: id_contrato
+            }
+        })
+
+        return contrato
+    }
+
+    public async execute({ id_maquinas, id_cliente }: Request): Promise<Response | null | undefined> {
         const contratoRepository = getCustomRepository(ContratoRepository)
         const computadorRepository = getCustomRepository(ComputadorRepository)
         const impressoraRepository = getCustomRepository(ImpressoraRepository)
         const notebookRepository = getCustomRepository(NotebookRepository)
 
         let contrato = contratoRepository.create({
-            id_cliente,
+            id_cliente
         })
 
         await contratoRepository.save(contrato)
 
         let valor = 0
-        let valor2: string
-        id_maquinas.forEach(async id => {
+
+
+        id_maquinas.map(async id => {
             let valorContrato = 0
             let valorTotal = []
             let contratoData
@@ -118,14 +149,35 @@ class CreateContrato {
                 valor += valorContrato + valor2
             })
 
-            valor2 = String(valor)
+            this.teste = String(valor)
+
+            const valorCorreto = await this.retornaValor(valor, contrato)
+            // console.log(valorCorreto)
+            
+            return valorCorreto
         });
-        
-        const contrato2 = contratoRepository.create({
-            id: contrato.id,
-            valor: valor2
-        })
-        return { contrato, valor }
+
+        // console.log(coisa)
+
+        // console.log(valor)
+
+        // const valorDoBanco = await contratoRepository.findOne({
+        //     where: {
+        //         id: contrato.id
+        //     }
+        // })
+
+        const valorDoBanco = await this.retornaCliente(contrato.id)
+
+        // console.log('aaaaaaaaaaaaaaaaaaaaa\n')
+        // console.log(valorDoBanco)
+        // console.log('\naaaaaaaaaaaaaaaaaaaaa')
+
+        let teste = this.teste
+
+        console.log(teste)
+
+        return { contrato, teste }
     }
 }
 

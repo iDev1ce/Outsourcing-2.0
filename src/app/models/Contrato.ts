@@ -2,9 +2,9 @@ import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, Column, JoinColum
 
 import Usuario from "./Usuario";
 import Chamados from "./Chamados";
-import Computador from "./estoque/Computador";
-import Notebooks from "./estoque/Notebooks";
-import Impressora from "./estoque/Impressora";
+import Computador from "./estoque/computador/Computador";
+import Notebooks from "./estoque/notebook/Notebooks";
+import Impressora from "./estoque/impressora/Impressora";
 import Funcionario from "./Funcionarios";
 
 @Entity("contratos")

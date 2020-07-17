@@ -1,12 +1,12 @@
 import { Request, Response } from "express"
 import { getCustomRepository } from "typeorm"
 
-import NotebooksRepository from "@app/repositories/estoque/NotebookRepository"
+import NotebooksRepository from "@app/repositories/estoque/notebook/NotebookRepository"
 
 import createNotebook from "@app/services/estoque/notebooks/CreateNotebook"
 import updateNotebook from "@app/services/estoque/notebooks/UpdateNotebook"
 import deleteNotebook from "@app/services/estoque/notebooks/DeleteNotebook"
-import NotebookRepository from "@app/repositories/estoque/NotebookRepository"
+import NotebookRepository from "@app/repositories/estoque/notebook/NotebookRepository"
 import createContrato from "@app/services/estoque/notebooks/CreateContrato"
 import uploadFotoNotebook from "@app/services/estoque/notebooks/uploadFotoNotebook"
 import createChamado from "@app/services/estoque/notebooks/createChamados"

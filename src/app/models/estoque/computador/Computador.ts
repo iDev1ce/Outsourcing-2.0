@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOn
 
 import Contrato from "@app/models/Contrato";
 import Chamados from "@app/models/Chamados";
-import FotoComputador from "@app/models/FotoComputador";
+import FotoComputador from "@app/models/estoque/computador/FotoComputador";
 import Funcionario from "@app/models/Funcionarios";
 
 @Entity("computadores")

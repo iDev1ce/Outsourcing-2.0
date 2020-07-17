@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm"
 
-import FotoRepository from "@app/repositories/FotoRepository"
-import FotoComputador from "@app/models/FotoComputador"
+import FotoRepository from "@app/repositories/estoque/computador/FotoRepository"
+import FotoComputador from "@app/models/estoque/computador/FotoComputador"
 
 /**
  * apagar foto lógica

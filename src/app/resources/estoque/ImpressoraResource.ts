@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { getCustomRepository } from "typeorm"
 
-import ImpressoraRepository from "@app/repositories/estoque/ImpressoraRepository"
+import ImpressoraRepository from "@app/repositories/estoque/impressora/ImpressoraRepository"
 
 import createImpressora from "@app/services/estoque/impressoras/CreateImpressora"
 import updateImpressora from "@app/services/estoque/impressoras/UpdateImpressora"

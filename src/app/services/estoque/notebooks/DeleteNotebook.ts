@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm";
 
-import Notebook from "@app/models/estoque/Notebooks";
-import NotebookRepository from "@app/repositories/estoque/NotebookRepository"
+import Notebook from "@app/models/estoque/notebook/Notebooks";
+import NotebookRepository from "@app/repositories/estoque/notebook/NotebookRepository"
 
 interface Request {
     id: string

@@ -2,7 +2,7 @@ import { getCustomRepository } from "typeorm";
 
 import Chamados from "@app/models/Chamados";
 import ChamadoRepository from "@app/repositories/ChamadoRepository"
-import ComputadorRepository from "@app/repositories/estoque/ComputadorRepository";
+import ComputadorRepository from "@app/repositories/estoque/computador/ComputadorRepository";
 
 interface Request {
     id_maquina: string

@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 
-import Notebooks from "./estoque/Notebooks";
+import Notebooks from "./Notebooks";
 
 @Entity("fotos_notebook")
 class FotoNotebook {

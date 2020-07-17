@@ -2,7 +2,7 @@ import { getCustomRepository } from "typeorm"
 
 import Contrato from "@app/models/Contrato";
 import ContratoRepository from "@app/repositories/ContratoRepository"
-import ComputadorRepository from "@app/repositories/estoque/ComputadorRepository";
+import ComputadorRepository from "@app/repositories/estoque/computador/ComputadorRepository";
 import UsuarioRepository from "@app/repositories/UsuarioRepository";
 import Usuario from "@app/models/Usuario";
 

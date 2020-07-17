@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { getCustomRepository } from "typeorm"
 
-import ComputadorRepository from "@app/repositories/estoque/ComputadorRepository"
+import ComputadorRepository from "@app/repositories/estoque/computador/ComputadorRepository"
 import ChamadoRepository from "@app/repositories/ChamadoRepository"
 
 import createComputador from "@app/services/estoque/computadores/CreateComputador"

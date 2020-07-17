@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm";
 
-import Computador from "../../../models/estoque/Computador";
-import ComputadorRepository from "../../../repositories/estoque/ComputadorRepository"
+import Computador from "../../../models/estoque/computador/Computador";
+import ComputadorRepository from "../../../repositories/estoque/computador/ComputadorRepository"
 
 interface Request {
     fonte:string

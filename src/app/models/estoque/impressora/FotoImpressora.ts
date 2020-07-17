@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 
-import Impressora from "./estoque/Impressora";
+import Impressora from "./Impressora";
 
 @Entity("fotos_impressora")
 class FotoImpressora {

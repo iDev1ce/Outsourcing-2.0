@@ -6,7 +6,9 @@
     "database": "solcode",
     "entities": [
         "./src/app/models/*.ts",
-        "./src/app/models/estoque/*.ts"
+        "./src/app/models/estoque/computador/*.ts",
+        "./src/app/models/estoque/impressora/*.ts",
+        "./src/app/models/estoque/notebook/*.ts"
     ],
     "migrations": [
         "./src/database/migrations/*.ts"

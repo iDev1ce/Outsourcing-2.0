@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 
-import Contrato from "../Contrato";;
-import Chamados from "../Chamados";
-import Funcionario from "../Funcionarios";
-import FotoImpressora from "../FotoImpressora";
+import Contrato from "../../Contrato";;
+import Chamados from "../../Chamados";
+import Funcionario from "../../Funcionarios";
+import FotoImpressora from "./FotoImpressora";
 
 @Entity("impressoras")
 class Impressora {

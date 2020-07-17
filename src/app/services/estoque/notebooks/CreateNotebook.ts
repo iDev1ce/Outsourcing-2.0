@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm";
 
-import Notebooks from "@app/models/estoque/Notebooks";
-import NotebooksRepository from "@app/repositories/estoque/NotebookRepository"
+import Notebooks from "@app/models/estoque/notebook/Notebooks";
+import NotebooksRepository from "@app/repositories/estoque/notebook/NotebookRepository"
 
 interface Request {
     marca:string

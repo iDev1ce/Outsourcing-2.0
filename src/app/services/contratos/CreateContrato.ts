@@ -1,9 +1,9 @@
 import { getCustomRepository } from "typeorm"
 
 import ContratoRepository from "@app/repositories/ContratoRepository"
-import ComputadorRepository from "@app/repositories/estoque/ComputadorRepository"
-import ImpressoraRepository from "@app/repositories/estoque/ImpressoraRepository"
-import NotebookRepository from "@app/repositories/estoque/NotebookRepository"
+import ComputadorRepository from "@app/repositories/estoque/computador/ComputadorRepository"
+import ImpressoraRepository from "@app/repositories/estoque/impressora/ImpressoraRepository"
+import NotebookRepository from "@app/repositories/estoque/notebook/NotebookRepository"
 import Contrato from "@app/models/Contrato"
 
 interface Request {

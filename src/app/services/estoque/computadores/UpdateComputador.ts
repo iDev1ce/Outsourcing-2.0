@@ -1,6 +1,6 @@
-import Computador from "../../../models/estoque/Computador";
+import Computador from "../../../models/estoque/computador/Computador";
 
-import ComputadorRepository from "../../../repositories/estoque/ComputadorRepository"
+import ComputadorRepository from "../../../repositories/estoque/computador/ComputadorRepository"
 import { getCustomRepository } from "typeorm";
 
 interface Request {

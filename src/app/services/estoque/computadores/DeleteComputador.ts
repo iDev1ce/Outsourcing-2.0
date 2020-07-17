@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
 
-import ComputadorRepository from "../../../repositories/estoque/ComputadorRepository"
+import ComputadorRepository from "../../../repositories/estoque/computador/ComputadorRepository"
 
 interface Request {
     id: string

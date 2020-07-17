@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column, OneToMany } from "typeorm";
 
 import Contrato from "./Contrato";
-import Computador from "./estoque/Computador";
-import Notebooks from "./estoque/Notebooks";
-import Impressora from "./estoque/Impressora";
+import Computador from "./estoque/computador/Computador";
+import Notebooks from "./estoque/notebook/Notebooks";
+import Impressora from "./estoque/impressora/Impressora";
 import Usuario from "./Usuario";
 import Funcionario from "./Funcionarios";
 

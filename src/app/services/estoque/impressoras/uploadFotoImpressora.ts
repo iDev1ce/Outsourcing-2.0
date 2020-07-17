@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm"
 
-import FotoImpressoraRepository from "@app/repositories/FotoImpressoraRepository"
-import FotoImpressora from "@app/models/FotoImpressora"
+import FotoImpressoraRepository from "@app/services/estoque/impressoras/FotoImpressoraRepository"
+import FotoImpressora from "@app/models/estoque/impressora/FotoImpressora"
 
 interface Request {
     impressora_id: string

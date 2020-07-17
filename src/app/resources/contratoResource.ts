@@ -3,17 +3,51 @@ import { getCustomRepository } from "typeorm"
 
 import ContratoRepository from "@app/repositories/ContratoRepository"
 import createContrato from '@app/services/contratos/CreateContrato'
+import ComputadorRepository from "@app/repositories/estoque/computador/ComputadorRepository"
+import ImpressoraRepository from "@app/repositories/estoque/impressora/ImpressoraRepository"
+import NotebookRepository from "@app/repositories/estoque/notebook/NotebookRepository"
 
 class ContratoResource {
-    public async insert(req: Request, res: Response) {
+    public async insert(req: Request, res: Response) {const contratoRepository = getCustomRepository(ContratoRepository)
+        const computadorRepository = getCustomRepository(ComputadorRepository)
+        const impressoraRepository = getCustomRepository(ImpressoraRepository)
+        const notebookRepository = getCustomRepository(NotebookRepository)
+        
         const { id_maquinas } = req.body
+
+        let valorTotal = []
+        for(let i = 0; i <= id_maquinas.length; i++) {
+            const computador = await computadorRepository.findOne({
+                where: { id: id_maquinas[i] }
+            })
+
+            const notebook = await notebookRepository.findOne({
+                where: { id: id_maquinas[i] }
+            })
+
+            const impressora = await impressoraRepository.findOne({
+                where: { id: id_maquinas[i] }
+            })
+            if(computador) {
+                valorTotal.push(Number(computador.valor))
+            } else if(notebook) {
+                valorTotal.push(Number(notebook.valor))
+            } else if(impressora) {
+                valorTotal.push(Number(impressora.valor))
+            } 
+        }
+
+        const total = valorTotal.reduce((total, valorTotal) => {
+            return total + valorTotal
+        })
+
+        const valor = String(total)
 
         const contrato = await createContrato.execute({ 
             id_maquinas,
+            valor,
             id_cliente: req.user.id 
         })
-
-        // console.log(contrato)
 
         if(!contrato)
             return res.status(400).send({ message: "erro ao criar contrato" })

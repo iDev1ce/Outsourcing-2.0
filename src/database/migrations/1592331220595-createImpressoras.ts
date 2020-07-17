@@ -31,6 +31,11 @@ export class createImpressoras1592331220595 implements MigrationInterface {
                         isNullable: false
                     },
                     {
+                        name: "valor",
+                        type: "varchar",
+                        isNullable: false
+                    },
+                    {
                         name: "id_contrato",
                         type: "varchar",
                         isNullable: true

@@ -51,6 +51,11 @@ export class createNotebooks1592415048509 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
+                        name: "valor",
+                        type: "varchar",
+                        isNullable: false
+                    },
+                    {
                         name: "id_funcionario",
                         type: "varchar",
                         isNullable: false

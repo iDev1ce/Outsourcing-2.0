@@ -11,8 +11,13 @@ interface Request {
     id_cliente: string
 }
 
+interface Response {
+    contrato: Contrato
+    valor: any
+}
+
 class CreateContrato {
-    public async execute({ id_maquinas, id_cliente }: Request): Promise<Contrato | null> {
+    public async execute({ id_maquinas, id_cliente }: Request): Promise<Response | null> {
         const contratoRepository = getCustomRepository(ContratoRepository)
         const computadorRepository = getCustomRepository(ComputadorRepository)
         const impressoraRepository = getCustomRepository(ImpressoraRepository)
@@ -24,8 +29,12 @@ class CreateContrato {
 
         await contratoRepository.save(contrato)
 
+        let valor = 0
+        let valor2: string
         id_maquinas.forEach(async id => {
-            let contratoData;
+            let valorContrato = 0
+            let valorTotal = []
+            let contratoData
 
             const computador = await computadorRepository.findOne({
                 where: { id }
@@ -40,12 +49,14 @@ class CreateContrato {
             })
 
             if(computador) {
-
                 computador.contrato_id = contrato.id
 
                 const contratoCompurador = computadorRepository.create(computador)
 
                 contratoData = [contratoCompurador]
+                
+                let valorComputador = parseFloat(computador.valor)
+                valorTotal.push(valorComputador)
 
                 await computadorRepository.save(contratoCompurador)
             } else if(notebook) {
@@ -55,6 +66,9 @@ class CreateContrato {
 
                 contratoData = [contratoNotebook]
 
+                let valorNotebook = parseFloat(notebook.valor)
+                valorTotal.push(valorNotebook)
+
                 await notebookRepository.save(contratoNotebook)
             } else if(impressora) {
                 impressora.id_contrato = contrato.id
@@ -63,6 +77,9 @@ class CreateContrato {
 
                 contratoData = [contratoImpressora]
 
+                let valorImpressora = parseFloat(impressora.valor)
+                valorTotal.push(valorImpressora)
+
                 await impressoraRepository.save(contratoImpressora)
             }
 
@@ -70,9 +87,9 @@ class CreateContrato {
                 contrato = contratoRepository.create({
                     id: contrato.id,
                     id_cliente,
-                    id_funcionario: computador.id_funcionario
+                    id_funcionario: computador.id_funcionario,
                 })
-        
+                
                 await contratoRepository.save(contrato)
             } else if(notebook) {
                 contrato = contratoRepository.create({
@@ -94,10 +111,21 @@ class CreateContrato {
                 return null
             }
 
-            return true
-        });
+            if(!valorTotal)
+                return null
 
-        return contrato
+            valorTotal.map(valor2 => {
+                valor += valorContrato + valor2
+            })
+
+            valor2 = String(valor)
+        });
+        
+        const contrato2 = contratoRepository.create({
+            id: contrato.id,
+            valor: valor2
+        })
+        return { contrato, valor }
     }
 }
 

@@ -8,11 +8,12 @@ interface Request {
     marca:string
     modelo:string
     tipo:string
+    valor:string
 }
 
 class UpdateImpressora {
 
-    public async execute({ id, marca, modelo, tipo }:Request):Promise<Impressora | null> {
+    public async execute({ id, marca, modelo, tipo, valor }:Request):Promise<Impressora | null> {
         const impressoraRepository = getCustomRepository(ImpressoraRepository)
 
         const existingImpressora = await impressoraRepository.findOne(id)
@@ -20,7 +21,7 @@ class UpdateImpressora {
         if (!existingImpressora)
             return null
 
-        const impressora = impressoraRepository.create({ id, marca, modelo, tipo})
+        const impressora = impressoraRepository.create({ id, marca, modelo, tipo, valor })
         await impressoraRepository.save(impressora)
 
         return impressora

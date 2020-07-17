@@ -44,6 +44,9 @@ class Computador {
     @Column({ type: "varchar", length: 100 })
     id_funcionario:string
 
+    @Column({ type: "varchar", length: 100 })
+    valor: string
+
     @ManyToOne(type => Funcionario, funcionario => funcionario.id)
     @JoinColumn({ name: "id_funcionario" })
     funcionario: Funcionario

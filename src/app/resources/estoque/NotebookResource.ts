@@ -38,7 +38,7 @@ class NotebookResource {
     }
 
     public async insert(req:Request, res:Response) {
-        const { marca, modelo, memoriaRam, placaVideo, processador, tipoPlacaVideo, tamanhoDaTela } = req.body
+        const { marca, modelo, memoriaRam, placaVideo, processador, tipoPlacaVideo, tamanhoDaTela, valor } = req.body
 
         const notebook = await createNotebook.execute({ 
             marca, 
@@ -48,6 +48,7 @@ class NotebookResource {
             processador, 
             tamanhoDaTela, 
             tipoPlacaVideo,
+            valor,
             id_funcionario: req.user.id
         })
 
@@ -59,7 +60,7 @@ class NotebookResource {
 
     public async update(req:Request, res:Response) {
         const { id } = req.params
-        const { marca, modelo, memoriaRam, placaVideo, processador, tipoPlacaVideo, tamanhoDaTela } = req.body
+        const { marca, modelo, memoriaRam, placaVideo, processador, tipoPlacaVideo, tamanhoDaTela, valor } = req.body
 
         const notebook = await updateNotebook.execute({ 
             id, 
@@ -69,7 +70,8 @@ class NotebookResource {
             placaVideo, 
             processador, 
             tipoPlacaVideo, 
-            tamanhoDaTela 
+            tamanhoDaTela,
+            valor
         })
 
         if (!notebook)

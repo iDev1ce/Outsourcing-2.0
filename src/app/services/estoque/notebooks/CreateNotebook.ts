@@ -12,12 +12,13 @@ interface Request {
     processador:string
     tamanhoDaTela:string
     id_funcionario: string
+    valor: string
 }
 
 class CreateNotebook {
 
     public async execute(
-        { marca, modelo, memoriaRam, placaVideo, tipoPlacaVideo, processador, tamanhoDaTela, id_funcionario }:Request
+        { marca, modelo, memoriaRam, placaVideo, tipoPlacaVideo, processador, tamanhoDaTela, id_funcionario, valor }:Request
     ):Promise<Notebooks | null> {
         const notebooksRepository = getCustomRepository(NotebooksRepository)
 
@@ -29,7 +30,8 @@ class CreateNotebook {
             tipoPlacaVideo, 
             processador, 
             tamanhoDaTela,
-            id_funcionario 
+            id_funcionario,
+            valor
         })
         
         if (!await notebooksRepository.save(notebook))

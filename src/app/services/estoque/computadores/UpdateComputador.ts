@@ -14,11 +14,14 @@ interface Request {
     placaMae:string
     placaRede:string
     placaVideo:string
+    valor:string
 }
 
 class UpdateComputador {
 
-    public async execute({ id, fonte, memoriaRam, mouse, monitor, placaMae, placaRede, placaVideo, processador, teclado }:Request):Promise<Computador | null> {
+    public async execute(
+        { id, fonte, memoriaRam, mouse, monitor, placaMae, placaRede, placaVideo, processador, teclado, valor }:Request
+    ):Promise<Computador | null> {
         const computadorRepository = getCustomRepository(ComputadorRepository)
 
         const existingComputador = await computadorRepository.findOne(id)
@@ -26,7 +29,7 @@ class UpdateComputador {
         if (!existingComputador)
             return null
 
-        const computador = computadorRepository.create({ id, fonte, memoriaRam, mouse, placaMae, monitor, placaRede, placaVideo, processador, teclado })
+        const computador = computadorRepository.create({ id, fonte, memoriaRam, mouse, placaMae, monitor, placaRede, placaVideo, processador, teclado, valor })
         await computadorRepository.save(computador)
 
         return computador

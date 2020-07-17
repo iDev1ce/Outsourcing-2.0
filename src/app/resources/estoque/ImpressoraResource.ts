@@ -37,12 +37,13 @@ class ImpressoraResource {
     }
 
     public async insert(req:Request, res:Response) {
-        const { marca, modelo, tipo } = req.body
+        const { marca, modelo, tipo, valor } = req.body
 
         const impressora = await createImpressora.execute({ 
             marca,
             modelo, 
             tipo,
+            valor,
             id_funcionario: req.user.id
         })
 
@@ -54,9 +55,9 @@ class ImpressoraResource {
 
     public async update(req:Request, res:Response) {
         const { id } = req.params
-        const { marca, modelo, tipo } = req.body
+        const { marca, modelo, tipo, valor } = req.body
 
-        const impressora = await updateImpressora.execute({ id, marca, modelo, tipo })
+        const impressora = await updateImpressora.execute({ id, marca, modelo, tipo, valor })
 
         if(!impressora)
             return res.status(404).send({ message: "Não há impressora" })

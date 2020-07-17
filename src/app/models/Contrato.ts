@@ -19,6 +19,9 @@ class Contrato {
     @Column()
     id_funcionario: string
 
+    @Column({ type: "varchar", length: 100 })
+    valor: string
+
     @ManyToOne(type => Usuario, usuario => usuario.id)
     @JoinColumn({ name: "id_cliente" })
     cliente: Usuario

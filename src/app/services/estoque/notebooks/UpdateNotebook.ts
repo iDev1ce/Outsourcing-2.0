@@ -12,11 +12,12 @@ interface Request {
     tipoPlacaVideo:string
     processador:string
     tamanhoDaTela:string
+    valor: string
 }
 
 class UpdateNotebook {
 
-    public async execute({ id, marca, modelo, memoriaRam, placaVideo, processador, tamanhoDaTela }:Request):Promise<Notebook | null> {
+    public async execute({ id, marca, modelo, memoriaRam, placaVideo, processador, tamanhoDaTela, valor }:Request):Promise<Notebook | null> {
         const notebookRepository = getCustomRepository(NotebookRepository)
 
         const existingNotebook = await notebookRepository.findOne(id)
@@ -24,7 +25,7 @@ class UpdateNotebook {
         if (!existingNotebook) 
             return null
 
-        const notebook = notebookRepository.create({ id, marca, modelo, memoriaRam, placaVideo, processador, tamanhoDaTela })
+        const notebook = notebookRepository.create({ id, marca, modelo, memoriaRam, placaVideo, processador, tamanhoDaTela, valor })
         await notebookRepository.save(notebook)
 
         return notebook

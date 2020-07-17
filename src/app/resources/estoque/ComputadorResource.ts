@@ -46,7 +46,8 @@ class ComputadorResource {
             placaRede,
             placaVideo,
             processador,
-            teclado 
+            teclado,
+            valor
         } = req.body
 
         const computador = await createComputador.execute({
@@ -59,6 +60,7 @@ class ComputadorResource {
             placaVideo,
             processador,
             teclado,
+            valor,
             id_funcionario: req.user.id
         })
 
@@ -80,7 +82,8 @@ class ComputadorResource {
             placaRede,
             placaVideo,
             processador,
-            teclado
+            teclado,
+            valor
         } = req.body
 
         const computador = await updateComputador.execute({ 
@@ -93,7 +96,8 @@ class ComputadorResource {
             placaRede,
             placaVideo,
             processador,
-            teclado
+            teclado,
+            valor
         })
 
         if(!computador)

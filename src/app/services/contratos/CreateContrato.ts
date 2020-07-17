@@ -13,7 +13,7 @@ interface Request {
 
 interface Response {
     contrato: Contrato
-    valor: any
+    valor: number
 }
 
 class CreateContrato {
@@ -22,18 +22,17 @@ class CreateContrato {
         const computadorRepository = getCustomRepository(ComputadorRepository)
         const impressoraRepository = getCustomRepository(ImpressoraRepository)
         const notebookRepository = getCustomRepository(NotebookRepository)
-
+        
         let contrato = contratoRepository.create({
             id_cliente,
         })
-
+        
         await contratoRepository.save(contrato)
 
         let valor = 0
-        let valor2: string
-        id_maquinas.forEach(async id => {
-            let valorContrato = 0
+        id_maquinas.map(async id => {
             let valorTotal = []
+            let valorContrato = 0
             let contratoData
 
             const computador = await computadorRepository.findOne({
@@ -111,20 +110,24 @@ class CreateContrato {
                 return null
             }
 
-            if(!valorTotal)
-                return null
-
+            let valor = 0
             valorTotal.map(valor2 => {
                 valor += valorContrato + valor2
             })
+            console.log(valor)
 
-            valor2 = String(valor)
-        });
-        
-        const contrato2 = contratoRepository.create({
-            id: contrato.id,
-            valor: valor2
+            contrato = contratoRepository.create({
+                id: contrato.id,
+                valor: String(valor)
+            })
+
+            valor = Number(contrato.valor)
+            console.log(valor)
+
+            // console.log(await contratoRepository.save(contrato))
         })
+
+        
         return { contrato, valor }
     }
 }

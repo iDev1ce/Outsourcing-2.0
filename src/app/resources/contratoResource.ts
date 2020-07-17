@@ -13,7 +13,7 @@ class ContratoResource {
             id_cliente: req.user.id 
         })
 
-        console.log(contrato)
+        // console.log(contrato)
 
         if(!contrato)
             return res.status(400).send({ message: "erro ao criar contrato" })

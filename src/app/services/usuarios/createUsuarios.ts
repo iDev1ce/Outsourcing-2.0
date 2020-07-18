@@ -3,16 +3,10 @@ import { hash } from "bcrypt"
 
 import Usuario from "@app/models/Usuario";
 import UsuarioRepository from "@app/repositories/UsuarioRepository";
-
-interface Request {
-    nome: string
-    cpf: string
-    email: string
-    senha: string
-}
+import ICreate from "@app/dto/usuario/ICreate";
 
 class CreateUsuarios {
-    public async execute({ nome, cpf, email, senha }: Request): Promise<Usuario | null | string> {
+    public async execute({ nome, cpf, email, senha }: ICreate): Promise<Usuario | null | string> {
         const usuarioRepository = getCustomRepository(UsuarioRepository)
 
         const senhaHash = await hash(senha, 10)

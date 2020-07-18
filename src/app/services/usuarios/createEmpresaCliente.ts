@@ -1,25 +1,13 @@
-import EmpresaCliente from "@app/models/empresas/EmpresaCliente";
-import { getCustomRepository } from "typeorm";
-import EmpresaClienteRepository from "@app/repositories/empresas/EmpresaClienteRepository";
-import UsuarioRepository from "@app/repositories/UsuarioRepository";
+import EmpresaCliente from "@app/models/empresas/EmpresaCliente"
+import { getCustomRepository } from "typeorm"
 
-interface Request {
-    nome: string,
-    email: string
-    telefone: string,
-    cep: string,
-    numero: string,
-    cidade: string,
-    estado: string,
-    rua: string
-    bairro: string
-    cnpj: string
-    id_usuario: string
-}
+import EmpresaClienteRepository from "@app/repositories/empresas/EmpresaClienteRepository"
+import UsuarioRepository from "@app/repositories/UsuarioRepository"
+import ICreateEmpresa from "@app/dto/usuario/ICreateEmpresa"
 
 class CreateEmpresaCliente {
     public async execute(
-        { nome, email, telefone, cep, numero, cidade, estado, rua, bairro, cnpj, id_usuario }: Request
+        { nome, email, telefone, cep, numero, cidade, estado, rua, bairro, cnpj, id_usuario }: ICreateEmpresa
     ): Promise<EmpresaCliente | string | null> {
         const empresaClienteRepository = getCustomRepository(EmpresaClienteRepository)
         const usuarioRepository = getCustomRepository(UsuarioRepository)

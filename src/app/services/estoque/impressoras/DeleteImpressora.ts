@@ -1,14 +1,11 @@
 import { getCustomRepository } from "typeorm"
 
 import ImpressoraRepository from "@app/repositories/estoque/impressora/ImpressoraRepository"
-
-interface Request {
-    id: string
-}
+import IDelete from "@app/dto/notebook/IDelete"
 
 class DeleteImpressora {
 
-    public async execute({ id }:Request):Promise<true | null> {
+    public async execute({ id }:IDelete):Promise<true | null> {
         const impressoraRepository = getCustomRepository(ImpressoraRepository)
 
         const status = await impressoraRepository.delete({ id })

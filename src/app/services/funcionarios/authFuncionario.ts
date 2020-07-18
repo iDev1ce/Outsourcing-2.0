@@ -2,22 +2,13 @@ import { getCustomRepository } from "typeorm"
 import { compare } from "bcrypt"
 import { sign } from "jsonwebtoken"
 
-import Funcionario from "@app/models/Funcionarios";
-import FuncionarioRepository from "@app/repositories/FuncionarioRepository";
+import FuncionarioRepository from "@app/repositories/FuncionarioRepository"
 import authConfig from "@config/auth"
-
-interface Request {
-    email: string
-    senha: string
-}
-
-interface Response {
-    funcionario: Funcionario
-    token: string
-}
+import IAuthRequest from "@app/dto/funcionario/IAuthRequest"
+import IAuthResponse from "@app/dto/funcionario/IAuthResponse"
 
 class AuthFuncionario {
-    public async execute({ email, senha }: Request): Promise<Response | null> {
+    public async execute({ email, senha }: IAuthRequest): Promise<IAuthResponse | null> {
         const funcionarioRepository = getCustomRepository(FuncionarioRepository)
 
         const existingFuncionario = await funcionarioRepository.findOne({

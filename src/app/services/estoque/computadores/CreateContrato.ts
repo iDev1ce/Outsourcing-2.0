@@ -1,23 +1,16 @@
 import { getCustomRepository } from "typeorm"
 
-import Contrato from "@app/models/Contrato";
 import ContratoRepository from "@app/repositories/ContratoRepository"
 import ComputadorRepository from "@app/repositories/estoque/computador/ComputadorRepository";
 import UsuarioRepository from "@app/repositories/UsuarioRepository";
-import Usuario from "@app/models/Usuario";
 
-interface Request {
-    id_computador:string
-    id_cliente:string
-}
-
-interface Response {
-    contrato: Contrato
-    usuario: Usuario[]
-}
+import ICreateContratoResquest from "@app/dto/computador/ICreateContratoRequest"
+import ICreateContratoResponse from "@app/dto/computador/ICreateContratoResponse"
 
 class CreateContrato {
-    public async execute({ id_computador, id_cliente }:Request): Promise<Response | null> {
+    public async execute(
+        { id_computador, id_cliente }:ICreateContratoResquest
+    ): Promise<ICreateContratoResponse | null> {
         const contratoRepository = getCustomRepository(ContratoRepository)
         const computadorRepository = getCustomRepository(ComputadorRepository)
         const usuarioRepository = getCustomRepository(UsuarioRepository)

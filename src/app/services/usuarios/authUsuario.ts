@@ -1,23 +1,14 @@
 import { getCustomRepository } from "typeorm"
-import { compare } from "bcrypt";
-import { sign } from "jsonwebtoken";
+import { compare } from "bcrypt"
+import { sign } from "jsonwebtoken"
 
-import Usuario from "@app/models/Usuario";
-import UsuarioRepository from "@app/repositories/UsuarioRepository";
-import authConfigUsuario from "@config/authUsuario";
-
-interface Request {
-    email: string
-    senha: string
-}
-
-interface Response {
-    usuario: Usuario
-    token: string
-}
+import UsuarioRepository from "@app/repositories/UsuarioRepository"
+import authConfigUsuario from "@config/authUsuario"
+import IAuthRequest from "@app/dto/usuario/IAuthRequest"
+import IAuthResponse from "@app/dto/usuario/IAuthResponse"
 
 class AuthUsuario {
-    public async execute({ email, senha }: Request): Promise<Response | null> {
+    public async execute({ email, senha }: IAuthRequest): Promise<IAuthResponse | null> {
         const usuarioRepository = getCustomRepository(UsuarioRepository)
 
         const existingUsuario = await usuarioRepository.findOne({

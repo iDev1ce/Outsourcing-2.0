@@ -3,25 +3,11 @@ import { hash } from "bcrypt"
 
 import EmpresaFuncionario from "@app/models/empresas/EmpresaFuncionario"
 import EmpresaFuncionarioRepository from "@app/repositories/empresas/EmpresaFuncionarioRepository"
-
-interface Request {
-    nome: string
-    email: string
-    senha: string
-    cnpj: string
-    estado: string
-    cidade: string
-    bairro: string
-    rua: string
-    numero: string
-    cep: string
-    telefone: string
-    emailComercial: string
-}
+import ICreate from "@app/dto/empresa/ICreate"
 
 class CreateEmpresaFuncionario {
     public async execute(
-        { nome, email, senha, cnpj, estado, cidade, bairro, rua, numero, cep, telefone, emailComercial }: Request
+        { nome, email, senha, cnpj, estado, cidade, bairro, rua, numero, cep, telefone, emailComercial }: ICreate
     ): Promise<EmpresaFuncionario | string | null> {
         const empresaFuncionarioRepository = getCustomRepository(EmpresaFuncionarioRepository)
 

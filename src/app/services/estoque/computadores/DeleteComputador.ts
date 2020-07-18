@@ -1,14 +1,11 @@
 import { getCustomRepository } from "typeorm";
 
-import ComputadorRepository from "../../../repositories/estoque/computador/ComputadorRepository"
-
-interface Request {
-    id: string
-}
+import ComputadorRepository from "@app/repositories/estoque/computador/ComputadorRepository"
+import IDelete from "@app/dto/computador/IDelete"
 
 class DeleteComputador {
 
-    public async execute({ id }:Request):Promise<true | false> {
+    public async execute({ id }:IDelete):Promise<true | false> {
         const computadorRepository = getCustomRepository(ComputadorRepository)
 
         const status = await computadorRepository.delete({ id })

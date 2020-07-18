@@ -2,23 +2,22 @@ import { getCustomRepository } from "typeorm";
 
 import Notebooks from "@app/models/estoque/notebook/Notebooks";
 import NotebooksRepository from "@app/repositories/estoque/notebook/NotebookRepository"
-
-interface Request {
-    marca:string
-    modelo:string
-    memoriaRam:string
-    placaVideo:string
-    tipoPlacaVideo:string
-    processador:string
-    tamanhoDaTela:string
-    id_funcionario: string
-    valor: string
-}
+import ICreate from "@app/dto/notebook/ICreate";
 
 class CreateNotebook {
 
     public async execute(
-        { marca, modelo, memoriaRam, placaVideo, tipoPlacaVideo, processador, tamanhoDaTela, id_funcionario, valor }:Request
+        { 
+            marca, 
+            modelo, 
+            memoriaRam, 
+            placaVideo, 
+            tipoPlacaVideo, 
+            processador, 
+            tamanhoDaTela, 
+            id_funcionario, 
+            valor 
+        }:ICreate
     ):Promise<Notebooks | null> {
         const notebooksRepository = getCustomRepository(NotebooksRepository)
 

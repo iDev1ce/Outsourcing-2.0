@@ -3,15 +3,10 @@ import { getCustomRepository } from "typeorm";
 import Chamados from "@app/models/Chamados";
 import ChamadoRepository from "@app/repositories/ChamadoRepository"
 import ComputadorRepository from "@app/repositories/estoque/computador/ComputadorRepository";
-
-interface Request {
-    id_maquina: string
-    id_cliente: string
-    descricao: string
-}
+import ICreateChamadoComputador from "@app/dto/computador/ICreateChamado"
 
 class CreateChamado {
-    public async execute({ id_maquina, id_cliente, descricao }: Request): Promise<Chamados | null> {
+    public async execute({ id_maquina, id_cliente, descricao }: ICreateChamadoComputador): Promise<Chamados | null> {
         const chamadoRepository = getCustomRepository(ChamadoRepository)
         const computadorRepository = getCustomRepository(ComputadorRepository)
         

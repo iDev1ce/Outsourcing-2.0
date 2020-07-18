@@ -3,17 +3,10 @@ import { hash } from "bcrypt"
 
 import FuncionarioRepository from "@app/repositories/FuncionarioRepository"
 import Funcionario from "@app/models/Funcionarios"
-
-interface Request {
-    cpf: string
-    nome: string
-    email: string
-    senha: string
-    id_empresa: string
-}
+import ICreate from "@app/dto/funcionario/ICreate"
 
 class CreateFuncionario {
-    public async execute({ cpf, nome, email, senha, id_empresa }: Request): Promise<Funcionario | string | null> {
+    public async execute({ cpf, nome, email, senha, id_empresa }: ICreate): Promise<Funcionario | string | null> {
         const funcionarioRepository = getCustomRepository(FuncionarioRepository)
 
         const senhaHash = await hash(senha, 10)

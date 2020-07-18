@@ -1,6 +1,7 @@
-import createComputador from "@app/services/estoque/computadores/CreateComputador"
+import createComputadorService from "@app/services/estoque/computadores/CreateComputador"
 
-// Isso ou isto
+// it - Isso ou isto
+// CI - Executar testes
 
 describe("CreateComputador", () => {
     it("should be able to create a new computer", () => {

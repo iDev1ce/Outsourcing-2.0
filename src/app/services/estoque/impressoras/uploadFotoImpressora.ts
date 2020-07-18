@@ -1,15 +1,11 @@
 import { getCustomRepository } from "typeorm"
 
-import FotoImpressoraRepository from "@app/services/estoque/impressoras/FotoImpressoraRepository"
+import FotoImpressoraRepository from "@app/repositories/estoque/impressora/FotoImpressoraRepository"
 import FotoImpressora from "@app/models/estoque/impressora/FotoImpressora"
-
-interface Request {
-    impressora_id: string
-    fotoFilename: string
-}
+import IUpload from "@app/dto/impressora/IUpload"
 
 class UploadFotoImpressora {
-    public async execute({ impressora_id, fotoFilename }: Request): Promise<FotoImpressora | null> {
+    public async execute({ impressora_id, fotoFilename }: IUpload): Promise<FotoImpressora | null> {
         const fotoImpressoraRepository = getCustomRepository(FotoImpressoraRepository)
 
         const foto = fotoImpressoraRepository.create({ foto: fotoFilename, impressora_id })

@@ -2,18 +2,11 @@ import { getCustomRepository } from "typeorm";
 
 import Impressora from "@app/models/estoque/impressora/Impressora";
 import ImpressoraRepository from "@app/repositories/estoque/impressora/ImpressoraRepository"
-
-interface Request {
-    marca:string
-    modelo:string
-    tipo:string
-    id_funcionario: string
-    valor: string
-}
+import ICreate from "@app/dto/impressora/ICreate";
 
 class CreateImpressora {
 
-    public async execute({ marca, modelo, tipo, id_funcionario, valor }:Request):Promise<Impressora | null> {
+    public async execute({ marca, modelo, tipo, id_funcionario, valor }:ICreate):Promise<Impressora | null> {
         const impressoraRepository = getCustomRepository(ImpressoraRepository)
 
         const impressora = impressoraRepository.create({ 

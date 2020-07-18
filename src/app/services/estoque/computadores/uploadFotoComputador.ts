@@ -2,6 +2,7 @@ import { getCustomRepository } from "typeorm"
 
 import FotoRepository from "@app/repositories/estoque/computador/FotoRepository"
 import FotoComputador from "@app/models/estoque/computador/FotoComputador"
+import IUpload from "@app/dto/computador/IUpload"
 
 /**
  * apagar foto lógica
@@ -17,13 +18,8 @@ import FotoComputador from "@app/models/estoque/computador/FotoComputador"
  * }
 */
 
-interface Request {
-    computador_id: string
-    fotoFilename: string
-}
-
 class UploadFotoComputador {
-    public async execute({ computador_id, fotoFilename }: Request): Promise<FotoComputador | null> {
+    public async execute({ computador_id, fotoFilename }: IUpload): Promise<FotoComputador | null> {
         const fotoRepository = getCustomRepository(FotoRepository)
 
         const foto = fotoRepository.create({ foto: fotoFilename, computador_id })

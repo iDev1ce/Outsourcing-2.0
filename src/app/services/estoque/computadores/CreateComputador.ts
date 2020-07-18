@@ -1,26 +1,25 @@
 import { getCustomRepository } from "typeorm";
 
-import Computador from "../../../models/estoque/computador/Computador";
-import ComputadorRepository from "../../../repositories/estoque/computador/ComputadorRepository"
-
-interface Request {
-    fonte:string
-    memoriaRam:string
-    monitor:string
-    mouse:string
-    teclado:string
-    processador:string
-    placaMae:string
-    placaRede:string
-    placaVideo:string
-    id_funcionario:string
-    valor: string
-}
+import Computador from "@app/models/estoque/computador/Computador";
+import ComputadorRepository from "@app/repositories/estoque/computador/ComputadorRepository"
+import ICreateComputador from "@app/dto/computador/ICreate"
 
 class CreateComputador {
 
     public async execute(
-        { fonte, memoriaRam, mouse, placaMae, monitor, placaRede, placaVideo, processador, teclado, id_funcionario, valor }:Request
+        {
+            fonte, 
+            memoriaRam, 
+            mouse, 
+            placaMae, 
+            monitor, 
+            placaRede, 
+            placaVideo, 
+            processador, 
+            teclado, 
+            id_funcionario, 
+            valor 
+        }:ICreateComputador
     ):Promise<Computador | null> {
         const computadorRepository = getCustomRepository(ComputadorRepository)
 

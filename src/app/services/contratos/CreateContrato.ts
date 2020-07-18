@@ -4,22 +4,12 @@ import ContratoRepository from "@app/repositories/ContratoRepository"
 import ComputadorRepository from "@app/repositories/estoque/computador/ComputadorRepository"
 import ImpressoraRepository from "@app/repositories/estoque/impressora/ImpressoraRepository"
 import NotebookRepository from "@app/repositories/estoque/notebook/NotebookRepository"
-import Contrato from "@app/models/Contrato"
-
-interface Request {
-    id_maquinas: Array<string>
-    id_cliente: string,
-    valor: string
-}
-
-interface Response {
-    contrato: Contrato
-    total: string
-}
+import ICreateRequest from "@app/dto/contrato/ICreateRequest"
+import ICreateResponse from "@app/dto/contrato/ICreateResponse"
 
 class CreateContrato {
 
-    public async execute({ id_maquinas, id_cliente, valor }: Request): Promise<Response | null> {
+    public async execute({ id_maquinas, id_cliente, valor }: ICreateRequest): Promise<ICreateResponse | null> {
         const contratoRepository = getCustomRepository(ContratoRepository)
         const computadorRepository = getCustomRepository(ComputadorRepository)
         const impressoraRepository = getCustomRepository(ImpressoraRepository)

@@ -2,16 +2,11 @@ import { getCustomRepository } from "typeorm";
 
 import Chamados from "@app/models/Chamados";
 import ChamadoRepository from "@app/repositories/ChamadoRepository"
-import ImpressoraRepository from "@app/repositories/estoque/impressora/ImpressoraRepository";
-
-interface Request {
-    id_impressora: string
-    id_cliente: string
-    descricao: string
-}
+import ImpressoraRepository from "@app/repositories/estoque/impressora/ImpressoraRepository"
+import ICreateChamado from "@app/dto/impressora/ICreateChamado"
 
 class CreateChamado {
-    public async execute({ id_impressora, id_cliente, descricao }: Request): Promise<Chamados | null> {
+    public async execute({ id_impressora, id_cliente, descricao }: ICreateChamado): Promise<Chamados | null> {
         const chamadoRepository = getCustomRepository(ChamadoRepository)
         const impressoraRepository = getCustomRepository(ImpressoraRepository)
         

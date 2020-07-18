@@ -1,15 +1,11 @@
 import { getCustomRepository } from "typeorm";
 
-import Notebook from "@app/models/estoque/notebook/Notebooks";
 import NotebookRepository from "@app/repositories/estoque/notebook/NotebookRepository"
-
-interface Request {
-    id: string
-}
+import IDelete from "@app/dto/notebook/IDelete";
 
 class DeleteNotebook {
 
-    public async execute({ id }:Request):Promise<true | null> {
+    public async execute({ id }:IDelete):Promise<true | null> {
         const notebookRepository = getCustomRepository(NotebookRepository)
 
         const status = await notebookRepository.delete({ id })

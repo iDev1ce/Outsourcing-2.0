@@ -3,14 +3,10 @@ import { getCustomRepository } from "typeorm"
 import Contrato from "@app/models/Contrato";
 import ContratoRepository from "@app/repositories/ContratoRepository"
 import NotebookRepository from "@app/repositories/estoque/notebook/NotebookRepository";
-
-interface Request {
-    id_notebook: string
-    id_cliente: string
-}
+import ICreateContrato from "@app/dto/notebook/ICreateContrato";
 
 class CreateContrato {
-    public async execute({ id_notebook, id_cliente }: Request): Promise<Contrato | null> {
+    public async execute({ id_notebook, id_cliente }: ICreateContrato): Promise<Contrato | null> {
         const contratoRepository = getCustomRepository(ContratoRepository)
         const notebookRepository = getCustomRepository(NotebookRepository)
 

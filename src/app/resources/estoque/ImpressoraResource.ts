@@ -23,6 +23,19 @@ class ImpressoraResource {
         return res.status(200).send(impressoras)
     }
 
+    public async getAllCliente(req:Request, res:Response) {
+        const impressoraRepository = getCustomRepository(ImpressoraRepository)
+
+        const impressoras = await impressoraRepository.find({
+            where: { id_contrato: null }
+        })
+
+        if(!impressoras)
+            return res.status(404).send({ message: "Não há impressoras" })
+
+        return res.status(200).send(impressoras)
+    }
+
     public async getById(req:Request, res:Response) {
         const impressoraRepository = getCustomRepository(ImpressoraRepository)
 

@@ -23,6 +23,19 @@ class ComputadorResource {
         return res.status(200).send(computadores)
     }
 
+    public async getAllCliente(req:Request, res:Response) {
+        const computadorRepository = getCustomRepository(ComputadorRepository)
+    
+        const computadores = await computadorRepository.find({
+            where: { contrato_id: null }
+        });
+
+        if(!computadores)
+            return res.send(404).send({ message: "Não há computadores" })
+
+        return res.status(200).send(computadores)
+    }
+
     public async getById(req:Request, res:Response) {
         const computadorRepository = getCustomRepository(ComputadorRepository)
 

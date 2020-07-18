@@ -49,7 +49,48 @@ class FuncionariosResource {
 
         const chamados = await chamadoRepository.find({
             select: ["id_cliente", "id_contrato", "descricao"],
-            relations: ["computador", "impressora", "notebook"]
+            relations: ["computador", "impressora", "notebook"],
+            where: { id_funcionario: req.user.id }
+        })
+
+        if(chamados[0].computador === null)
+            delete chamados[0].computador
+
+        if(chamados[0].notebook === null)
+            delete chamados[0].notebook
+
+        if(chamados[0].impressora === null)
+            delete chamados[0].impressora
+
+        const usuario = await usuarioRepository.find({
+            relations: ["empresa"],
+            where: { id: chamados[0].id_cliente }
+        })
+
+        delete usuario[0].senha
+        delete usuario[0].cpf
+        delete usuario[0].nome
+        delete usuario[0].cpf
+        delete usuario[0].email
+        delete usuario[0].id
+        delete usuario[0].id_empresa
+
+        if(!chamados)
+            return res.status(404).send("Não há chamados")
+
+        return res.status(200).send({ chamados, usuario })
+    }
+
+    public async getByIdChamados(req:Request, res:Response) {
+        const chamadoRepository = getCustomRepository(ChamadoRepository)
+        const usuarioRepository = getCustomRepository(UsuarioRepository)
+
+        const { id } = req.params
+
+        const chamados = await chamadoRepository.find({
+            select: ["id_cliente", "id_contrato", "descricao"],
+            relations: ["computador", "impressora", "notebook"],
+            where: { id_funcionario: req.user.id, id }
         })
 
         if(chamados[0].computador === null)
@@ -85,7 +126,28 @@ class FuncionariosResource {
 
         const contratos = await contratoRepository.find({
             select: ["id_cliente"],
-            relations: ["cliente"]
+            relations: ["cliente"],
+            where: { id_funcionario: req.user.id }
+        })
+
+        delete contratos[0].cliente.senha
+        delete contratos[0].cliente.cpf
+
+        if(contratos.length === 0)
+            return res.status(404).send({ message: "Ainda não tem um contrato" })
+        
+        return res.status(200).send(contratos)
+    }
+
+    public async getByIdContratos(req: Request, res: Response) {
+        const contratoRepository = getCustomRepository(ContratoRepository)
+
+        const { id } = req.params
+
+        const contratos = await contratoRepository.find({
+            select: ["id_cliente"],
+            relations: ["cliente"],
+            where: { id_funcionario: req.user.id, id }
         })
 
         delete contratos[0].cliente.senha

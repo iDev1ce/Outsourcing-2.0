@@ -24,8 +24,7 @@ class NotebookRoute {
         this.routes.put("/:id", Notebook.update)
         this.routes.delete("/:id", Notebook.delete)
         this.routes.patch("/upload/:id", upload.single("foto"), Notebook.upload)
-        this.routes.post("/contrato", Notebook.contrato)
-        this.routes.post("/chamados", Notebook.chamados)
+        this.routes.get("/chamados", Notebook.chamados)
     }
 
 

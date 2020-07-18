@@ -12,7 +12,7 @@ class EmpresaClienteRoutes {
     }
 
     private getPrivateRoutes():void {
-        this.routes.post("/register", EmpresaClienteResource.registerEmpresaCliente)
+        this.routes.post("/registrar", EmpresaClienteResource.registerEmpresaCliente)
     }
 }
 

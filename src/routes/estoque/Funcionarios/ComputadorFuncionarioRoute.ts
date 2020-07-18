@@ -24,8 +24,6 @@ class ComputadorResource {
         this.routes.put("/:id", Computador.update)
         this.routes.patch("/foto/:id", upload.single("foto"), Computador.upload)
         this.routes.delete("/:id", Computador.delete)
-        this.routes.post("/contrato", Computador.contrato)
-        this.routes.post("/chamados", Computador.chamado)
         this.routes.get("/chamados/:id_maquina", Computador.getAllChamados)
     }
 }

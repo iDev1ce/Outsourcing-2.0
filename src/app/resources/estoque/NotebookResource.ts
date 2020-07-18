@@ -24,6 +24,19 @@ class NotebookResource {
         return res.status(200).send(notebooks)
     }
 
+    public async getAllCliente(req:Request, res:Response) {
+        const notebooksRepository = getCustomRepository(NotebooksRepository)
+
+        const notebooks = await notebooksRepository.find({
+            where: { id_contrato: null }
+        });
+
+        if (!notebooks)
+            return res.status(404).send({ message: "Não há notebooks" })
+
+        return res.status(200).send(notebooks)
+    }
+
     public async getById(req:Request, res:Response) {
         const notebooksRepository = getCustomRepository(NotebookRepository)
 

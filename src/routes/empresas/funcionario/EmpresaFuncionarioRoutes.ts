@@ -11,12 +11,6 @@ class EmpresaFuncionarioRoutes {
         this.routes = Router()
 
         this.getPrivateRoutes()
-        this.getPublicRoutes()
-    }
-
-    private getPublicRoutes(): void {
-        this.routes.post("/sign-in", EmpresaFuncionarioResource.signIn)
-        this.routes.post("/login", EmpresaFuncionarioResource.login)
     }
 
     private getPrivateRoutes() :void {

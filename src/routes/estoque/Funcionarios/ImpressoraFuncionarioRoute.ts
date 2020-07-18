@@ -24,8 +24,7 @@ class ImpressoraRoute {
         this.routes.put("/:id", Impressora.update)
         this.routes.patch('/upload/:id', upload.single("foto"), Impressora.upload)
         this.routes.delete("/:id", Impressora.delete)
-        this.routes.post('/contratos', Impressora.contrato)
-        this.routes.post("/chamados/:id", Impressora.chamado)
+        this.routes.get("/chamados/:id", Impressora.chamado)
     }
 }
 

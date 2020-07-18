@@ -9,10 +9,11 @@ interface Request {
     nome: string
     email: string
     senha: string
+    id_empresa: string
 }
 
 class CreateFuncionario {
-    public async execute({ cpf, nome, email, senha }: Request): Promise<Funcionario | string | null> {
+    public async execute({ cpf, nome, email, senha, id_empresa }: Request): Promise<Funcionario | string | null> {
         const funcionarioRepository = getCustomRepository(FuncionarioRepository)
 
         const senhaHash = await hash(senha, 10)
@@ -35,7 +36,8 @@ class CreateFuncionario {
             nome,
             email,
             senha: senhaHash,
-            cpf
+            cpf,
+            empresa_id: id_empresa
         })
 
 

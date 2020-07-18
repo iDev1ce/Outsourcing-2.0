@@ -1,6 +1,6 @@
-import EmpresaCliente from "@app/models/EmpresaCliente";
+import EmpresaCliente from "@app/models/empresas/EmpresaCliente";
 import { getCustomRepository } from "typeorm";
-import EmpresaClienteRepository from "@app/repositories/EmpresaClienteRepository";
+import EmpresaClienteRepository from "@app/repositories/empresas/EmpresaClienteRepository";
 import UsuarioRepository from "@app/repositories/UsuarioRepository";
 
 interface Request {

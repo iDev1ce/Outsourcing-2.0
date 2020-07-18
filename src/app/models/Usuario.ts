@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToOn
 
 import Contrato from "./Contrato";
 import Chamados from "./Chamados";
-import EmpresaCliente from "./EmpresaCliente";
+import EmpresaCliente from "./empresas/EmpresaCliente";
 
 @Entity("usuarios")
 class Usuario {

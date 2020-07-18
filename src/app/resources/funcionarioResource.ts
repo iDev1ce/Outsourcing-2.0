@@ -5,7 +5,6 @@ import createFuncionario from "@app/services/funcionarios/createFuncionario"
 import authFuncionario from "@app/services/funcionarios/authFuncionario"
 import ChamadoRepository from "@app/repositories/ChamadoRepository"
 import ContratoRepository from "@app/repositories/ContratoRepository";
-import FuncionarioRepository from "@app/repositories/FuncionarioRepository";
 import UsuarioRepository from "@app/repositories/UsuarioRepository";
 
 class FuncionariosResource {
@@ -15,8 +14,9 @@ class FuncionariosResource {
         const funcionario = await createFuncionario.execute({ 
             cpf, 
             nome, 
-            email, 
-            senha
+            email,
+            senha,
+            id_empresa: req.user.id
         })
         
         if(funcionario === "cpf")

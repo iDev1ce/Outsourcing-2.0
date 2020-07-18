@@ -8,7 +8,8 @@
         "./src/app/models/*.ts",
         "./src/app/models/estoque/computador/*.ts",
         "./src/app/models/estoque/impressora/*.ts",
-        "./src/app/models/estoque/notebook/*.ts"
+        "./src/app/models/estoque/notebook/*.ts",
+        "./src/app/models/empresas/*.ts"
     ],
     "migrations": [
         "./src/database/migrations/*.ts"

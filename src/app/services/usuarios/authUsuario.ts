@@ -27,8 +27,6 @@ class AuthUsuario {
         if(!existingUsuario) 
             return null
 
-        console.log(existingUsuario.senha)
-
         if(!await compare(senha, existingUsuario.senha))
             return null
 

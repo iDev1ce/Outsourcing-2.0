@@ -11,7 +11,8 @@ import contratoRoutes from "./ContratoRoutes"
 
 import FuncionarioRoute from "./FuncionarioRoutes"
 import UsersRoute from "./UsuarioRoute"
-import EmpresaRoutes from "./EmpresaClienteRoutes"
+import EmpresaRoutes from "./empresas/EmpresaClienteRoutes"
+import EmpresaFuncionarioRoutes from "./empresas/EmpresaFuncionarioRoutes"
 
 import FuncionarioResource from "@app/resources/funcionarioResource"
 import UsuarioResource from "@app/resources/usuarioResource"
@@ -30,6 +31,7 @@ class Routes {
         this.getPrivateChamadosRoute()
         this.getPrivateContratosRotues()
         this.getPrivateEmpresaClienteRoutes()
+        this.getPrivateEmpresaFuncionarioRoutes()
     }
 
     // Funcionarios
@@ -59,6 +61,11 @@ class Routes {
 
     private getPrivateEmpresaClienteRoutes(): void {
         this.routes.use("/empresas", middleUser, EmpresaRoutes)
+    }
+
+    // Empresa Funcionário
+    private getPrivateEmpresaFuncionarioRoutes(): void {
+        this.routes.use("/api/empresas-funcionarios", EmpresaFuncionarioRoutes)
     }
 }
 

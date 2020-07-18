@@ -1,6 +1,6 @@
 import { PrimaryGeneratedColumn, Column, Entity, OneToMany, JoinColumn } from "typeorm"
 
-import Usuario from "./Usuario"
+import Usuario from "../Usuario"
 
 @Entity('empresas_clientes')
 class EmpresaCliente {

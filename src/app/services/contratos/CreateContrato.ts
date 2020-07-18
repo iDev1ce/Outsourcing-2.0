@@ -34,7 +34,6 @@ class CreateContrato {
 
         await contratoRepository.save(contrato)
 
-        
         for(let i = 0; i <= id_maquinas.length; i++) {
             let contratoData
             

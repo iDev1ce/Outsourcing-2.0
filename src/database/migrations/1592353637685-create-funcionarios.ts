@@ -42,6 +42,12 @@ export class createFuncionarios1592353637685 implements MigrationInterface {
                         type: "varchar",
                         isNullable: true,
                         isUnique: true
+                    },
+                    {
+                        name: "empresa_id",
+                        type: "varchar",
+                        isNullable: false,
+                        isUnique: true
                     }
                 ]
             })

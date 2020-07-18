@@ -4,7 +4,7 @@ import Contrato from "./Contrato"
 import Impressora from "./estoque/impressora/Impressora"
 import Notebooks from "./estoque/notebook/Notebooks"
 import Computador from "./estoque/computador/Computador"
-import Empresa from "./EmpresaCliente"
+import EmpresaFuncionario from "./empresas/EmpresaFuncionario"
 
 @Entity("funcionarios")
 class Funcionario {
@@ -23,6 +23,13 @@ class Funcionario {
 
     @Column()
     senha: string
+
+    @Column({ type: "varchar", length: 100 })
+    empresa_id: string    
+
+    @ManyToOne(type => EmpresaFuncionario, empresaFuncionario => empresaFuncionario.id)
+    @JoinColumn({ name: "empresa_id" })
+    empresa: EmpresaFuncionario
 
     @OneToMany(type => Contrato, contrato => contrato.id)
     @JoinColumn({ name: "id" })

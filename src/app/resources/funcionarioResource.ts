@@ -140,6 +140,7 @@ class FuncionariosResource {
 
     public async getByIdContratos(req: Request, res: Response) {
         const contratoRepository = getCustomRepository(ContratoRepository)
+        const usuarioRepository = getCustomRepository(UsuarioRepository)
 
         const { id } = req.params
 
@@ -148,13 +149,18 @@ class FuncionariosResource {
             where: { id_funcionario: req.user.id, id }
         })
 
+        const usuario = await usuarioRepository.find({
+            relations: ["empresa"],
+            where: { id_empresa: contratos[0].cliente.id_empresa }
+        })
+
         delete contratos[0].cliente.senha
         delete contratos[0].cliente.cpf
 
         if(contratos.length === 0)
             return res.status(404).send({ message: "Ainda não tem um contrato" })
         
-        return res.status(200).send(contratos)
+        return res.status(200).send({ contratos, usuario })
     }
 }
 

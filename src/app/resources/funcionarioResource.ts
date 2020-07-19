@@ -48,10 +48,12 @@ class FuncionariosResource {
         const usuarioRepository = getCustomRepository(UsuarioRepository)
 
         const chamados = await chamadoRepository.find({
-            select: ["id_cliente", "id_contrato", "descricao"],
+            select: ["id", "id_cliente", "id_contrato", "descricao"],
             relations: ["computador", "impressora", "notebook"],
             where: { id_funcionario: req.user.id }
         })
+
+        console.log(chamados)
 
         if(chamados[0].computador === null)
             delete chamados[0].computador
@@ -78,7 +80,7 @@ class FuncionariosResource {
         if(!chamados)
             return res.status(404).send("Não há chamados")
 
-        return res.status(200).send({ chamados, usuario })
+        return res.status(200).send([{ chamados, usuario }])
     }
 
     public async getByIdChamados(req:Request, res:Response) {
@@ -125,7 +127,7 @@ class FuncionariosResource {
         const contratoRepository = getCustomRepository(ContratoRepository)
 
         const contratos = await contratoRepository.find({
-            select: ["id_cliente"],
+            select: ["id","id_cliente"],
             relations: ["cliente"],
             where: { id_funcionario: req.user.id }
         })

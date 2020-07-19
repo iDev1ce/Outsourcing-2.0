@@ -42,7 +42,7 @@ class UsuarioResource {
         const usuarioRepository = getCustomRepository(UsuarioRepository)
 
         const chamados = await chamadoRepository.find({
-            select: ["id_cliente", "id_contrato", "descricao"],
+            select: ["id", "id_cliente", "id_contrato", "descricao"],
             relations: ["computador", "impressora", "notebook"],
             where: { id_cliente: req.user.id }
         })

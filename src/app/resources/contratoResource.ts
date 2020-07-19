@@ -95,7 +95,9 @@ class ContratoResource {
 
         const { id } = req.params
 
-        const contrato = await contratoRepository.findOne({ id })
+        const contrato = await contratoRepository.findOne({
+            where: { id } 
+        })
 
         if (!contrato)
             return res.status(404).send({ message: "Não existe contrato" })

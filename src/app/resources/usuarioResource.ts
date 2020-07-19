@@ -66,6 +66,37 @@ class UsuarioResource {
         return res.status(200).send({ chamados, usuario })
     }
 
+    public async getByIdChamados(req:Request, res:Response) {
+        const chamadoRepository = getCustomRepository(ChamadoRepository)
+        const usuarioRepository = getCustomRepository(UsuarioRepository)
+
+        const { id } = req.params
+
+        const chamados = await chamadoRepository.find({
+            select: ["id", "id_cliente", "id_contrato", "descricao"],
+            relations: ["computador", "impressora", "notebook"],
+            where: { id_cliente: req.user.id , id: id }
+        })
+
+
+        const usuario = await usuarioRepository.findOne({
+            relations: ["empresa"],
+            where: { id: chamados[0].id_cliente }
+        })
+
+        if(!usuario)
+            return null
+
+        delete usuario.cpf
+        delete usuario.senha
+
+
+        if(!chamados)
+            return res.status(404).send("Não há chamados")
+
+        return res.status(200).send({ chamados, usuario })
+    }
+
     public async registerEmpresaCliente(req: Request, res: Response) {
         const {
             nome,
@@ -113,7 +144,7 @@ class UsuarioResource {
         if (contrato.length == 0)
             return res.status(404).send({ message: "Não há contratos" })
 
-        return res.status(200).send({ contratos: contrato })
+        return res.status(200).send(contrato)
     }
 }
 

@@ -21,20 +21,18 @@ class ComputadorRepository {
     }: ICreate): Promise<Computador[] | null> {
         const computador = new Computador()
 
-        Object.assign(computador, { 
-            id: uuid(),
-            fonte,
-            processador,
-            memoriaRam,
-            monitor,
-            mouse,
-            teclado,
-            placaMae,
-            placaRede,
-            placaVideo,
-            id_funcionario,
-            valor
-        })
+        computador.id = uuid()
+        computador.fonte = fonte
+        computador.processador = processador
+        computador.memoriaRam = memoriaRam
+        computador.monitor = monitor
+        computador.mouse = mouse
+        computador.teclado = teclado
+        computador.placaMae = placaMae
+        computador.placaRede = placaRede
+        computador.placaVideo = placaVideo
+        computador.id_funcionario = id_funcionario
+        computador.valor = valor
 
         this.computadores.push(computador)
 

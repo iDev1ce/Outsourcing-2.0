@@ -6,7 +6,6 @@ class CreateUsuarios {
     public async executeFake({ nome, cpf, email, senha }: ICreate): Promise<Usuario[] | null | string> {
         const fakeRepository = new FakeRepository()
 
-        
         const usuario = await fakeRepository.create({
             cpf: cpf,
             email: email,

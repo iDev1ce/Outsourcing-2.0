@@ -12,6 +12,8 @@ class CreateChamados {
         
         const notebook = await notebookRepository.findOne({ where: { id: id_notebook } })
 
+        console.log(notebook)
+
         if(!notebook)
             return null
         
@@ -33,8 +35,6 @@ class CreateChamados {
 
         if(!chamado)
             return null
-
-        
 
         await chamadoRepository.save(chamado)
 

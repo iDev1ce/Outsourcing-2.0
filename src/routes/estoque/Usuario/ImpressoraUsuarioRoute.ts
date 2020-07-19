@@ -17,7 +17,7 @@ class ImpressoraRoute {
         this.routes.get("/" || "", Impressora.getAll)
         this.routes.get("/:id", Impressora.getById)
         this.routes.post('/contratos', Impressora.contrato)
-        this.routes.post("/chamados/:id", Impressora.chamado)
+        this.routes.post("/chamados", Impressora.chamado)
     }
 }
 

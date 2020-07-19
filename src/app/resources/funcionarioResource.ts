@@ -92,7 +92,7 @@ class FuncionariosResource {
         const chamados = await chamadoRepository.find({
             select: ["id", "id_cliente", "id_contrato", "descricao"],
             relations: ["computador", "impressora", "notebook"],
-            where: { id_funcionario: req.user.id, id }
+            where: { id_funcionario: req.user.id }
         })
 
         if(chamados[0].computador === null)
@@ -109,10 +109,7 @@ class FuncionariosResource {
             where: { id: chamados[0].id_cliente }
         })
 
-        delete usuario[0].senha
-        delete usuario[0].cpf
         delete usuario[0].nome
-        delete usuario[0].cpf
         delete usuario[0].email
         delete usuario[0].id
         delete usuario[0].id_empresa
@@ -120,7 +117,7 @@ class FuncionariosResource {
         if(!chamados)
             return res.status(404).send("Não há chamados")
 
-        return res.status(200).send({ chamados, usuario })
+        return res.status(200).send([{ chamados, usuario }])
     }
 
     public async getAllContratos(req: Request, res: Response) {
@@ -147,7 +144,6 @@ class FuncionariosResource {
         const { id } = req.params
 
         const contratos = await contratoRepository.find({
-            select: ["id_cliente"],
             relations: ["cliente"],
             where: { id_funcionario: req.user.id, id }
         })

@@ -138,6 +138,8 @@ class NotebookResource {
             descricao 
         })
 
+        console.log(chamado)
+
         if(!chamado)
             return res.status(400).send({ message: "Erro ao fazer um chamado!" })
         

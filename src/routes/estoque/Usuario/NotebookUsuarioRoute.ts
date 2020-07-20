@@ -14,7 +14,7 @@ class NotebookRoute {
 
     private getPrivateRoutes():void { 
         this.routes.use(middleUser)
-        this.routes.get("/" || "", Notebook.getAll)
+        this.routes.get("/" || "", Notebook.getAllCliente)
         this.routes.get("/:id", Notebook.getById)
         this.routes.post("/contrato", Notebook.contrato)
         this.routes.post("/chamados", Notebook.chamados)

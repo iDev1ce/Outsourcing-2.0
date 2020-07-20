@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, Column, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, Column, JoinColumn, JoinTable } from "typeorm";
 
 import Usuario from "./Usuario";
 import Chamados from "./Chamados";
@@ -40,6 +40,7 @@ class Contrato {
 
     @OneToMany(type => Computador, computador => computador.id)
     @JoinColumn({ name: "id" })
+    @JoinTable()
     computador: Computador[]
 
     @OneToMany(type => Chamados, chamados => chamados.id)

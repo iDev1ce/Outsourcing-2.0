@@ -7,7 +7,6 @@ import ComputadorRepository from "@app/repositories/estoque/computador/Computado
 import ImpressoraRepository from "@app/repositories/estoque/impressora/ImpressoraRepository"
 import NotebookRepository from "@app/repositories/estoque/notebook/NotebookRepository"
 import UsuarioRepository from "@app/repositories/UsuarioRepository"
-import FuncionarioRepository from "@app/repositories/FuncionarioRepository"
 
 class ContratoResource {
     public async insert(req: Request, res: Response) {const contratoRepository = getCustomRepository(ContratoRepository)
@@ -67,7 +66,6 @@ class ContratoResource {
 
     public async getClienteAll(req: Request, res: Response) {
         const contratoRepository = getCustomRepository(ContratoRepository)
-        const funcionarioRepository = getCustomRepository(FuncionarioRepository)
 
         const contratos = await contratoRepository.find({
             relations: ["funcionario"],
@@ -99,6 +97,7 @@ class ContratoResource {
         const { id } = req.params
 
         const contrato = await contratoRepository.findOne({
+            relations: ["funcionario"],
             where: { id } 
         })
 

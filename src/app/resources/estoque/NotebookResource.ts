@@ -16,6 +16,19 @@ class NotebookResource {
     public async getAll(req:Request, res:Response) {
         const notebooksRepository = getCustomRepository(NotebooksRepository)
 
+        const notebooks = await notebooksRepository.find({
+            where: { id_funcionario: req.user.id }
+        });
+
+        if (!notebooks)
+            return res.status(404).send({ message: "Não há notebooks" })
+
+        return res.status(200).send(notebooks)
+    }
+
+    public async get(req:Request, res:Response) {
+        const notebooksRepository = getCustomRepository(NotebooksRepository)
+
         const notebooks = await notebooksRepository.find();
 
         if (!notebooks)

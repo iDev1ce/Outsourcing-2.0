@@ -15,6 +15,19 @@ class ComputadorResource {
     public async getAll(req:Request, res:Response) {
         const computadorRepository = getCustomRepository(ComputadorRepository)
 
+        const computadores = await computadorRepository.find({
+            where: { id_funcionario: req.user.id }
+        });
+
+        if(!computadores)
+            return res.send(404).send({ message: "Não há computadores" })
+
+        return res.status(200).send(computadores)
+    }
+
+    public async get(req:Request, res:Response) {
+        const computadorRepository = getCustomRepository(ComputadorRepository)
+    
         const computadores = await computadorRepository.find();
 
         if(!computadores)

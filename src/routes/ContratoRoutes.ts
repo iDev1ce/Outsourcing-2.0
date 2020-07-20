@@ -14,6 +14,7 @@ class ContratoRoutes {
     private getPrivateRoutes():void {
         this.routes.post("/criar", ContratoResource.insert)
         this.routes.get("/", ContratoResource.getClienteAll)
+        this.routes.get("/todos", ContratoResource.getFuncionarioAll)
         this.routes.get("/:id", ContratoResource.getById)
     }
 }

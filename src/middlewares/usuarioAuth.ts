@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import { verify } from "jsonwebtoken"
 
-import authUsuario from "@config/authUsuario"
+import authConfig from "@config/authUsuario"
 
 interface TokenPayload {
     int: number
@@ -17,11 +17,11 @@ export default function auth(
     const authHeader = req.headers.authorization
 
     if(!authHeader)
-        throw new Error("Token not found")
+        throw new Error('Token not found')
 
     const [, token] = authHeader.split(' ')
 
-    const decode = verify(token, authUsuario.secret)
+    const decode = verify(token, authConfig.secret)
 
     const { sub } = decode as TokenPayload
 

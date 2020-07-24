@@ -41,6 +41,7 @@ class CreateContrato {
 
             if(computador) {
                 computador.contrato_id = contrato.id
+                computador.id_cliente = id_cliente
 
                 const contratoCompurador = computadorRepository.create(computador)
 
@@ -49,6 +50,7 @@ class CreateContrato {
                 await computadorRepository.save(contratoCompurador)
             } else if(notebook) {
                 notebook.id_contrato = contrato.id
+                notebook.id_cliente = id_cliente
 
                 const contratoNotebook = notebookRepository.create(notebook)
 
@@ -57,6 +59,7 @@ class CreateContrato {
                 await notebookRepository.save(contratoNotebook)
             } else if(impressora) {
                 impressora.id_contrato = contrato.id
+                impressora.id_cliente = id_cliente
                 
                 const contratoImpressora = impressoraRepository.create(impressora)
 

@@ -47,7 +47,6 @@ class UsuarioResource {
             where: { id_cliente: req.user.id }
         })
 
-
         const usuario = await usuarioRepository.findOne({
             relations: ["empresa"],
             where: { id: chamados[0].id_cliente }

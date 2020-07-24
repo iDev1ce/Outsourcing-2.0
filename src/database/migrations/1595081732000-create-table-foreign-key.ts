@@ -16,6 +16,12 @@ export class createTableForeignKey1595081732000 implements MigrationInterface {
             referencedTableName: "funcionarios"
         }))
 
+        await queryRunner.createForeignKey("impressoras", new TableForeignKey({
+            columnNames: ["id_cliente"],
+            referencedColumnNames: ["id"],
+            referencedTableName: "usuarios"
+        }))
+
         // Funcionarios
         // await queryRunner.createForeignKey("funcionarios", new TableForeignKey({
         //     columnNames: ["id_contato"],
@@ -36,6 +42,12 @@ export class createTableForeignKey1595081732000 implements MigrationInterface {
             referencedTableName: "funcionarios"
         }))
 
+        await queryRunner.createForeignKey("notebooks",new TableForeignKey({
+            columnNames: ["id_cliente"],
+            referencedColumnNames: ["id"],
+            referencedTableName: "usuarios"
+        }))
+
         // Computadores
         await queryRunner.createForeignKey("computadores", new TableForeignKey({
             columnNames: ["contrato_id"],
@@ -47,6 +59,12 @@ export class createTableForeignKey1595081732000 implements MigrationInterface {
             columnNames: ["id_funcionario"],
             referencedColumnNames: ["id"],
             referencedTableName: "funcionarios"
+        }))
+
+        await queryRunner.createForeignKey("computadores", new TableForeignKey({
+            columnNames: ["id_cliente"],
+            referencedColumnNames: ["id"],
+            referencedTableName: "usuarios"
         }))
 
         // Fotos Computadores

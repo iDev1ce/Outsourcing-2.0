@@ -17,6 +17,8 @@ class ContratoResource {
 
         const { id_maquinas } = req.body
 
+        console.log(id_maquinas)
+
         const enderacoEmpresa = await usuarioRepository.findOne({
             where: { id: req.user.id }
         })
@@ -57,6 +59,8 @@ class ContratoResource {
             valor,
             id_cliente: req.user.id 
         })
+
+        console.log("Entrou")
 
         if(!contrato)
             return res.status(400).send({ message: "erro ao criar contrato" })

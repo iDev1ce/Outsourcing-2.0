@@ -15,6 +15,7 @@ class ImpressoraRoute {
     private getPrivateRoutes():void {
         this.routes.use(middleUser)
         this.routes.get("/" || "", Impressora.getAllCliente)
+        this.routes.get("/minhas-maquinas" || "", Impressora.getMyMachines)
         this.routes.get("/all" || "", Impressora.get)
         this.routes.get("/:id", Impressora.getById)
         this.routes.post('/contratos', Impressora.contrato)

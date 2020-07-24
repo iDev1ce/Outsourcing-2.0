@@ -61,6 +61,11 @@ export class createNotebooks1592415048509 implements MigrationInterface {
                         isNullable: false
                     },
                     {
+                        name: "id_cliente",
+                        type: "varchar",
+                        isNullable: true
+                    },
+                    {
                         name: "id_contrato",
                         type: "varchar",
                         isNullable: true

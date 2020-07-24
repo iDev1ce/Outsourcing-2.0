@@ -16,6 +16,7 @@ class ComputadorResource {
     private getPrivateRoutes():void {
         this.routes.use(middleUser)
         this.routes.get("/" || "", Computador.getAllCliente)
+        this.routes.get("/minhas-maquinas" || "", Computador.getMyMachines)
         this.routes.get("/all" || "", Computador.get)
         this.routes.get("/:id", Computador.getById)
         this.routes.post("/contrato", Computador.contrato)

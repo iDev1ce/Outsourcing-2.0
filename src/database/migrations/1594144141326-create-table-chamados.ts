@@ -36,7 +36,7 @@ export class createTableChamados1594144141326 implements MigrationInterface {
                     },
                     {
                         name: "descricao",
-                        type: "varchar",
+                        type: "text",
                         isNullable: false
                     },
                     {

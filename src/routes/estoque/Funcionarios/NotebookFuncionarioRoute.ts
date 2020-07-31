@@ -26,8 +26,6 @@ class NotebookRoute {
         this.routes.patch("/upload/:id", upload.single("foto"), Notebook.upload)
         this.routes.get("/chamados", Notebook.chamados)
     }
-
-
 }
 
 export default new NotebookRoute().routes;

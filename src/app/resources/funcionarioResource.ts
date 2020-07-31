@@ -92,7 +92,10 @@ class FuncionariosResource {
         const chamados = await chamadoRepository.find({
             select: ["id", "id_cliente", "id_contrato", "descricao"],
             relations: ["computador", "impressora", "notebook"],
-            where: { id_funcionario: req.user.id }
+            where: { 
+                id_funcionario: req.user.id,
+                id
+            }
         })
 
         if(chamados[0].computador === null)

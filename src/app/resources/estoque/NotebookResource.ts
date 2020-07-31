@@ -124,6 +124,8 @@ class NotebookResource {
 
         const deleteStatus = await deleteNotebook.execute({ id })
 
+        console.log(deleteStatus)
+
         if (!deleteStatus)
             return res.status(404).send({ message: "Não há notebooks" })
 

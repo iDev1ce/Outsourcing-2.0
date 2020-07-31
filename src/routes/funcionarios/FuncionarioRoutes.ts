@@ -20,8 +20,8 @@ class FuncionarioRoutes {
         this.routes.get("/contratos/:id", middle, funcionarioResource.getByIdContratos)
         this.routes.get("/chamados/:id", middle, funcionarioResource.getByIdChamados)
         this.routes.get("/chamados", middle, funcionarioResource.getAllChamados)
+        this.routes.use("/notebooks", middle, NotebookFuncionarioRoute)
         this.routes.use("/impressoras", ImpressoraFuncionarioRoute)
-        this.routes.use("/notebooks", NotebookFuncionarioRoute)
         this.routes.use("/computadores", ComputadorFuncionarioRoute)
     }
 }
